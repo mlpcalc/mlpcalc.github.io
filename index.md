@@ -503,3 +503,7 @@
   <td><input id="drop1" name="sappdrop" type="radio" value="avg" checked>Average (60)</td>
   <td><input id="drop2" name="sappdrop" type="radio" value="rand">Random (25-150)</td>
   </table>
+<br>
+Send any questions and suggestions <a href="https://www.reddit.com/user/Nice_Coconut">here</a>
+</body>
+</html>
