@@ -329,7 +329,7 @@
 	setgems();
   }
   
-  const fixedv=[5000,10000,25000,50000]
+  const fixedv=[2500,10000,25000,50000]
   var gemtimes = [9999,9999,9999,9999]
   var gemindexes = [-1,-1,-1,-1]
   function checkforgems(index,totaldmg,helpers,storedenergy,timetaken,sapphiresleft){
@@ -481,7 +481,7 @@
   <td></td>
   <td></td>
   </tr>
-  <tr id="gem5000">
+  <tr id="gem2500">
   <td><img name="gempic" src="" alt="Gems" /><b>5</b></td>
   <td></td>
   <td></td>
