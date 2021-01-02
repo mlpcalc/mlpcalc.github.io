@@ -54,6 +54,7 @@
 
   const images = ["powerpic","maxenergypic","cooldownpic","energypic","sapphirepic","gempic"];
   var h50, h75;
+  var power, maxenergy, time;
 
   function loadpage(){
     for (let i = 0; i <images.length; i++){
@@ -61,6 +62,9 @@
 	}
 	h50 = document.getElementById("help50");
     h75 = document.getElementById("help75");
+	power = document.getElementById("power");
+    maxenergy = document.getElementById("maxenergy");
+	time = document.getElementById("time");
   }
   
   function setimages(imgitem){
@@ -144,71 +148,70 @@
   
   var hstate=[false,false];
   function addhelpers(num){
-    let p = document.getElementById("power");
-	let pv = Number(document.getElementById("power").value);
+	let pv = Number(power.value);
 	let helpid;
 	if (num==0){
 	  helpid = '50'
 	} else {
 	  helpid = '75'
 	}
+	let sign = -1;
 	if (document.getElementById("help"+helpid).checked){
 	  if (!hstate[num]){
-  	    pv += Number(helpid);
-		p.value = pv;
+	    sign = 1;
 		hstate[num] = true;
 	  }
-	} else {
+	} else { 
 	  if (hstate[num]){
-  	    pv -= Number(helpid);
-		p.value = pv;
 		hstate[num] = false;
 	  }
 	}
+	pv += sign*Number(helpid);
+	power.value = pv;
+	power.min = Number(power.min)+(sign*Number(helpid));
+	power.max = Number(power.max)+(sign*Number(helpid));
   }
   
   function processETOptions(arg=0) {
-    let p = Number(document.getElementById("power").value);
-	let e = document.getElementById("maxenergy");
-	let ev = Number(document.getElementById("maxenergy").value);
-	let t = document.getElementById("time");
-	let tv = Number(document.getElementById("time").value);
-	if (h50.checked) p-=50;
-	if (h75.checked) p-=75;
-	if (!check_pow(p)){
-	  e.value = '';
-	  t.value = '';
+	let pv = Number(power.value);
+	let ev = Number(maxenergy.value);
+	let tv = Number(time.value);
+	if (h50.checked) pv-=50;
+	if (h75.checked) pv-=75;
+	if (!check_pow(pv)){
+	  maxenergy.value = '';
+	  time.value = '';
 	  return;
 	}
-	let pows = getIndexes(p, 0);
+	let pows = getIndexes(pv, 0);
 	let enrgs = getIndexes(ev, 1);
 	let cooldowns = getIndexes(tv, 2);
 	let n = [];
-	let ETVals;
+	let ETVals; 
 	if (arg==0){
-	  removeOptions(e);
+	  removeOptions(maxenergy);
 	  ETVals = getETValues(pows, 1);
-	  addOptions(ETVals, e);
-	  removeOptions(t);
+	  addOptions(ETVals, maxenergy);
+	  removeOptions(time);
 	  ETVals = getETValues(pows, 2);
 	  let converted = setTimes(ETVals);
-	  addOptions(converted, t);
+	  addOptions(converted, time);
 	}
 	else if (arg==1){
 	  n = getIntersection(pows,enrgs);
-	  removeOptions(t);
+	  removeOptions(time);
 	  ETVals = getETValues(n, 2);
 	  let converted = setTimes(ETVals);
-	  addOptions(converted, t);
+	  addOptions(converted, time);
 	}
 	else {
 	  n = getIntersection(pows,cooldowns);
-	  removeOptions(e);
+	  removeOptions(maxenergy);
 	  ETVals = getETValues(n, 1);
-	  addOptions(ETVals, e);
+	  addOptions(ETVals, maxenergy);
 	}
-	switchElement(e);
-	switchElement(t);
+	switchElement(maxenergy);
+	switchElement(time);
   }
   
   var dmg=[0,0,0,0,0];
@@ -289,21 +292,21 @@
     let sapphiresleft = 0;
     let storedenergy = 0;
     let helpers = 0;
-  	let p = Number(document.getElementById("power").value);
-	let e = Number(document.getElementById("maxenergy").value);
-	let t = Number(document.getElementById("time").value);
+  	let pv = Number(power.value);
+	let ev = Number(maxenergy.value);
+	let tv = Number(time.value);
 	drop = document.getElementById("drop1").checked;
 	if (h50.checked) {
-	  p-=50;
+	  pv-=50;
 	  helpers += 50;
 	}
 	if (h75.checked) {
- 	  p-=75;
+ 	  pv-=75;
 	  helpers += 75;
 	}
-	let pows = getIndexes(p, 0);
-	let nrgs = getIndexes(e, 1);
-	let cooldowns = getIndexes(t, 2);
+	let pows = getIndexes(pv, 0);
+	let nrgs = getIndexes(ev, 1);
+	let cooldowns = getIndexes(tv, 2);
 	let n, i;
 	for (i = 0; i <pows.length; i++){
 	  if ((nrgs.includes(pows[i]))&&(cooldowns.includes(pows[i]))){
@@ -428,6 +431,10 @@
   function fillgemnull(gemid){
     let row = document.getElementById(gemid);
 	row.children[1].innerText = "Impossible";
+	row.children[2].innerText = '';
+	row.children[3].innerText = '';
+	row.children[4].innerText = '';
+	row.children[5].innerText = '';
   }
   
 </script>
@@ -455,7 +462,7 @@
   <th align="center"><img name="sapphirepic" src="" alt="Current sapphires" /></th>
   </tr></thead>
   <tbody><tr>
-  <td align="center"><input id="power" type="number" value="10" min="10" max="188" style="width:50px" onchange="processETOptions()"/></td>
+  <td align="center"><input id="power" type="number" value="10" min="10" max="63" style="width:50px" onchange="processETOptions()"/></td>
   <td align="center"><select id="maxenergy" style="width:60px" onchange="processETOptions(1)" disabled>
     <option>10</option>
   </select></td>
