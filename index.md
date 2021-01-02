@@ -53,11 +53,14 @@
   const dropvalues = [25, 50, 75, 100, 150];
 
   const images = ["powerpic","maxenergypic","cooldownpic","energypic","sapphirepic","gempic"];
+  var h50, h75;
 
   function loadpage(){
     for (let i = 0; i <images.length; i++){
 	  setimages(images[i]);
 	}
+	h50 = document.getElementById("help50");
+    h75 = document.getElementById("help75");
   }
   
   function setimages(imgitem){
@@ -68,8 +71,7 @@
     }
   }
 
-  function check_pow(){
-	let p = document.getElementById("power").value;
+  function check_pow(p){
 	if ((p % 1 === 0)&&(p >= 10)&&(p <= 63)){
 	  return true;
 	} else {
@@ -140,13 +142,40 @@
 	return arr3;
   }
   
+  var hstate=[false,false];
+  function addhelpers(num){
+    let p = document.getElementById("power");
+	let pv = Number(document.getElementById("power").value);
+	let helpid;
+	if (num==0){
+	  helpid = '50'
+	} else {
+	  helpid = '75'
+	}
+	if (document.getElementById("help"+helpid).checked){
+	  if (!hstate[num]){
+  	    pv += Number(helpid);
+		p.value = pv;
+		hstate[num] = true;
+	  }
+	} else {
+	  if (hstate[num]){
+  	    pv -= Number(helpid);
+		p.value = pv;
+		hstate[num] = false;
+	  }
+	}
+  }
+  
   function processETOptions(arg=0) {
     let p = Number(document.getElementById("power").value);
 	let e = document.getElementById("maxenergy");
 	let ev = Number(document.getElementById("maxenergy").value);
 	let t = document.getElementById("time");
 	let tv = Number(document.getElementById("time").value);
-	if (!check_pow()){
+	if (h50.checked) p-=50;
+	if (h75.checked) p-=75;
+	if (!check_pow(p)){
 	  e.value = '';
 	  t.value = '';
 	  return;
@@ -264,6 +293,14 @@
 	let e = Number(document.getElementById("maxenergy").value);
 	let t = Number(document.getElementById("time").value);
 	drop = document.getElementById("drop1").checked;
+	if (h50.checked) {
+	  p-=50;
+	  helpers += 50;
+	}
+	if (h75.checked) {
+ 	  p-=75;
+	  helpers += 75;
+	}
 	let pows = getIndexes(p, 0);
 	let nrgs = getIndexes(e, 1);
 	let cooldowns = getIndexes(t, 2);
@@ -273,12 +310,6 @@
 	    n = pows[i];
 		break;
 	  }
-	}
-	if (Number(document.getElementById("help50").checked)){
-	  helpers += 50;
-	}
-	if (Number(document.getElementById("help75").checked)){
-	  helpers += 75;
 	}
 	sapphiresleft = Number(document.getElementById("cursapphires").value);
 	storedenergy = Number(document.getElementById("curenergy").value);
@@ -424,7 +455,7 @@
   <th align="center"><img name="sapphirepic" src="" alt="Current sapphires" /></th>
   </tr></thead>
   <tbody><tr>
-  <td align="center"><input id="power" type="number" value="10" min="10" max="63" style="width:50px" onchange="processETOptions()"/></td>
+  <td align="center"><input id="power" type="number" value="10" min="10" max="188" style="width:50px" onchange="processETOptions()"/></td>
   <td align="center"><select id="maxenergy" style="width:60px" onchange="processETOptions(1)" disabled>
     <option>10</option>
   </select></td>
@@ -437,7 +468,7 @@
    
    </p>
    <p><b>Helpers:</b><br>
-   <input id="help50" type="checkbox"> 50 power <input id="help75" type="checkbox"> 75 power</p>
+   <input id="help50" type="checkbox" onchange="addhelpers(0)"> 50 power <input id="help75" type="checkbox" onchange="addhelpers(1)"> 75 power</p>
    <p><b>Stage 1</b> completed: <input id="s1" type="checkbox" onchange="checkoption(1)"> or damage dealt: <input id="s0" type="number" value="0" min="0" max="999" style="width:70px"/></p>
    <p><b>Stage 2</b> completed: <input id="s3" type="checkbox" onchange="checkoption(3)"> or damage dealt: <input id="s2" type="number" value="0" min="0" max="9999" style="width:70px" onchange="checkoption(2)"/></p>
    <p><b>Stage 3</b> damage dealt: <input id="s4" type="number" value="0" min="0" max="49999" style="width:70px" onchange="checkoption(4)"/></p>
