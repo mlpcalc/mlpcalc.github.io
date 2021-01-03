@@ -424,7 +424,10 @@
 	} else {
 	  row.children[2].innerText = '';
 	}
-	row.children[3].innerText = vals[index][0];
+	tmp1 = vals[index][0];
+	if (h50.checked) tmp1 += 50;
+	if (h75.checked) tmp1 += 75;
+	row.children[3].innerText = tmp1;
 	row.children[4].innerText = vals[index][1];
 	row.children[5].innerText = times[vals[index][2]];
   }
