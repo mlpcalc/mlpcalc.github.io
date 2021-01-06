@@ -504,7 +504,7 @@
   </tr></tbody></table>
    
    </p>
-   <p><b>curhelpers:</b><br>
+   <p><b>Helpers:</b><br>
    <input id="help0" type="checkbox" onchange="addcurhelpers(0)"> <span id="h0value">50</span> power    <input id="help1" type="checkbox" onchange="addcurhelpers(1)"> <span id="h1value">50</span> power</p>
    <p><b>Stage 1</b> completed: <input id="s1" type="checkbox" onchange="checkoption(1)"> or damage dealt: <input id="s0" type="number" value="0" min="0" max="999" style="width:70px"/></p>
    <p><b>Stage 2</b> completed: <input id="s3" type="checkbox" onchange="checkoption(3)"> or damage dealt: <input id="s2" type="number" value="0" min="0" max="9999" style="width:70px" onchange="checkoption(2)"/></p>
