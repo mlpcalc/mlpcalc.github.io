@@ -1,36 +1,7 @@
 <html>
 <head>
-
+<script src="data.js"></script> 
 <script>
-  const vals = [
-  [10,  10,   12,    0], [11,  10,   12,    5], [12,  10,   12,   25], [12,  11,   12,   50],
-  [12,  11,   11,   70], [13,  11,   11,   90], [14,  11,   11,  110], [15,  11,   11,  135],
-  [15,  12,   11,  155], [15,  12,   10,  175], [16,  12,   10,  195], [16,  13,   10,  215],
-  [17,  13,   10,  235], [17,  13,    9,  255], [18,  13,    9,  275], [18,  14,    9,  300],
-  [19,  14,    9,  320], [19,  14,    8,  340], [20,  14,    8,  360], [20,  16,    8,  380],
-  [20,  16,    7,  405], [21,  16,    7,  425], [21,  18,    7,  450], [21,  18,    6,  470], 
-  [22,  18,    6,  495], [22,  20,    6,  515], [22,  20,    5,  540], [23,  20,    5,  565], 
-  [23,  23,    5,  590], [23,  23,    4,  615], [24,  23,    4,  640], [25,  23,    4,  665], 
-  [25,  26,    4,  690], [26,  26,    4,  720], [26,  29,    4,  745], [27,  29,    4,  775],
-  [27,  32,    4,  805], [28,  32,    4,  835], [28,  35,    4,  865], [29,  35,    4,  900],
-  [29,  35,    3,  930], [30,  35,    3,  965], [31,  35,    3, 1000], [32,  35,    3, 1035],
-  [32,  39,    3, 1070], [33,  39,    3, 1110], [33,  43,    3, 1145], [34,  43,    3, 1185],
-  [34,  43,  2.5, 1225], [35,  43,  2.5, 1270], [35,  47,  2.5, 1310], [36,  47,  2.5, 1355],
-  [36,  51,  2.5, 1400], [37,  51,  2.5, 1450], [37,  55,  2.5, 1495], [38,  55,  2.5, 1545],
-  [38,  55,    2, 1595], [38,  61,    2, 1650], [39,  61,    2, 1700], [39,  67,    2, 1755],
-  [40,  67,    2, 1815], [40,  67,  1.5, 1870], [41,  67,  1.5, 1930], [41,  73,  1.5, 1990],
-  [42,  73,  1.5, 2055], [42,  79,  1.5, 2120], [43,  79,  1.5, 2185], [43,  85,  1.5, 2250],
-  [44,  85,  1.5, 2320], [44,  93,  1.5, 2390], [45,  93,  1.5, 2465], [45, 101,  1.5, 2540],
-  [46, 101,  1.5, 2615], [46, 101,    1, 2695], [47, 101,    1, 2775], [47, 109,    1, 2855],
-  [48, 109,    1, 2940], [48, 117,    1, 3030], [49, 117,    1, 3115], [49, 125,    1, 3205],
-  [50, 125,    1, 3300], [50, 134,    1, 3395], [51, 134,    1, 3490], [51, 143,    1, 3590],
-  [52, 143,    1, 3690], [52, 152,    1, 3795], [53, 152,    1, 3900], [53, 152, 0.75, 4010],
-  [54, 152, 0.75, 4120], [55, 152, 0.75, 4230], [55, 161, 0.75, 4345], [56, 161, 0.75, 4465],
-  [56, 170, 0.75, 4585], [57, 170, 0.75, 4710], [57, 179, 0.75, 4835], [58, 179, 0.75, 4960],
-  [58, 188, 0.75, 5090], [59, 188, 0.75, 5225], [59, 197, 0.75, 5360], [60, 197, 0.75, 5500],
-  [61, 197, 0.75, 5640], [62, 197, 0.75, 5785], [63, 197, 0.75, 5930], [63, 197, 0.75, 999999]
-  ];
-
   const times = {
     0.75:"45s",
 	1:"1m",
@@ -49,22 +20,86 @@
 	12:"12m"
   };
   
-  const droprates = [0.15, 0.70, 0.85, 0.95, 1];
-  const dropvalues = [25, 50, 75, 100, 150];
-
   const images = ["powerpic","maxenergypic","cooldownpic","energypic","sapphirepic","gempic"];
-  var h50, h75;
+  var help0, help1;
   var power, maxenergy, time;
+  var gemtimes = []
+  var gemindexes = []
+  var drop1;
+  var blitzevent;
+  var vals, helpers, sapphiresavg, bosshealth;
+  var droprates, dropvalues;
+  var convrate, convgems;
+  var margin;
 
   function loadpage(){
-    for (let i = 0; i <images.length; i++){
+    let i;
+    for (i = 0; i <images.length; i++){
 	  setimages(images[i]);
 	}
-	h50 = document.getElementById("help50");
-    h75 = document.getElementById("help75");
+	help0 = document.getElementById("help0");
+    help1 = document.getElementById("help1");
 	power = document.getElementById("power");
     maxenergy = document.getElementById("maxenergy");
 	time = document.getElementById("time");
+	drop1 = document.getElementById("drop1");
+	blitzevent = document.getElementById("blitzevent");
+    generateEventList();
+	for (i=0; i<blitzevent.options.length; i++){
+	  if (blitzevent.options[i].value == "Freedom of the Press"){
+	    blitzevent.options[i].selected = true;
+		break;
+	  }
+	}
+	updatepage();
+  }
+  
+  function updatepage(){
+    let E = blitzevent[blitzevent.selectedIndex].value;
+	vals = gamedata[E]['vals'];
+	helpers = gamedata[E]['helpers'];
+    sapphiresavg = gamedata[E]['sapphiresavg'];
+	bosshealth = gamedata[E]['bosshealth'];
+    droprates = gamedata[E]['droprates'];
+    dropvalues = gamedata[E]['dropvalues'];
+    convrate=gamedata[E]['convrate'];
+    convgems=gamedata[E]['convgems'];
+	margin=gamedata[E]['margin'];
+	
+    power.value = vals[0][0];
+	power.min = vals[0][0];
+	power.max = vals[vals.length-1][0];
+	document.getElementById("h0value").innerText = helpers[0]
+	document.getElementById("h1value").innerText = helpers[1]
+	gemtable = document.getElementById("gemtable");
+	gemtable.innerHTML = "";
+	gemtimes = [];
+	gemindexes = [];
+	for (let i=convrate.length-1; i>=0; i--){
+	  tr = document.createElement('tr');
+	  tr.id = "gem"+convrate[i];
+	  tr.innerHTML += '<td><img name="gempic" src="" alt="Gems" /><b>'+convgems[i]+'</b></td>';
+	  tr.innerHTML += '<td></td><td></td><td></td><td></td><td></td></tr>';
+	  gemtable.appendChild(tr);
+	  gemtimes.push(9999);
+	  gemindexes.push(-1);
+	}
+	
+    document.getElementById("error").innerText = margin*100;
+	setimages(images[images.length-1]);
+	drop1.nextSibling.remove();
+	drop1.insertAdjacentText('afterend',"Average ("+sapphiresavg+")");
+	processETOptions();
+  }
+  
+  function generateEventList(){
+    removeOptions(blitzevent);
+	let eventlist=[], tmp;
+    for (i in gamedata){
+	  tmp = [i,i]
+	  eventlist.push(tmp);
+	}
+	addOptions(eventlist, blitzevent);
   }
   
   function setimages(imgitem){
@@ -76,7 +111,7 @@
   }
 
   function check_pow(p){
-	if ((p % 1 === 0)&&(p >= 10)&&(p <= 63)){
+	if ((p % 1 === 0)&&(p >= vals[0][0])&&(p <= vals[vals.length-1][0])){
 	  return true;
 	} else {
 	  return false;
@@ -114,8 +149,9 @@
   }
 
   function addOptions(arr, selBox) {
+    let newOption
     for (let i = 0; i <arr.length; i++){
-	  let newOption = new Option(arr[i][0],arr[i][1]);
+	  newOption = new Option(arr[i][0],arr[i][1]);
 	  selBox.add(newOption, undefined);
 	}
   }
@@ -147,14 +183,9 @@
   }
   
   var hstate=[false,false];
-  function addhelpers(num){
+  function addcurhelpers(num){
 	let pv = Number(power.value);
-	let helpid;
-	if (num==0){
-	  helpid = '50'
-	} else {
-	  helpid = '75'
-	}
+	let helpid = num;
 	let sign = -1;
 	if (document.getElementById("help"+helpid).checked){
 	  if (!hstate[num]){
@@ -166,18 +197,18 @@
 		hstate[num] = false;
 	  }
 	}
-	pv += sign*Number(helpid);
+	pv += sign*helpers[Number(helpid)];
 	power.value = pv;
-	power.min = Number(power.min)+(sign*Number(helpid));
-	power.max = Number(power.max)+(sign*Number(helpid));
+	power.min = Number(power.min)+(sign*helpers[Number(helpid)]);
+	power.max = Number(power.max)+(sign*helpers[Number(helpid)]);
   }
   
   function processETOptions(arg=0) {
 	let pv = Number(power.value);
 	let ev = Number(maxenergy.value);
 	let tv = Number(time.value);
-	if (h50.checked) pv-=50;
-	if (h75.checked) pv-=75;
+	if (help0.checked) pv-=helpers[0];
+	if (help1.checked) pv-=helpers[1];
 	if (!check_pow(pv)){
 	  maxenergy.value = '';
 	  time.value = '';
@@ -271,38 +302,34 @@
     let sum = 0, tmp1, tmp2;
 	for (let i = 0; i < num; i++){
 	  tmp1 = Math.random();
-	  for (let j = droprates.length - 1; j >= 0; j--){
+	  for (let j = 0; j <droprates.length; j++){
 	    if (tmp1 <= droprates[j]){
-		  tmp2 = dropvalues[j];
-		} else {
+		  tmp2 = Math.floor(Math.random()*(dropvalues[j][1]+1-dropvalues[j][0]))+dropvalues[j][0];
 		  break;
-		}
+		} 
 	  }
 	  sum += tmp2;
 	}
 	return sum;
   }
 
-  const sapphiresavg = 60;
-  const bosshealth = 61000;
-  var drop;
+  var testrand=[];
   function calctime(){
     let totaldmg = 0;
     let timetaken = 0;
     let sapphiresleft = 0;
     let storedenergy = 0;
-    let helpers = 0;
+    let curhelpers = 0;
   	let pv = Number(power.value);
 	let ev = Number(maxenergy.value);
 	let tv = Number(time.value);
-	drop = document.getElementById("drop1").checked;
-	if (h50.checked) {
-	  pv-=50;
-	  helpers += 50;
+	if (help0.checked) {
+	  pv-=helpers[0];
+	  curhelpers += helpers[0];
 	}
-	if (h75.checked) {
- 	  pv-=75;
-	  helpers += 75;
+	if (help1.checked) {
+ 	  pv-=helpers[1];
+	  curhelpers += helpers[1];
 	}
 	let pows = getIndexes(pv, 0);
 	let nrgs = getIndexes(ev, 1);
@@ -321,8 +348,8 @@
 	totaldmg += Number(document.getElementById("s4").value);
 	for (i = n; i <vals.length; i++){
 	  while (sapphiresleft < vals[i+1][3]) {
-        totaldmg += vals[i][0] + helpers;
-		if (drop){
+        totaldmg += vals[i][0] + curhelpers;
+		if (drop1.checked){
 		  sapphiresleft += sapphiresavg;
 		} else{
 		  sapphiresleft += randomdrop();
@@ -333,19 +360,19 @@
 		  timetaken += vals[i][2];
 		}
 	    if (totaldmg >= bosshealth){
-		  checkforgems(i,totaldmg,helpers,storedenergy,timetaken,sapphiresleft);
+		  checkforgems(i,totaldmg,curhelpers,storedenergy,timetaken,sapphiresleft);
 	      break;
 	    }
       }
 	  if (totaldmg >= bosshealth){
 	    break;
 	  }
-	  checkforgems(i,totaldmg,helpers,storedenergy,timetaken,sapphiresleft);
+	  checkforgems(i,totaldmg,curhelpers,storedenergy,timetaken,sapphiresleft);
 	  sapphiresleft -= vals[i+1][3];
 	  storedenergy += vals[i+1][1] - vals[i][1];
 	}
 	let result = document.getElementById("result");
-	let marginoferror = timetaken*0.025;
+	let marginoferror = timetaken*margin;
 	let print1 = Math.trunc(timetaken / 60)+'h '+ Math.trunc(timetaken % 60) +'m';
 	let print2;
 	let tmp = Math.trunc(marginoferror / 60);
@@ -354,41 +381,38 @@
 	} else {
 	  print2 = Math.trunc(marginoferror % 60) +'m';
 	}
-	if (drop){
+	if (drop1.checked){
 	  result.innerText = print1 + '    (±'+print2+')';
 	} else {
 	  result.innerText = print1;
 	}
-	
+	testrand.push(timetaken);
 	setgems();
   }
   
-  const fixedv=[2500,10000,25000,50000]
-  var gemtimes = [9999,9999,9999,9999]
-  var gemindexes = [-1,-1,-1,-1]
-  function checkforgems(index,totaldmg,helpers,storedenergy,timetaken,sapphiresleft){
+  function checkforgems(index,totaldmg,curhelpers,storedenergy,timetaken,sapphiresleft){
     while ((sapphiresleft<50000)&&(totaldmg<bosshealth)){
       if (storedenergy>0){
 	    storedenergy -= 1;
-		totaldmg += vals[index][0]+helpers;
-		if (drop){
+		totaldmg += vals[index][0]+curhelpers;
+		if (drop1.checked){
 		  sapphiresleft += sapphiresavg;
 		} else{
 		  sapphiresleft += randomdrop();
 		}
 	  } else {
-		let mult = Math.ceil((bosshealth - totaldmg)/(vals[index][0]+helpers));
-	    totaldmg += mult*(vals[index][0]+helpers);
+		let mult = Math.ceil((bosshealth - totaldmg)/(vals[index][0]+curhelpers));
+	    totaldmg += mult*(vals[index][0]+curhelpers);
 		timetaken += mult*vals[index][2];
-		if (drop){
+		if (drop1.checked){
 		  sapphiresleft += mult*sapphiresavg;
 		} else{
 		  sapphiresleft += randomdrop(mult);
 		}
 	  }
 	}
-	for (let i = 0; i <fixedv.length; i++){
-	  if (sapphiresleft >= fixedv[i]){
+	for (let i = 0; i <convrate.length; i++){
+	  if (sapphiresleft > convrate[i]){
 	    if (timetaken <= gemtimes[i]){
 		  gemtimes[i] = timetaken;
 		  gemindexes[i] = index;
@@ -400,11 +424,11 @@
   function setgems(){
     for (i = 0; i <gemindexes.length; i++){
 	  if (gemindexes[i] > -1){
-	    fillgemtarget(gemindexes[i], gemtimes[i], "gem"+fixedv[i]);
+	    fillgemtarget(gemindexes[i], gemtimes[i], "gem"+convrate[i]);
 		gemindexes[i] = -1;
 		gemtimes[i] = 9999;
 	  } else {
-	    fillgemnull("gem"+fixedv[i]);
+	    fillgemnull("gem"+convrate[i]);
 	  }
 	}
   }
@@ -412,21 +436,21 @@
   function fillgemtarget(index, time, gemid){
     let row = document.getElementById(gemid);
 	row.children[1].innerText = Math.trunc(time / 60)+'h '+ Math.trunc(time % 60) +'m';
-	let tmp1 = time*0.025;
+	let tmp1 = time*margin;
 	let tmp2 = Math.trunc(tmp1 / 60);
 	if (tmp2 > 0){
 	  tmp2 = tmp2+'h '+ Math.trunc(tmp1 % 60) +'m';
 	} else {
 	  tmp2 = Math.trunc(tmp1 % 60) +'m';
 	}
-	if (drop){
+	if (drop1.checked){
 	  row.children[2].innerText = '±'+tmp2;  
 	} else {
 	  row.children[2].innerText = '';
 	}
 	tmp1 = vals[index][0];
-	if (h50.checked) tmp1 += 50;
-	if (h75.checked) tmp1 += 75;
+	if (help0.checked) tmp1 += helpers[0];
+	if (help1.checked) tmp1 += helpers[1];
 	row.children[3].innerText = tmp1;
 	row.children[4].innerText = vals[index][1];
 	row.children[5].innerText = times[vals[index][2]];
@@ -456,6 +480,9 @@
 <span id="gempicdata" style="display:none"> data:image/png;base64,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</span>
 
 <h1>Blitz calculator</h1>
+  <p>Select event: <select id="blitzevent" onchange="updatepage()">
+    <option>Freedom of the Press</option>
+  </select></p>
   <p><table style="border-collapse: collapse;"><thead>
   <tr>
   <th align="center"><img name="powerpic" src="" alt="Power" /></th>
@@ -477,8 +504,8 @@
   </tr></tbody></table>
    
    </p>
-   <p><b>Helpers:</b><br>
-   <input id="help50" type="checkbox" onchange="addhelpers(0)"> 50 power <input id="help75" type="checkbox" onchange="addhelpers(1)"> 75 power</p>
+   <p><b>curhelpers:</b><br>
+   <input id="help0" type="checkbox" onchange="addcurhelpers(0)"> <span id="h0value">50</span> power    <input id="help1" type="checkbox" onchange="addcurhelpers(1)"> <span id="h1value">50</span> power</p>
    <p><b>Stage 1</b> completed: <input id="s1" type="checkbox" onchange="checkoption(1)"> or damage dealt: <input id="s0" type="number" value="0" min="0" max="999" style="width:70px"/></p>
    <p><b>Stage 2</b> completed: <input id="s3" type="checkbox" onchange="checkoption(3)"> or damage dealt: <input id="s2" type="number" value="0" min="0" max="9999" style="width:70px" onchange="checkoption(2)"/></p>
    <p><b>Stage 3</b> damage dealt: <input id="s4" type="number" value="0" min="0" max="49999" style="width:70px" onchange="checkoption(4)"/></p>
@@ -498,7 +525,7 @@
   <th><img name="maxenergypic" src="" alt="Max energy" /></th>
   <th><img name="cooldownpic" src="" alt="Cooldown time" /></th>
   </tr></thead>
-  <tbody align="center"><tr id="gem50000">
+  <tbody id="gemtable" align="center"><tr id="gem50000">
   <td><img name="gempic" src="" alt="Gems" /><b>20</b></td>
   <td></td>
   <td></td>
@@ -537,7 +564,7 @@
   (plus any additional energy and sapphires picked from area)</p>
   <p>You can check the spread of values by switching the option<br>
   below and calculating the result several times.</p>
-  <p>Margin of error calculated as 2.5% from average value<br>
+  <p>Margin of error calculated as <span id="error">2.5</span>% from average value<br>
   since more than 90% of spread included in these boundaries</p></i>
   <b>Sapphires per hit:</b>
   <table>
