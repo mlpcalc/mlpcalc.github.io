@@ -28,6 +28,7 @@
   var drop1;
   var blitzevent;
   var vals, helpers, sapphiresavg, bosshealth;
+  var hstate=[false,false];
   var droprates, dropvalues;
   var convrate, convgems;
   var margin;
@@ -94,6 +95,7 @@
 	document.getElementById("s2").max = bossstages[1]-1;
 	help0.checked = false;
 	help1.checked = false;
+	hstate=[false,false];
 	processETOptions();
   }
   
@@ -187,7 +189,6 @@
 	return arr3;
   }
   
-  var hstate=[false,false];
   function addcurhelpers(num){
 	let pv = Number(power.value);
 	let helpid = num;
