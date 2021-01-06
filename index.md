@@ -60,6 +60,7 @@
 	helpers = gamedata[E]['helpers'];
     sapphiresavg = gamedata[E]['sapphiresavg'];
 	bosshealth = gamedata[E]['bosshealth'];
+	bossstages = gamedata[E]['bossstages'];
     droprates = gamedata[E]['droprates'];
     dropvalues = gamedata[E]['dropvalues'];
     convrate=gamedata[E]['convrate'];
@@ -89,6 +90,8 @@
 	setimages(images[images.length-1]);
 	drop1.nextSibling.remove();
 	drop1.insertAdjacentText('afterend',"Average ("+sapphiresavg+")");
+	document.getElementById("s0").max = bossstages[0]-1;
+	document.getElementById("s2").max = bossstages[1]-1;
 	processETOptions();
   }
   
