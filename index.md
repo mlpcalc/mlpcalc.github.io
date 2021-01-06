@@ -93,6 +93,7 @@
 	drop1.insertAdjacentText('afterend',"Average ("+sapphiresavg+")");
 	document.getElementById("s0").max = bossstages[0]-1;
 	document.getElementById("s2").max = bossstages[1]-1;
+	document.getElementById("s4").max = bossstages[2]-1;
 	help0.checked = false;
 	help1.checked = false;
 	hstate=[false,false];
