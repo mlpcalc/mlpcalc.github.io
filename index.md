@@ -530,7 +530,7 @@
   
   <table><thead align="center"><tr>
   <th colspan="3"></th>
-  <td colspan="3" style="width:150px" align="center">Stop upgrading at: <span id="warning0" style="color:red; font-size:18pt"><b>*</b></span></td></tr>
+  <td colspan="3" style="width:150px" align="center">Stop upgrading at: <span id="warning0" style="color:red; font-size:18pt display:none"><b>*</b></span></td></tr>
   <tr>
   <th style="vertical-align:bottom width:20px">Extra<br>gems</th>
   <th style="vertical-align:bottom width:60px">Time<br>to reach</th>
@@ -573,7 +573,7 @@
   </tr>
   </tbody>
   </table>
-  <span id="warning1"><span style="color:red; font-size:18pt">*</span> Due to random nature of sapphire drops, their amount might be<br>
+  <span id="warning1" style="display:none"><span style="color:red; font-size:18pt">*</span> Due to random nature of sapphire drops, their amount might be<br>
   slightly less than needed in the end. Consider to stop upgrading one<br>
   step earlier than recommended, if you have spare time.<br>
   Just to be safe.</span>  
