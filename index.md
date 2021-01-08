@@ -390,8 +390,12 @@
 	}
 	if (drop1.checked){
 	  result.innerText = print1 + '    (±'+print2+')';
+	  document.getElementById("warning0").style.display = "inline"
+	  document.getElementById("warning1").style.display = "inline"
 	} else {
 	  result.innerText = print1;
+	  document.getElementById("warning0").style.display = "none"
+	  document.getElementById("warning1").style.display = "none"
 	}
 	testrand.push(timetaken);
 	setgems();
@@ -454,6 +458,9 @@
 	  row.children[2].innerText = '±'+tmp2;  
 	} else {
 	  row.children[2].innerText = '';
+	}
+	if ((vals[index][0]==vals[index-1][0])&&(vals[index][2]==vals[index-1][2])){
+	  index -= 1;
 	}
 	tmp1 = vals[index][0];
 	if (help0.checked) tmp1 += helpers[0];
@@ -523,7 +530,7 @@
   
   <table><thead align="center"><tr>
   <th colspan="3"></th>
-  <td colspan="3" style="width:80px" align="center">Stop upgrading at:</td></tr>
+  <td colspan="3" style="width:150px" align="center">Stop upgrading at: <span id="warning0" style="color:red; font-size:18pt"><b>*</b></span></td></tr>
   <tr>
   <th style="vertical-align:bottom width:20px">Extra<br>gems</th>
   <th style="vertical-align:bottom width:60px">Time<br>to reach</th>
@@ -565,7 +572,12 @@
   <td></td>
   </tr>
   </tbody>
-  </table><br>
+  </table>
+  <span id="warning1"><span style="color:red; font-size:18pt">*</span> Due to random nature of sapphire drops, their amount might be<br>
+  slightly less than needed in the end. Consider to stop upgrading one<br>
+  step earlier than recommended, if you have spare time.<br>
+  Just to be safe.</span>  
+  <br>
   <i><p>All calculations are approximate, actual times depend on<br>
   your luck with number of sapphires dropping for every hit<br>
   (plus any additional energy and sapphires picked from area)</p>
