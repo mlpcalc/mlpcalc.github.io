@@ -99,6 +99,8 @@
 	hstate=[false,false];
 	processETOptions();
 	checkstage();
+	document.getElementById("warning0").style.display = "none";
+	document.getElementById("warning1").style.display = "none";
   }
   
   function generateEventList(){
@@ -345,12 +347,12 @@
 	}
 	if (drop1.checked){
 	  result.innerText = print1 + '    (±'+print2+')';
-	  document.getElementById("warning0").style.display = "inline"
-	  document.getElementById("warning1").style.display = "inline"
+	  document.getElementById("warning0").style.display = "inline";
+	  document.getElementById("warning1").style.display = "inline";
 	} else {
 	  result.innerText = print1;
-	  document.getElementById("warning0").style.display = "none"
-	  document.getElementById("warning1").style.display = "none"
+	  document.getElementById("warning0").style.display = "none";
+	  document.getElementById("warning1").style.display = "none";
 	}
 	testrand.push(timetaken);
 	setgems();
