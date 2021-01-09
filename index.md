@@ -23,6 +23,7 @@
   const images = ["powerpic","maxenergypic","cooldownpic","energypic","sapphirepic","gempic"];
   var help0, help1;
   var power, maxenergy, time;
+  var curstage, curdamage;
   var gemtimes = []
   var gemindexes = []
   var drop1;
@@ -43,6 +44,8 @@
 	power = document.getElementById("power");
     maxenergy = document.getElementById("maxenergy");
 	time = document.getElementById("time");
+	curstage = document.getElementById("curstage");
+	curdamage = document.getElementById("curdamage");
 	drop1 = document.getElementById("drop1");
 	blitzevent = document.getElementById("blitzevent");
     generateEventList();
@@ -91,13 +94,11 @@
 	setimages(images[images.length-1]);
 	drop1.nextSibling.remove();
 	drop1.insertAdjacentText('afterend',"Average ("+sapphiresavg+")");
-	document.getElementById("s0").max = bossstages[0]-1;
-	document.getElementById("s2").max = bossstages[1]-1;
-	document.getElementById("s4").max = bossstages[2]-1;
 	help0.checked = false;
 	help1.checked = false;
 	hstate=[false,false];
 	processETOptions();
+	checkstage();
   }
   
   function generateEventList(){
@@ -252,57 +253,10 @@
 	switchElement(time);
   }
   
-  var dmg=[0,0,0,0,0];
-  function disableoption(arg){
-    if (arg>0){
-	  let s = document.getElementById("s"+(arg-1));
-	  if (s.type == "number"){
-	    if (!s.disabled){
-		  dmg[arg-1] = s.value;
-		}
-		s.value = Number(s.max) + 1;
-	  } else {
-	    if (!s.disabled){
-		  dmg[arg-1] = s.checked;
-		}
-		s.checked = true;
-	  }
-	  s.disabled = true;
-	  checkoption(arg-1);
-	}
-  }
-  function enableoption(arg){
-    if (arg>0){
-	  let s = document.getElementById("s"+(arg-1));
-	  if (s.type == "number"){
-	    s.value = dmg[arg-1];
-	  } else {
-		s.checked = dmg[arg-1];
-	  }
-	  s.disabled = false;
-	  checkoption(arg-1);
-	}
-  }
-  var prevstate=[0,0,0,0,0];
-  function checkoption(arg){
-    let s = document.getElementById("s"+arg);
-	if (s.type == "number"){
-	  if (s.value >0){
-	    if (prevstate[arg]==0){
-		  disableoption(arg,1);
-		  prevstate[arg]=1;  
-		}
-	  } else {
-	    enableoption(arg,0);
-		prevstate[arg]=0;
-	  }
-	} else {
-	  if (s.checked){
-  	    disableoption(arg,1);
-  	  } else {
-	    enableoption(arg,0);
-	  }
-	}
+  function checkstage(){
+    let stageindex = Number(curstage[curstage.selectedIndex].value);
+    curdamage.max = bossstages[stageindex]-1;
+	curdamage.value = "0";
   }
   
   function randomdrop(num=1){
@@ -350,9 +304,10 @@
 	}
 	sapphiresleft = Number(document.getElementById("cursapphires").value);
 	storedenergy = Number(document.getElementById("curenergy").value);
-	totaldmg += Number(document.getElementById("s0").value);
-	totaldmg += Number(document.getElementById("s2").value);
-	totaldmg += Number(document.getElementById("s4").value);
+	for (i = 0; i <Number(curstage.value); i++){
+	  totaldmg += bossstages[i];
+	}
+    totaldmg += Number(curdamage.value);
 	for (i = n; i <vals.length; i++){
 	  while (sapphiresleft < vals[i+1][3]) {
         totaldmg += vals[i][0] + curhelpers;
@@ -520,10 +475,14 @@
    </p>
    <p><b>Helpers:</b><br>
    <input id="help0" type="checkbox" onchange="addcurhelpers(0)"> <span id="h0value">50</span> power    <input id="help1" type="checkbox" onchange="addcurhelpers(1)"> <span id="h1value">50</span> power</p>
-   <p><b>Stage 1</b> completed: <input id="s1" type="checkbox" onchange="checkoption(1)"> or damage dealt: <input id="s0" type="number" value="0" min="0" max="999" style="width:70px"/></p>
-   <p><b>Stage 2</b> completed: <input id="s3" type="checkbox" onchange="checkoption(3)"> or damage dealt: <input id="s2" type="number" value="0" min="0" max="9999" style="width:70px" onchange="checkoption(2)"/></p>
-   <p><b>Stage 3</b> damage dealt: <input id="s4" type="number" value="0" min="0" max="49999" style="width:70px" onchange="checkoption(4)"/></p>
    
+   Current stage <select id="curstage" onchange="checkstage()">
+    <option value="0" selected>I</option>
+	<option value="1">II</option>
+	<option value="2">III</option>
+  </select> damage dealt: 
+  <input id="curdamage" type="number" value="0" min="0" style="width:70px"/>
+  
    <h1 id="result" style="width:450px" align="center"></h1>
    
   <p><input style="width:450px" type="button" value="Calculate" onclick="calctime()"></p>
@@ -575,7 +534,7 @@
   </table>
   <span id="warning1" style="display:none"><span style="color:red; font-size:18pt">*</span> Due to random nature of sapphire drops, their amount might be<br>
   slightly less than needed in the end. Consider to stop upgrading one<br>
-  step earlier than recommended, if you have spare time.<br>
+  step earlier than suggested, if you have spare time.<br>
   Just to be safe.</span>  
   <br>
   <i><p>All calculations are approximate, actual times depend on<br>
