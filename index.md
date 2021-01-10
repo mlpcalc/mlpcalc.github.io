@@ -534,10 +534,10 @@
   </tr>
   </tbody>
   </table>
-  <span id="warning1" style="display:none"><span style="color:red; font-size:18pt">*</span> Due to random nature of sapphire drops, their amount might be<br>
+  <p id="warning1" style="display:none"><span style="color:red; font-size:18pt">*</span> Due to random nature of sapphire drops, their amount might be<br>
   slightly less than needed in the end. Consider to stop upgrading one<br>
   step earlier than suggested, if you have spare time.<br>
-  Just to be safe.</span>  
+  Just to be safe.</p>  
   <br>
   <i><p>All calculations are approximate, actual times depend on<br>
   your luck with number of sapphires dropping for every hit<br>
