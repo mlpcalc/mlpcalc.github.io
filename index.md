@@ -262,5 +262,3 @@ Current gear levels: <br>
   how often you can check your pouch and upgrade gear.<br>
 <br>
 Send any questions and suggestions <a href="https://www.reddit.com/user/Nice_Coconut">here</a>
-</body>
-</html>
