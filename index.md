@@ -190,8 +190,8 @@
 	for (let i=curstage; i < stages.length-1; i++){
 	  curtime = calcstage(i);
 	  totaltime += curtime;
-	  h1 = document.createElement('h1');
-	  h1.innerHTML += 'Stage ' + (i+1) + ' will end in ' + formattime(curtime) + '<br>';
+	  h2 = document.createElement('h1');
+	  h2.innerHTML += 'Stage ' + (i+1) + ' will end in ' + formattime(curtime) + ' with gear levels ' + curarmor[1] + '/' + curhelmet [1] + '<br>';
 	  results.appendChild(h1);
 	}
 	h1 = document.createElement('h1');
