@@ -245,6 +245,7 @@ Current gear levels: <br>
 	<option value="5">6. Chancellor Neighsay 1 (15000, 47)</option>
 	<option value="6">7. Chancellor Neighsay 2 (24000, 77)</option>
   </select>
+  <br>
    
   <div id="results"></div>
 
