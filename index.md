@@ -114,7 +114,6 @@
 	  bosshits = stages[num]['bosshits'];
 	}
 	while (totalpower * bosshits <= stages[num]['bosshp']){
-	  totalpower = curarmor[0]+curhelmet[0]+stages[num]['helpersdmg'];
 	  if (curarmor[1] > curhelmet[1]){
 	    nextupgrade = [true,vals[curhelmet[1]][1]];
 	  }
@@ -137,6 +136,7 @@
 	    curhelmet[0] = upgradelevels[curhelmet[1]+1];
 	    curhelmet[1] += 1;
   	  }
+	  totalpower = curarmor[0]+curhelmet[0]+stages[num]['helpersdmg'];
 	}
 	return stagetime
   }
@@ -184,15 +184,15 @@
 	ttb = Math.ceil(curminion/curdmg);
 	pouchtime = Math.ceil((stages[curstage]['maxcoins'] + stages[curstage]['coinbonus']) / stages[curstage]['minioncoins']) * ttb;
 	span = document.createElement('span');
-	span.innerHTML = '<img name="pouchpic" src="" alt="maxpouch" /><b> ('+ (stages[curstage]['maxcoins'] + stages[curstage]['coinbonus']) +') in: '+formattime(pouchtime)+'</b>';
+	span.innerHTML = '<img name="pouchpic" src="" alt="maxpouch" /><b> (current max '+ (stages[curstage]['maxcoins'] + stages[curstage]['coinbonus']) +') will fill in: '+formattime(pouchtime)+'</b>';
 	results.appendChild(span);
 	setimages('pouchpic')
 	for (let i=curstage; i < stages.length-1; i++){
 	  curtime = calcstage(i);
 	  totaltime += curtime;
-	  h2 = document.createElement('h1');
+	  h2 = document.createElement('h2');
 	  h2.innerHTML += 'Stage ' + (i+1) + ' will end in ' + formattime(curtime) + ' with gear levels ' + curarmor[1] + '/' + curhelmet [1] + '<br>';
-	  results.appendChild(h1);
+	  results.appendChild(h2);
 	}
 	h1 = document.createElement('h1');
 	h1.innerHTML += 'Total time: ' + formattime(totaltime);
