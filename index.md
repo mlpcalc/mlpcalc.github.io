@@ -258,7 +258,7 @@
 	  tr = document.createElement('tr');
 	  tr.innerHTML += '<td>Extra<br>gems</td>'
 	  for (let j=1; j<egems.length;j++){
-	    tr.innerHTML += '<td width="120"><img name="gempic" src="" alt="Gems" />'+egems[j] + ': <br>' + formattime(gemtimes[j]) + '</td>';
+	    tr.innerHTML += '<td align="center" width="120"><img name="gempic" src="" alt="Gems" />'+egems[j] + ': <br>' + formattime(gemtimes[j]) + '</td>';
 	  }
 	  tbdy.appendChild(tr);
 	  table.appendChild(tbdy);
