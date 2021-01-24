@@ -252,13 +252,13 @@
 	  gemtimes = calcgems(i+1,curdmg,coins)
 	  totaltime += curtime;
 	  h2 = document.createElement('h2');
-	  h2.innerHTML += 'Stage ' + (i+1) + ' will end in ' + formattime(curtime) + ' with gear levels ' + curarmor[1] + '/' + curhelmet [1] + '<br>';
+	  h2.innerHTML += 'Stage ' + (i+1) + ' will require ' + formattime(curtime) + ' and gear levels ' + curarmor[1] + '/' + curhelmet [1] + '<br>';
 	  table = document.createElement('table');
 	  tbdy = document.createElement('tbody');
 	  tr = document.createElement('tr');
 	  tr.innerHTML += '<td>Extra<br>gems</td>'
 	  for (let j=1; j<egems.length;j++){
-	    tr.innerHTML += '<td align="center" width="120"><img name="gempic" src="" alt="Gems" />'+egems[j] + ': <br>' + formattime(gemtimes[j]) + '</td>';
+	    tr.innerHTML += '<td align="center" width="120"><img name="gempic" src="" alt="Gems" />'+egems[j] + ': <br>+' + formattime(gemtimes[j]) + '</td>';
 	  }
 	  tbdy.appendChild(tr);
 	  table.appendChild(tbdy);
