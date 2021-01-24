@@ -338,16 +338,16 @@ Current gear levels: <br>
      
   <div id="results"></div>
 
-  <input id="skiprec" type="checkbox" onchange="skiprecendis()"> <span id="">Calc with chance of double hit <span id="" style="color:red; font-size:18pt display:inline"><b>*   </b></span> </span> 
+  <input id="skiprec" type="checkbox" onchange="skiprecendis()"> <span id="">Calc with chance of extra hit <span id="" style="color:red; font-size:18pt display:inline"><b>*   </b></span> </span> 
   <select id="skiprechits" disabled="true">
-    <option value="1">1</option>
-	<option value="2">2 (rare)</option>
+    <option value="1">1 hit</option>
+	<option value="2">2 hits (rare)</option>
   </select>
   
   <p><input style="width:450px" type="button" value="Calculate" onclick="calctime()"></p>
   
   <p id="" style="display:inline"><span style="color:red; font-size:18pt">*</span> It's possible to defeat the bosses with power less than<br>
-  recommended, if there will be more target icon than usual during<br>
+  recommended, if there will be more target icons than usual during<br>
   the battle with them. It requires several retries for it to happen.</p>
   <br>
   <br>
