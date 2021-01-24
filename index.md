@@ -111,7 +111,8 @@
 	var stagetime = 0;
 	var totalpower = curarmor[0]+curhelmet[0]+stages[num]['helpersdmg'];
 	if (document.getElementById("skiprec").checked){
-	  bosshits = stages[num]['bosshits']+1;
+	  skip = Number(document.getElementById("skiprechits").value)
+	  bosshits = stages[num]['bosshits']+skip;
 	}
 	else {
 	  bosshits = stages[num]['bosshits'];
@@ -217,6 +218,14 @@
 	} else {
 	  secondsleft = 0;
 	  secondsto = zeroday+(endsleep*3600) - Date.parse(curdaytime)
+	}
+  }
+  
+  function skiprecendis(){
+    if (document.getElementById("skiprec").checked){
+	  document.getElementById("skiprechits").disabled = false;
+	} else {
+	  document.getElementById("skiprechits").disabled = true;
 	}
   }
   
@@ -329,11 +338,16 @@ Current gear levels: <br>
      
   <div id="results"></div>
 
-  <input id="skiprec" type="checkbox" onchange=""> <span id="">Calc with chance of double hit <span id="" style="color:red; font-size:18pt display:inline"><b>*</b></span> </span> 
+  <input id="skiprec" type="checkbox" onchange="skiprecendis()"> <span id="">Calc with chance of double hit <span id="" style="color:red; font-size:18pt display:inline"><b>*   </b></span> </span> 
+  <select id="skiprechits" disabled="true">
+    <option value="1">1</option>
+	<option value="2">2 (rare)</option>
+  </select>
+  
   <p><input style="width:450px" type="button" value="Calculate" onclick="calctime()"></p>
   
   <p id="" style="display:inline"><span style="color:red; font-size:18pt">*</span> It's possible to defeat the bosses with power less than<br>
-  recommended, if there will be one more target icon than usual during<br>
+  recommended, if there will be more target icon than usual during<br>
   the battle with them. It requires several retries for it to happen.</p>
   <br>
   <br>
