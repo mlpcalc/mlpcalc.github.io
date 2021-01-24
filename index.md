@@ -34,6 +34,7 @@
 	}
 	egems = maindata['convgems'];
 	setimages('coinpic');
+	skiprecendis();
   }
   
   function setHelpers(){
