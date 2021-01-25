@@ -452,7 +452,7 @@
 
 <h1>Blitz calculator</h1>
   <p>Select event: <select id="blitzevent" onchange="updatepage()">
-    <option>Tale of Tirek</option>
+    <option>Tale of Tirek </option>
   </select></p>
   <p><table style="border-collapse: collapse;"><thead>
   <tr>
