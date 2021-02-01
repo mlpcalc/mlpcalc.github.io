@@ -90,7 +90,7 @@
 		}
 	  ],
 	  "helpers" : [[2, 2, 2], [5, 5, 5], [20, 20, 20], [45, 45, 45], [65, 65, 65], [100, 100, 100], [150, 150, 150], [100, 100, 100]],
-	  "crosshelpers":[[0,1,2],[0,1,2],[0,1,2],[3,4],[3,4],[3,4],[5,6,7],[5,6,7],[5,6,7]],
+	  "crosshelpers":[[0,1,2],[0,1,2],[0,1,2],[3,4,5],[3,4,5],[6,7,8],[6,7,8],[6,7,8]],
 	  "helpnames":["Future Fluttershy","Future Applejack","Future Rainbow Dash","Future Rarity","Future Pinkie Pie",
 	  "Future Apple Bloom","Future Starlight Glimmer","Future Sunburst","Future Trixie"],
 	  "convrate":[1,2501,10001,30001,100000],
