@@ -33,7 +33,7 @@
   var droprates, dropvalues;
   var convrate, convgems;
   var margin;
-  const defaultBlitzEvent = "Tale of Tirek"
+  const defaultBlitzEvent = "Hearts and Hooves and Claws Day"
 
   function loadpage(){
     let i;
