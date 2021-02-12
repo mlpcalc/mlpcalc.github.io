@@ -117,7 +117,8 @@ const gamedata ={
 	  "convrate":[1,2501,10001,25001,50001],
 	  "convgems":[3,5,10,15,20],
 	  "margin":0.025
-	  }
+	  },
+	  
 	  "Hearts and Hooves and Claws Day":
 	  {"vals": [
 	  [10,  10,   12,    0], [11,  10,   12,    5], [12,  10,   12,   25], [12,  11,   12,   50],
