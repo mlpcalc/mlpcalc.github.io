@@ -541,10 +541,10 @@
   Just to be safe.</p>  
   <br>
   <br>
-  <p>This calculator <b>does not</b> account for rainbow piles<br>
+  <i><p>This calculator <b>does not</b> account for rainbow piles<br>
   scattered across the area. Meanwhile they can make a huge<br>
   difference (up to 10 hours if you are lucky) if checked regularly</p>
-  <i><p>All other calculations are approximate, actual times depend on<br>
+  <p>All other calculations are approximate, actual times depend on<br>
   your luck with number of sapphires dropping for every hit<br></p>
   <p>You can check the spread of values by switching the option<br>
   below and calculating the result several times.</p>
