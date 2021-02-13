@@ -541,8 +541,8 @@
   Just to be safe.</p>  
   <br>
   <br>
-  <i><p>This calculator <b>does not</b> account for rainbow piles scattered<br>
-  across the area. Meanwhile they can make a huge difference if checked regularly<br>
+  <i><p>This calculator <b>does not</b> account for rainbow piles scattered across<br>
+  the area. Meanwhile they can make a huge difference if checked regularly<br>
   (up to 8-9 hours of total time from start of event if you are lucky)</p>
   <p>All other calculations are approximate, actual times depend on<br>
   your luck with number of sapphires dropping for every hit<br></p>
