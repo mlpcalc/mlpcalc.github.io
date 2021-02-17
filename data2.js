@@ -114,7 +114,7 @@
 		[0, 9999999]
 	  ],
 	  "bosses" : [
-	    {"ID" : "Boss_Rarity_2",
+	    {"ID" : "Rarity",
 	    "BossHP" : 50,
 	    "BossHits" : 10,
 	    "TimeMinutes" : 10,
@@ -123,7 +123,7 @@
 	    "MinionCurrencyReward" : 1,
 	    "MinionsBeforeBoss" : 1,
 		},
-		{"ID" : "Boss_Rainbow_Dash_2",
+		{"ID" : "Rainbow Dash",
 		"BossHP" : 750,
 		"BossHits" : 15,
 		"TimeMinutes" : 15,
@@ -132,7 +132,7 @@
 		"MinionCurrencyReward" : 2,
 		"MinionsBeforeBoss" : 50
 		},
-		{"ID" : "Boss_Pinkie_Pie",
+		{"ID" : "Pinkie Pie",
 		"BossHP" : 2430,
 		"BossHits" : 15,
 		"TimeMinutes" : 15,
@@ -141,7 +141,7 @@
 		"MinionCurrencyReward" : 3,
 		"MinionsBeforeBoss" : 45
 		},
-		{"ID" : "Boss_Peppy_Friendship_Student",
+		{"ID" : "Peppy Friendship Student",
 		"BossHP" : 7000,
 		"BossHits" : 20,
 		"TimeMinutes" : 20,
@@ -150,7 +150,7 @@
 		"MinionCurrencyReward" : 9,
 		"MinionsBeforeBoss" : 40
 		},
-		{"ID" : "Boss_Agent_Sweetie_Drops",
+		{"ID" : "Agent Sweetie Drops",
 		"BossHP" : 12440,
 		"BossHits" : 20,
 		"TimeMinutes" : 20,
@@ -159,7 +159,7 @@
 		"MinionCurrencyReward" : 24,
 		"MinionsBeforeBoss" : 35
 		},
-		{"ID" : "Boss_Sandbar",
+		{"ID" : "Sandbar",
 		"BossHP" : 23700,
 		"BossHits" : 25,
 		"TimeMinutes" : 25,
@@ -168,7 +168,7 @@
 		"MinionCurrencyReward" : 47,
 		"MinionsBeforeBoss" : 30
 		},
-		{"ID" : "Boss_Rarity_3",
+		{"ID" : "Rarity 2",
 		"BossHP" : 33700,
 		"BossHits" : 25,
 		"TimeMinutes" : 25,
