@@ -363,7 +363,7 @@
 	}
 	
 	var p = document.createElement('p');
-	p.innerHTML += '<b>Closest valuable upgrades<br>(reduced time to beat minion -> increased coins income):</b><br>';
+	p.innerHTML += '<br><b>Closest valuable upgrades<br>(reduced time to beat minion -> increased coins income):</b><br>';
 	for (let i=0; i < timeUpgrades.length; i++){
 	  p.innerHTML += timeUpgrades[i][1] + '/' + timeUpgrades[i][2] + ' in ' + formattime(timeUpgrades[i][0]) + '<br>'
 	  if (i == 2) break;
