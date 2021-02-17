@@ -18,6 +18,8 @@
   var upgradelevels = [0];
   var egems = [];
   var siegeevent;
+  var timeUpgrades = [];
+  var totaltime;
   const defaultSiegeEvent = "She's All Yak"
   //var curdaytime;
   
@@ -180,6 +182,7 @@
 	}
   }
   
+  
   function calcstage(num){
     var nextupgrade;
 	var stagetime = 0;
@@ -194,6 +197,7 @@
 	if (bosshits == 0){
 	  bosshits = stages[num]['bosstime'] * 60
 	}
+	var tmptime = Math.ceil(stages[num]['minionhp'] / totalpower);
 	while (totalpower * bosshits <= stages[num]['bosshp']){
 	  if (curarmor[1] > curhelmet[1]){
 	    nextupgrade = [true,vals[curhelmet[1]][1]];
@@ -218,6 +222,10 @@
 	    curhelmet[1] += 1;
   	  }
 	  totalpower = curarmor[0]+curhelmet[0]+stages[num]['helpersdmg'];
+	  if (Math.ceil(stages[num]['minionhp'] / totalpower)<tmptime){
+	    timeUpgrades.push([totaltime + stagetime,curarmor[1],curhelmet[1]]);
+		tmptime = Math.ceil(stages[num]['minionhp'] / totalpower);
+	  }
 	}
 	return stagetime
   }
@@ -309,6 +317,7 @@
   function calctime(){
     results = document.getElementById("results");
 	results.innerHTML = "";
+	timeUpgrades = [];
 	curstage = Number(document.getElementById("curstage").value);
 	setHelpers();
 	tmp1 = Number(document.getElementById("curarmor").value);
@@ -316,7 +325,7 @@
 	coins = Number(document.getElementById("curcoins").value);
 	curarmor = [upgradelevels[tmp1],tmp1];
     curhelmet = [upgradelevels[tmp2],tmp2];
-	let totaltime = 0;
+	totaltime = 0;
 	let curtime = 0;
 	let gemtimes = []
 	//var curdaytime = new Date();
@@ -331,6 +340,7 @@
 	span = document.createElement('span');
 	span.innerHTML = '<img name="pouchpic" src="" alt="maxpouch" /><b> (current max '+ stages[curstage]['maxcoins'] +') will fill in: '+formattime(pouchtime)+'</b>';
 	results.appendChild(span);
+	mainresults = document.createElement('div');
 	setimages('pouchpic');
 	for (let i=curstage; i < stages.length-1; i++){
 	  curtime = calcstage(i);
@@ -348,13 +358,23 @@
 	  }
 	  tbdy.appendChild(tr);
 	  table.appendChild(tbdy);
-	  results.appendChild(h2);
-	  results.appendChild(table);
+	  mainresults.appendChild(h2);
+	  mainresults.appendChild(table);
 	}
+	
+	var p = document.createElement('p');
+	p.innerHTML += '<b>Closest valuable upgrades<br>(reduced time to beat minion -> increased coins income):</b><br>';
+	for (let i=0; i < timeUpgrades.length; i++){
+	  p.innerHTML += timeUpgrades[i][1] + '/' + timeUpgrades[i][2] + ' in ' + formattime(timeUpgrades[i][0]) + '<br>'
+	  if (i == 2) break;
+	}
+	results.appendChild(p);
+	results.appendChild(mainresults);
 	setimages('gempic')
 	h1 = document.createElement('h1');
 	h1.innerHTML += 'Total time: ' + formattime(totaltime);
 	results.appendChild(h1);
+	
   }
 
 
