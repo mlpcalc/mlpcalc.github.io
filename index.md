@@ -62,6 +62,7 @@
 	curstage = document.getElementById("curstage");
 	removeOptions(curstage);
 	addOptions(generateStages(), curstage);
+	curstage.selectedIndex = 1;
 	if (stages[0]['bosshits']>0){
 	  document.getElementById("bosstip1").style.display = "inline";
 	  document.getElementById("bosstip2").style.display = "inline";
