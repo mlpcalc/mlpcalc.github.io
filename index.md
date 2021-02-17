@@ -138,7 +138,13 @@
 	  tr.append(td);
 	  td = document.createElement('td');
 	  span = document.createElement('span');
-	  span.innerHTML = ' '+helpnames[i]+'<br>(stages '+(stagenums[i]).toString()+')';
+	  let hstages = ''
+	  if (stagenums[i].length == 8){
+	    hstages = "all stages";
+	  } else {
+	    hstages = "stages "+(stagenums[i]).toString();
+	  }
+	  span.innerHTML = ' '+helpnames[i]+'<br>('+hstages+')';
 	  td.append(span);
 	  tr.append(td);
 	  if (j==3){
