@@ -377,8 +377,8 @@
 <br>
 <br>
 Current gear levels: <br>
-<input id="curarmor" type="number" value="1" min="1" max="88" style="width:80px"/><br>
-<input id="curhelmet" type="number" value="1" min="1" max="88" style="width:80px"/>
+<input id="curarmor" type="number" value="9" min="1" max="88" style="width:80px"/><br>
+<input id="curhelmet" type="number" value="9" min="1" max="88" style="width:80px"/>
 
    <p id="helpers">
    </p>
