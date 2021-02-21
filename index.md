@@ -69,6 +69,8 @@
 	  document.getElementById("bosstip1").style.display = "inline";
 	  document.getElementById("bosstip2").style.display = "inline";
 	}
+	updatedmg("curarmor")
+	updatedmg("curhelmet")
 	skiprecendis();
   }
   
