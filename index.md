@@ -403,7 +403,7 @@
 <br>
 <br>
 <table>
-<td style="width:160px">
+<td style="width:200px">
 Current gear levels: <br>
 <input id="curarmor" type="number" value="9" min="1" max="88" style="width:60px" onchange="updatedmg('curarmor')"/><br>
 <input id="curhelmet" type="number" value="9" min="1" max="88" style="width:60px" onchange="updatedmg('curhelmet')"/>
