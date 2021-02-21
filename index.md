@@ -72,6 +72,11 @@
 	skiprecendis();
   }
   
+  function updatedmg(gear){
+    let lvl = document.getElementById(gear).value;
+    document.getElementById(gear+"dmg").value = upgradelevels[lvl];
+  }
+  
   function generateEventList(){
     removeOptions(siegeevent);
 	let eventlist=[], tmp;
@@ -397,9 +402,17 @@
 <img name="coinpic" src="" alt="Current coins" /> <input id="curcoins" type="number" value="0" min="0" max="950000" style="width:80px"/>
 <br>
 <br>
+<table>
+<td style="width:160px">
 Current gear levels: <br>
-<input id="curarmor" type="number" value="9" min="1" max="88" style="width:80px"/><br>
-<input id="curhelmet" type="number" value="9" min="1" max="88" style="width:80px"/>
+<input id="curarmor" type="number" value="9" min="1" max="88" style="width:60px" onchange="updatedmg('curarmor')"/><br>
+<input id="curhelmet" type="number" value="9" min="1" max="88" style="width:60px" onchange="updatedmg('curhelmet')"/>
+</td><td>
+Current gear power: <br>
+<input id="curarmordmg" type="text" value="9" style="width:60px" disabled="true" /><br>
+<input id="curhelmetdmg" type="text" value="9" style="width:60px" disabled="true" />
+</td>
+</table>
 
    <p id="helpers">
    </p>
