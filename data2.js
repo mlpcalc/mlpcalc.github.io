@@ -168,7 +168,7 @@
 		"MinionCurrencyReward" : 47,
 		"MinionsBeforeBoss" : 30
 		},
-		{"ID" : "Rarity 2",
+		{"ID" : "Rarity",
 		"BossHP" : 33700,
 		"BossHits" : 25,
 		"TimeMinutes" : 25,
