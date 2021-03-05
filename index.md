@@ -27,6 +27,7 @@
   var gemtimes = []
   var gemindexes = []
   var drop1;
+  var drop2;
   var blitzevent;
   var vals, helpers, sapphiresavg, bosshealth;
   var hstate=[false,false];
@@ -48,6 +49,7 @@
 	curstage = document.getElementById("curstage");
 	curdamage = document.getElementById("curdamage");
 	drop1 = document.getElementById("drop1");
+	drop2 = document.getElementById("drop2");
 	blitzevent = document.getElementById("blitzevent");
     generateEventList();
 	for (i=0; i<blitzevent.options.length; i++){
@@ -91,10 +93,18 @@
 	  gemindexes.push(-1);
 	}
 	
+	let dropnums=[]
+	for (let i=0;i<dropvalues.length;i++){
+	  dropnums.push(dropvalues[i][0])
+      dropnums.push(dropvalues[i][1])
+	}
+	
     document.getElementById("error").innerText = margin*100;
 	setimages(images[images.length-1]);
 	drop1.nextSibling.remove();
+	drop2.nextSibling.remove();
 	drop1.insertAdjacentText('afterend',"Average ("+sapphiresavg+")");
+	drop2.insertAdjacentText('afterend',"Random ("+Math.min(...dropnums)+"-"+Math.max(...dropnums)+")");
 	help0.checked = false;
 	help1.checked = false;
 	hstate=[false,false];
