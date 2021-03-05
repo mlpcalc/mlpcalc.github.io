@@ -34,7 +34,7 @@
   var droprates, dropvalues;
   var convrate, convgems;
   var margin;
-  const defaultBlitzEvent = "Hearts and Hooves and Claws Day"
+  const defaultBlitzEvent = "Feats of Friendship"
 
   function loadpage(){
     let i;
