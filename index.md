@@ -34,7 +34,7 @@
   var droprates, dropvalues;
   var convrate, convgems;
   var margin;
-  const defaultBlitzEvent = "Feats of Friendship"
+  const defaultBlitzEvent = "The Thracian Infiltration"
 
   function loadpage(){
     let i;
