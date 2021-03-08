@@ -1,6 +1,7 @@
 <html>
 <head>
 <script src="data2.js"></script> 
+<script src="gan.js"></script> 
 <script>
 
   var selectedEvent;
