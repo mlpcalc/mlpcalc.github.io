@@ -1,14 +1,15 @@
 <html>
 <head>
 <script src="data2.js"></script> 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-VS85LB7P6F"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-191706851-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-VS85LB7P6F');
+  gtag('config', 'UA-191706851-1');
 </script>
+
 <script>
 
   var selectedEvent;
