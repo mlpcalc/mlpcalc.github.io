@@ -367,7 +367,7 @@
 	//mainresults = document.createElement('div');
 	
 	span = document.createElement('span');
-	span.innerHTML = '<img name="maxenergypic" src="" alt="max energy" width="20" /><b> (current max '+ ev +') will fill in: '+formattime(pouchtime)+'</b>';
+	span.innerHTML = '<img name="maxenergypic" src="" alt="max energy" width="20" /><b> will fill in: '+formattime(pouchtime)+'</b>';
 	
 	//<h1 id="results" style="width:450px" align="center"></h1>
 	
