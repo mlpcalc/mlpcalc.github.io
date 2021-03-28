@@ -89,7 +89,7 @@
 	  tr.innerHTML += '<td><img name="gempic" src="" alt="Gems" /><b>'+convgems[i]+'</b></td>';
 	  tr.innerHTML += '<td></td><td></td><td></td><td></td><td></td></tr>';
 	  gemtable.appendChild(tr);
-	  gemtimes.push(9999);
+	  gemtimes.push(999999);
 	  gemindexes.push(-1);
 	}
 	
@@ -303,9 +303,39 @@
 	}
 	return sum;
   }
+  
+  function formattime(time){
+    var out = "";
+	var count = [0,0];
+    if (Math.trunc(time / 86400) > 0){
+	  out += Math.trunc(time / 86400) + 'd ';
+	  time -= 86400 * Math.trunc(time / 86400);
+	  count[0] = 1;
+	}
+	if (Math.trunc(time / 3600) > 0){
+	  out += Math.trunc(time / 3600) + 'h ';
+	  time -= 3600 * Math.trunc(time / 3600);
+	  count[1] = 1;
+	}
+	if (Math.trunc(time / 60) > 0){
+	  if (count == [1,0]){
+	    out += '0h '+Math.trunc(time / 60) + 'm ';
+	  }
+	  else {
+	  out += Math.trunc(time / 60) + 'm ';
+	  }
+	  time -= 60 * Math.ceil(time / 60);
+	}
+	if (out == ""){
+	  out += time + 's ';
+	}
+	return out;
+  }
 
   var testrand=[];
   function calctime(){
+    let results = document.getElementById("results");
+	results.innerHTML = ""
     let totaldmg = 0;
     let timetaken = 0;
     let sapphiresleft = 0;
@@ -332,6 +362,15 @@
 		break;
 	  }
 	}
+	
+	pouchtime = ev * tv * 60;
+	//mainresults = document.createElement('div');
+	
+	span = document.createElement('span');
+	span.innerHTML = '<img name="maxenergypic" src="" alt="max energy" width="20" /><b> (current max '+ ev +') will fill in: '+formattime(pouchtime)+'</b>';
+	
+	//<h1 id="results" style="width:450px" align="center"></h1>
+	
 	sapphiresleft = Number(document.getElementById("cursapphires").value);
 	storedenergy = Number(document.getElementById("curenergy").value);
 	for (i = 0; i <Number(curstage.value); i++){
@@ -349,7 +388,7 @@
 		if (storedenergy >0){
 		  storedenergy -= 1;
 		} else {
-		  timetaken += vals[i][2];
+		  timetaken += vals[i][2]*60;
 		}
 	    if (totaldmg >= bosshealth){
 		  checkforgems(i,totaldmg,curhelpers,storedenergy,timetaken,sapphiresleft);
@@ -363,26 +402,28 @@
 	  sapphiresleft -= vals[i+1][3];
 	  storedenergy += vals[i+1][1] - vals[i][1];
 	}
-	let result = document.getElementById("result");
+	
+	
+	
+	let h1 = document.createElement('h1');
+	h1.style.width = "450px";
+	h1.align = "center";
 	let marginoferror = timetaken*margin;
-	let print1 = Math.trunc(timetaken / 60)+'h '+ Math.trunc(timetaken % 60) +'m';
-	let print2;
-	let tmp = Math.trunc(marginoferror / 60);
-	if (tmp>0){
-	  print2 = Math.trunc(marginoferror / 60)+'h '+ Math.trunc(marginoferror % 60) +'m';
-	} else {
-	  print2 = Math.trunc(marginoferror % 60) +'m';
-	}
+	let print1 = formattime(timetaken);
+	print2 = formattime(marginoferror);
 	if (drop1.checked){
-	  result.innerText = print1 + '    (±'+print2+')';
+	  h1.innerText = print1 + '    (±'+print2+')';
 	  document.getElementById("warning0").style.display = "inline";
 	  document.getElementById("warning1").style.display = "inline";
 	} else {
-	  result.innerText = print1;
+	  h1.innerText = print1;
 	  document.getElementById("warning0").style.display = "none";
 	  document.getElementById("warning1").style.display = "none";
 	}
 	testrand.push(timetaken);
+	results.appendChild(h1);
+	results.appendChild(span);
+	setimages('maxenergypic');
 	setgems();
   }
   
@@ -399,7 +440,7 @@
 	  } else {
 		let mult = Math.ceil((bosshealth - totaldmg)/(vals[index][0]+curhelpers));
 	    totaldmg += mult*(vals[index][0]+curhelpers);
-		timetaken += mult*vals[index][2];
+		timetaken += mult*vals[index][2]*60;
 		if (drop1.checked){
 		  sapphiresleft += mult*sapphiresavg;
 		} else{
@@ -422,7 +463,7 @@
 	  if (gemindexes[i] > -1){
 	    fillgemtarget(gemindexes[i], gemtimes[i], "gem"+convrate[i]);
 		gemindexes[i] = -1;
-		gemtimes[i] = 9999;
+		gemtimes[i] = 999999;
 	  } else {
 	    fillgemnull("gem"+convrate[i]);
 	  }
@@ -431,26 +472,20 @@
   
   function fillgemtarget(index, time, gemid){
     let row = document.getElementById(gemid);
-	row.children[1].innerText = Math.trunc(time / 60)+'h '+ Math.trunc(time % 60) +'m';
-	let tmp1 = time*margin;
-	let tmp2 = Math.trunc(tmp1 / 60);
-	if (tmp2 > 0){
-	  tmp2 = tmp2+'h '+ Math.trunc(tmp1 % 60) +'m';
-	} else {
-	  tmp2 = Math.trunc(tmp1 % 60) +'m';
-	}
+	row.children[1].innerText = formattime(time);
+	let tmp1 = formattime(time*margin);
 	if (drop1.checked){
-	  row.children[2].innerText = '±'+tmp2;  
+	  row.children[2].innerText = '±'+tmp1;  
 	} else {
 	  row.children[2].innerText = '';
 	}
 	if ((vals[index][0]==vals[index-1][0])&&(vals[index][2]==vals[index-1][2])){
 	  index -= 1;
 	}
-	tmp1 = vals[index][0];
-	if (help0.checked) tmp1 += helpers[0];
-	if (help1.checked) tmp1 += helpers[1];
-	row.children[3].innerText = tmp1;
+	tmp2 = vals[index][0];
+	if (help0.checked) tmp2 += helpers[0];
+	if (help1.checked) tmp2 += helpers[1];
+	row.children[3].innerText = tmp2;
 	row.children[4].innerText = vals[index][1];
 	row.children[5].innerText = times[vals[index][2]];
   }
@@ -513,8 +548,8 @@
   </select> damage dealt: 
   <input id="curdamage" type="number" value="0" min="0" style="width:70px"/>
   
-   <h1 id="result" style="width:450px" align="center"></h1>
-   
+   <div id="results"></div>
+      
   <p><input style="width:450px" type="button" value="Calculate" onclick="calctime()"></p>
   
   <table><thead align="center"><tr>
