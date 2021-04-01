@@ -378,9 +378,11 @@
 	  table = document.createElement('table');
 	  tbdy = document.createElement('tbody');
 	  tr = document.createElement('tr');
+	  cellwidth = 110;
 	  tr.innerHTML += '<td>Extra<br>gems</td>'
 	  for (let j=1; j<egems.length;j++){
-	    tr.innerHTML += '<td align="center" width="120"><img name="gempic" src="" alt="Gems" />'+egems[j] + ': <br>+' + formattime(gemtimes[j]) + '</td>';
+	    if (j >= 3) {cellwidth = 130;}
+	    tr.innerHTML += '<td align="center" width="'+cellwidth.toString()+'"><img name="gempic" src="" alt="Gems" />'+egems[j] + ': <br>+' + formattime(gemtimes[j]) + '</td>';
 	  }
 	  tbdy.appendChild(tr);
 	  table.appendChild(tbdy);
