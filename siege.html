@@ -391,6 +391,7 @@
 	h1 = document.createElement('h1');
 	h1.innerHTML += 'Total time: ' + formattime(totaltime);
 	results.appendChild(h1);
+	parent.postMessage(document.body.scrollHeight, "*");
 	
   }
 
@@ -429,9 +430,8 @@ Current gear power: <br>
    <p id="helpers">
    </p>
 
-<br>   
+  
  Current stage: <select id="curstage">
-
   </select>
   <br>
   
