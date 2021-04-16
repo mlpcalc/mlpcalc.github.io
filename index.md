@@ -49,7 +49,7 @@
     <option value="1">Blitz</option>
   </select></p>
 
-<iframe id="eventframe" src="" height="800px" width="620px"></iframe>
+<iframe id="eventframe" src="" height="800px" width="666px"></iframe>
 
   
 <p id="footer">Send any questions and suggestions <a href="https://www.reddit.com/user/Nice_Coconut">here</a></p>
