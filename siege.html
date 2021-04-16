@@ -75,7 +75,8 @@
 	updatedmg("curarmor")
 	updatedmg("curhelmet")
 	skiprecendis();
-	parent.postMessage(document.getElementsByTagName("html")[0].scrollHeight, "*");
+	let iframeSize = document.getElementsByTagName("html")[0];
+	parent.postMessage(iframeSize.scrollHeight, "*");
   }
   
   function updatedmg(gear){
@@ -391,7 +392,8 @@
 	h1 = document.createElement('h1');
 	h1.innerHTML += 'Total time: ' + formattime(totaltime);
 	results.appendChild(h1);
-	parent.postMessage(document.getElementsByTagName("html")[0].scrollHeight, "*");
+	let iframeSize = document.getElementsByTagName("html")[0];
+	parent.postMessage(iframeSize.scrollHeight, "*");
 	
   }
 
