@@ -1,6 +1,7 @@
 <html>
 <head>
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-191706851-1"></script>
+<link rel="stylesheet" href="style.css">
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -43,13 +44,15 @@
 </script>
 </head>
 <body onload="loadpage()">  
+<div class="container-lg markdown-body">
 <h1 style="margin-bottom: 1px;">Event calculator</h1>
 <p style="margin-top: 1px;margin-bottom: 1px;">Select event type: <select id="eventtype" onchange="updateEventType()">
 	<option value="0" selected>Siege</option>
     <option value="1">Blitz</option>
   </select></p>
 
-<iframe id="eventframe" src="" height="800px" width="666px"></iframe>
+<iframe id="eventframe" src="" height="1000px" width="666px" style="border-style:none"></iframe>
 
   
 <p id="footer">Send any questions and suggestions <a href="https://www.reddit.com/user/Nice_Coconut">here</a></p>
+</div>
