@@ -1,4 +1,4 @@
-  const gamedata ={
+  const siege_data ={
     "The Crowning Achievement":
 	  {"upgrades": [
         [ 2,     0],
