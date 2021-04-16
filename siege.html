@@ -39,7 +39,7 @@
   function updatepage(){
 	document.getElementById("results").innerHTML = "";
     selectedEvent = siegeevent[siegeevent.selectedIndex].value;
-	maindata = gamedata[selectedEvent]
+	maindata = siege_data[selectedEvent]
 	let i;
     for (i=0;i<maindata["bosses"].length; i++){
 	  stages[i]={};
@@ -86,7 +86,7 @@
   function generateEventList(){
     removeOptions(siegeevent);
 	let eventlist=[], tmp;
-    for (i in gamedata){
+    for (i in siege_data){
 	  tmp = [i,i]
 	  eventlist.push(tmp);
 	}
