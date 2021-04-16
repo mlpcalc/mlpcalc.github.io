@@ -21,7 +21,7 @@
   }
   window.addEventListener("message", receiveMessage, false);*/
   window.addEventListener("message", function(e){
-    if (e.origin != "https://mlpcalc.github.io/")
+    if (e.origin != "https://mlpcalc.github.io")
       return;
 	iframe.style.height = e.data+"px";
   })
