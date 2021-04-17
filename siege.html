@@ -34,7 +34,7 @@
 	  }
 	}
 	updatepage();
-	console.log('loadpage,'+Date.now())
+	console.log('loadpage,'+performance.now())
   }
   
   function updatepage(){
@@ -76,7 +76,7 @@
 	updatedmg("curarmor")
 	updatedmg("curhelmet")
 	skiprecendis();
-	console.log('updatepage,'+Date.now())
+	console.log('updatepage,'+performance.now())
 	let iframeSize = document.getElementsByTagName("html")[0].scrollHeight;
 	parent.postMessage(iframeSize, "*");
   }
@@ -84,7 +84,7 @@
   function updatedmg(gear){
     let lvl = document.getElementById(gear).value;
     document.getElementById(gear+"dmg").value = upgradelevels[lvl];
-	console.log('updatedmg,'+Date.now())
+	console.log('updatedmg,'+performance.now())
   }
   
   function generateEventList(){
@@ -95,7 +95,7 @@
 	  eventlist.push(tmp);
 	}
 	addOptions(eventlist, siegeevent);
-	console.log('generateeventlist,'+Date.now())
+	console.log('generateeventlist,'+performance.now())
   }
   
   function generateStages(){
@@ -108,7 +108,7 @@
 	  tmp += maindata["bosses"][i]["MinionCurrencyReward"] + ')';
 	  stagesarr.push([tmp,i])
 	}
-	console.log('generateStages,'+Date.now())
+	console.log('generateStages,'+performance.now())
 	return stagesarr;
   }
   
@@ -116,7 +116,7 @@
     while (selBox.options.length > 0) {
       selBox.remove(0);
     }
-	console.log('removeOptions,'+Date.now())
+	console.log('removeOptions,'+performance.now())
   }
   
   function addOptions(arr, selBox) {
@@ -125,7 +125,7 @@
 	  newOption = new Option(arr[i][0],arr[i][1]);
 	  selBox.add(newOption, undefined);
 	}
-	console.log('addOptions,'+Date.now())
+	console.log('addOptions,'+performance.now())
   }
   
   function generateHelpers(){
@@ -180,7 +180,7 @@
 	  table.append(tr);
 	}
 	document.getElementById("helpers").append(table)
-	console.log('generateHelpers,'+Date.now())
+	console.log('generateHelpers,'+performance.now())
   }
   
   function setHelpers(){
@@ -202,7 +202,7 @@
 	  }
 	  stages[i]['maxcoins'] = maindata['bosses'][i]['CurrencyCappings'][stages[i]['helpnum']];
 	}
-	console.log('setHelpers,'+Date.now())
+	console.log('setHelpers,'+performance.now())
   }
   
   
@@ -250,7 +250,7 @@
 		tmptime = Math.ceil(stages[num]['minionhp'] / totalpower);
 	  }
 	}
-	console.log('calcstage,'+Date.now())
+	console.log('calcstage,'+performance.now())
 	if (bosshits == 0){
 	  return stagetime + stages[num]['bosstime'] * 60
 	} else {
@@ -283,7 +283,7 @@
 	if (out == ""){
 	  out += time + 's ';
 	}
-	console.log('formattime,'+Date.now())
+	console.log('formattime,'+performance.now())
 	return out;
   }
   
@@ -293,7 +293,7 @@
 	for (let i = 0; i < imgs.length; i++){
 	  imgs[i].src=item;
     }
-	console.log('setimages,'+Date.now())
+	console.log('setimages,'+performance.now())
   }
   
   function calcgems(instage, inpower, incoins){
@@ -311,7 +311,7 @@
 	  incoins += stages[instage]['minioncoins']
 	}
 	gemtimes.push(gtime);
-	console.log('calcgems,'+Date.now())
+	console.log('calcgems,'+performance.now())
     return gemtimes;
   }
   
@@ -335,7 +335,7 @@
 	  secondsleft = 0;
 	  secondsto = zeroday+(endsleep*3600) - Date.parse(curdaytime)
 	}
-	console.log('getdelta,'+Date.now())
+	console.log('getdelta,'+performance.now())
   }
   
   function skiprecendis(){
@@ -344,7 +344,7 @@
 	} else {
 	  document.getElementById("skiprechits").disabled = true;
 	}
-	console.log('skiprecendis,'+Date.now())
+	console.log('skiprecendis,'+performance.now())
   }
   
   function calctime(){
@@ -407,7 +407,7 @@
 	h1 = document.createElement('h1');
 	h1.innerHTML += 'Total time: ' + formattime(totaltime);
 	results.appendChild(h1);
-	console.log('calctime,'+Date.now())
+	console.log('calctime,'+performance.now())
 	let iframeSize = document.getElementsByTagName("html")[0].scrollHeight;
 	parent.postMessage(iframeSize, "*");
 	
