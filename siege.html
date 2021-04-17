@@ -8,7 +8,6 @@
   var selectedEvent;
   var maindata;
   //const images = ["pouchpic","coinpic"];
-  var maxpouchpic;
   var vals;
   var curarmor;
   var curhelmet;
@@ -33,10 +32,7 @@
 		break;
 	  }
 	}
-	maxpouchpic = new Image();
-	maxpouchpic.onload = function(){updatepage()}
-	maxpouchpic.src = "assets/pouch.png"
-	//updatepage();
+	updatepage();
   }
   
   function updatepage(){
@@ -313,6 +309,10 @@
 	}
   }
   
+  function imgLoaded(imgElement) {
+    return imgElement.complete && imgElement.naturalHeight !== 0;
+  }
+  
   function calctime(){
     let wrapper = document.getElementById("wrapper");
 console.log('1, '+wrapper.scrollHeight);
@@ -337,7 +337,9 @@ console.log('3, '+wrapper.scrollHeight);
 console.log('4, '+wrapper.scrollHeight);
 	pouchtime = Math.ceil(stages[curstage]['maxcoins'] / stages[curstage]['minioncoins']) * ttb;
 	span = document.createElement('span');
-	span.appendChild(maxpouchpic);
+	img = document.createElement('img');
+	img.src = "assets/pouch.png";
+	span.appendChild(img);
 	//span.innerHTML = '<img name="pouchpic" src="assets/pouch.png" alt="maxpouch" /><b> (current max '+ stages[curstage]['maxcoins'] +') will fill in: '+formattime(pouchtime)+'</b>';
 	span.innerHTML += "<b> (current max '+ stages[curstage]['maxcoins'] +') will fill in: '+formattime(pouchtime)+'</b>'";
 	results.appendChild(span);
@@ -384,7 +386,9 @@ console.log('11, '+wrapper.scrollHeight);
 	h1.innerHTML += 'Total time: ' + formattime(totaltime);
 	results.appendChild(h1);
 console.log('12, '+wrapper.scrollHeight);
-	let iframeSize = document.getElementById("wrapper").scrollHeight;
+	let addedheight = 0;
+	if (imgLoaded(img) == false) addedheight = 20;
+	let iframeSize = document.getElementById("wrapper").scrollHeight + addedheight;
 	parent.postMessage(iframeSize, "*");
 
   }
