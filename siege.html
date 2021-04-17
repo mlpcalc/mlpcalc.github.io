@@ -38,6 +38,7 @@
   }
   
   function updatepage(){
+    parent.postMessage(500, "*");
 	document.getElementById("results").innerHTML = "";
     selectedEvent = siegeevent[siegeevent.selectedIndex].value;
 	maindata = gamedata[selectedEvent]
@@ -348,6 +349,7 @@
   }
   
   function calctime(){
+    parent.postMessage(500, "*");
     results = document.getElementById("results");
 	results.innerHTML = "";
 	timeUpgrades = [];
