@@ -14,14 +14,7 @@
   var curEventType = 0;
   var iframe;
   
-  /*function receiveMessage(event){
-    if (event.origin !== "https://mlpcalc.github.io/")
-      return;
-	iframe.style.height = event.data+"px";
-  }
-  window.addEventListener("message", receiveMessage, false);*/
   window.addEventListener("message", function(e){
-    //iframe.style.height = "500px";
     if (e.origin != "https://mlpcalc.github.io")
       return;
 	iframe.style.height = e.data+"px";
