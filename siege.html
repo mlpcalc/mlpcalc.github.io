@@ -34,6 +34,7 @@
 	  }
 	}
 	updatepage();
+	console.log('loadpage,'+Date.now())
   }
   
   function updatepage(){
@@ -75,13 +76,15 @@
 	updatedmg("curarmor")
 	updatedmg("curhelmet")
 	skiprecendis();
-	let iframeSize = document.getElementsByTagName("html")[0];
-	parent.postMessage(iframeSize.scrollHeight, "*");
+	console.log('updatepage,'+Date.now())
+	let iframeSize = document.getElementsByTagName("html")[0].scrollHeight;
+	parent.postMessage(iframeSize, "*");
   }
   
   function updatedmg(gear){
     let lvl = document.getElementById(gear).value;
     document.getElementById(gear+"dmg").value = upgradelevels[lvl];
+	console.log('updatedmg,'+Date.now())
   }
   
   function generateEventList(){
@@ -92,6 +95,7 @@
 	  eventlist.push(tmp);
 	}
 	addOptions(eventlist, siegeevent);
+	console.log('generateeventlist,'+Date.now())
   }
   
   function generateStages(){
@@ -104,6 +108,7 @@
 	  tmp += maindata["bosses"][i]["MinionCurrencyReward"] + ')';
 	  stagesarr.push([tmp,i])
 	}
+	console.log('generateStages,'+Date.now())
 	return stagesarr;
   }
   
@@ -111,6 +116,7 @@
     while (selBox.options.length > 0) {
       selBox.remove(0);
     }
+	console.log('removeOptions,'+Date.now())
   }
   
   function addOptions(arr, selBox) {
@@ -119,6 +125,7 @@
 	  newOption = new Option(arr[i][0],arr[i][1]);
 	  selBox.add(newOption, undefined);
 	}
+	console.log('addOptions,'+Date.now())
   }
   
   function generateHelpers(){
@@ -173,6 +180,7 @@
 	  table.append(tr);
 	}
 	document.getElementById("helpers").append(table)
+	console.log('generateHelpers,'+Date.now())
   }
   
   function setHelpers(){
@@ -194,6 +202,7 @@
 	  }
 	  stages[i]['maxcoins'] = maindata['bosses'][i]['CurrencyCappings'][stages[i]['helpnum']];
 	}
+	console.log('setHelpers,'+Date.now())
   }
   
   
@@ -241,6 +250,7 @@
 		tmptime = Math.ceil(stages[num]['minionhp'] / totalpower);
 	  }
 	}
+	console.log('calcstage,'+Date.now())
 	if (bosshits == 0){
 	  return stagetime + stages[num]['bosstime'] * 60
 	} else {
@@ -273,6 +283,7 @@
 	if (out == ""){
 	  out += time + 's ';
 	}
+	console.log('formattime,'+Date.now())
 	return out;
   }
   
@@ -282,6 +293,7 @@
 	for (let i = 0; i < imgs.length; i++){
 	  imgs[i].src=item;
     }
+	console.log('setimages,'+Date.now())
   }
   
   function calcgems(instage, inpower, incoins){
@@ -299,6 +311,7 @@
 	  incoins += stages[instage]['minioncoins']
 	}
 	gemtimes.push(gtime);
+	console.log('calcgems,'+Date.now())
     return gemtimes;
   }
   
@@ -322,6 +335,7 @@
 	  secondsleft = 0;
 	  secondsto = zeroday+(endsleep*3600) - Date.parse(curdaytime)
 	}
+	console.log('getdelta,'+Date.now())
   }
   
   function skiprecendis(){
@@ -330,6 +344,7 @@
 	} else {
 	  document.getElementById("skiprechits").disabled = true;
 	}
+	console.log('skiprecendis,'+Date.now())
   }
   
   function calctime(){
@@ -392,8 +407,9 @@
 	h1 = document.createElement('h1');
 	h1.innerHTML += 'Total time: ' + formattime(totaltime);
 	results.appendChild(h1);
-	let iframeSize = document.getElementsByTagName("html")[0];
-	parent.postMessage(iframeSize.scrollHeight, "*");
+	console.log('calctime,'+Date.now())
+	let iframeSize = document.getElementsByTagName("html")[0].scrollHeight;
+	parent.postMessage(iframeSize, "*");
 	
   }
 
