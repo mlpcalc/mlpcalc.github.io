@@ -333,7 +333,7 @@ console.log('3, '+wrapper.scrollHeight);
 console.log('4, '+wrapper.scrollHeight);
 	pouchtime = Math.ceil(stages[curstage]['maxcoins'] / stages[curstage]['minioncoins']) * ttb;
 	span = document.createElement('span');
-	span.innerHTML = '<img name="pouchpic" src="assets\pouch.png" alt="maxpouch" /><b> (current max '+ stages[curstage]['maxcoins'] +') will fill in: '+formattime(pouchtime)+'</b>';
+	span.innerHTML = '<img name="pouchpic" src="assets/pouch.png" alt="maxpouch" /><b> (current max '+ stages[curstage]['maxcoins'] +') will fill in: '+formattime(pouchtime)+'</b>';
 	results.appendChild(span);
 console.log('5, '+wrapper.scrollHeight);
 	mainresults = document.createElement('div');
@@ -351,7 +351,7 @@ console.log('6, '+wrapper.scrollHeight);
 	  tr = document.createElement('tr');
 	  tr.innerHTML += '<td>Extra<br>gems</td>'
 	  for (let j=1; j<egems.length;j++){
-	    tr.innerHTML += '<td align="center" width="120"><img name="gempic" src="assets\gem.png" alt="Gems" />'+egems[j] + ': <br>+' + formattime(gemtimes[j]) + '</td>';
+	    tr.innerHTML += '<td align="center" width="120"><img name="gempic" src="assets/gem.png" alt="Gems" />'+egems[j] + ': <br>+' + formattime(gemtimes[j]) + '</td>';
 	  }
 	  tbdy.appendChild(tr);
 	  table.appendChild(tbdy);
@@ -400,7 +400,7 @@ console.log('12, '+wrapper.scrollHeight);
 <p style="margin-top: 1px;">Select event: <select id="siegeevent" onchange="updatepage()">
   </select></p>
 
-<img name="coinpic" src="assets\coin.png" alt="Current coins" /> <input id="curcoins" type="number" value="0" min="0" max="950000" style="width:80px"/>
+<img name="coinpic" src="assets/coin.png" alt="Current coins" /> <input id="curcoins" type="number" value="0" min="0" max="950000" style="width:80px"/>
 <br>
 <br>
 <table>
