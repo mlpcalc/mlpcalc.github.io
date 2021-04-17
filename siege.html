@@ -374,9 +374,14 @@
 	h1.innerHTML += 'Total time: ' + formattime(totaltime);
 	results.appendChild(h1);
 	//checking if pouch image is loaded
-	//if not - adding 30px to iframe height
+	//if not - adding 25px to iframe height
+	//if yes - adding 5px
 	let addedheight = 0;
-	if (imgLoaded(img) == false) addedheight = 30;
+	if (imgLoaded(img) == false) {
+	  addedheight = 25;
+	} else {
+	  addedheight = 5;
+	}
 	let iframeSize = document.getElementById("wrapper").scrollHeight + addedheight;
 	parent.postMessage(iframeSize, "*");
 
