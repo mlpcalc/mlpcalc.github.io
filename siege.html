@@ -338,7 +338,7 @@ console.log('4, '+wrapper.scrollHeight);
 console.log('5, '+wrapper.scrollHeight);
 	mainresults = document.createElement('div');
 	setimages('pouchpic');
-console.log('6, 'wrapper.scrollHeight);
+console.log('6, '+wrapper.scrollHeight);
 	for (let i=curstage; i < stages.length-1; i++){
 	  curtime = calcstage(i);
 	  curdmg = curarmor[0]+curhelmet[0]+stages[curstage]['helpersdmg'];
@@ -358,26 +358,26 @@ console.log('6, 'wrapper.scrollHeight);
 	  mainresults.appendChild(h2);
 	  mainresults.appendChild(table);
 	}
-console.log('7, 'wrapper.scrollHeight);
+console.log('7, '+wrapper.scrollHeight);
 	
 	var p = document.createElement('p');
 	p.innerHTML += '<br><b>Closest valuable upgrades<br>(reduced time to beat minion -> increased coins income):</b><br>';
-console.log('1, 'wrapper.scrollHeight);
+console.log('1, '+wrapper.scrollHeight);
 	for (let i=0; i < timeUpgrades.length; i++){
 	  p.innerHTML += timeUpgrades[i][1] + '/' + timeUpgrades[i][2] + ' in ' + formattime(timeUpgrades[i][0]) + '<br>'
 	  if (i == 2) break;
 	}
-console.log('8, 'wrapper.scrollHeight);
+console.log('8, '+wrapper.scrollHeight);
 	results.appendChild(p);
-console.log('9, 'wrapper.scrollHeight);
+console.log('9, '+wrapper.scrollHeight);
 	results.appendChild(mainresults);
-console.log('10, 'wrapper.scrollHeight);
+console.log('10, '+wrapper.scrollHeight);
 	setimages('gempic')
-console.log('11, 'wrapper.scrollHeight);
+console.log('11, '+wrapper.scrollHeight);
 	h1 = document.createElement('h1');
 	h1.innerHTML += 'Total time: ' + formattime(totaltime);
 	results.appendChild(h1);
-console.log('12, 'wrapper.scrollHeight);
+console.log('12, '+wrapper.scrollHeight);
 	let iframeSize = document.getElementById("wrapper").scrollHeight;
 	parent.postMessage(iframeSize, "*");
 	
