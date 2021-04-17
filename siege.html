@@ -33,6 +33,8 @@
 	  }
 	}
 	updatepage();
+	let iframeSize = document.getElementById("wrapper").scrollHeight;
+	parent.postMessage(iframeSize, "*");
   }
   
   function updatepage(){
@@ -74,8 +76,8 @@
 	updatedmg("curarmor")
 	updatedmg("curhelmet")
 	skiprecendis();
-	let iframeSize = document.getElementById("wrapper").scrollHeight;
-	parent.postMessage(iframeSize, "*");
+	//let iframeSize = document.getElementById("wrapper").scrollHeight;
+	//parent.postMessage(iframeSize, "*");
   }
   
   function updatedmg(gear){
@@ -333,12 +335,7 @@ console.log('3, '+wrapper.scrollHeight);
 console.log('4, '+wrapper.scrollHeight);
 	pouchtime = Math.ceil(stages[curstage]['maxcoins'] / stages[curstage]['minioncoins']) * ttb;
 	span = document.createElement('span');
-	img = document.createElement('img');
-	img.name = "pouchpic";
-	img.src = "assets/pouch.png";
-	img.alt = "maxpouch";
-	span.appendChild(img);
-	span.innerHTML += '<b> (current max '+ stages[curstage]['maxcoins'] +') will fill in: '+formattime(pouchtime)+'</b>';
+	span.innerHTML = '<img name="pouchpic" src="assets/pouch.png" alt="maxpouch" /><b> (current max '+ stages[curstage]['maxcoins'] +') will fill in: '+formattime(pouchtime)+'</b>';
 	results.appendChild(span);
 console.log('5, '+wrapper.scrollHeight);
 	mainresults = document.createElement('div');
@@ -383,8 +380,7 @@ console.log('11, '+wrapper.scrollHeight);
 	h1.innerHTML += 'Total time: ' + formattime(totaltime);
 	results.appendChild(h1);
 console.log('12, '+wrapper.scrollHeight);
-	let iframeSize = document.getElementById("wrapper").scrollHeight;
-	parent.postMessage(iframeSize, "*");
+
 	
   }
 
