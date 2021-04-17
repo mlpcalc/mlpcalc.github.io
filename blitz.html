@@ -129,8 +129,8 @@
 	checkstage();
 	document.getElementById("warning0").style.display = "none";
 	document.getElementById("warning1").style.display = "none";
-	let iframeSize = document.getElementsByTagName("html")[0];
-	parent.postMessage(iframeSize.scrollHeight, "*");
+	let iframeSize = document.getElementsByTagName("html")[0].scrollHeight;
+	parent.postMessage(iframeSize, "*");
   }
   
   function generateEventList(){
@@ -427,8 +427,8 @@
 	results.appendChild(span);
 	setimages('maxenergypic');
 	setgems();
-	let iframeSize = document.getElementsByTagName("html")[0];
-	parent.postMessage(iframeSize.scrollHeight, "*");
+	let iframeSize = document.getElementsByTagName("html")[0].scrollHeight;
+	parent.postMessage(iframeSize, "*");
   }
   
   function checkforgems(index,totaldmg,curhelpers,storedenergy,totaltime,sapphiresleft){
