@@ -315,14 +315,11 @@
   
   function calctime(){
     let wrapper = document.getElementById("wrapper");
-console.log('1, '+wrapper.scrollHeight);
     results = document.getElementById("results");
 	results.innerHTML = "";
-console.log('2, '+wrapper.scrollHeight);
 	timeUpgrades = [];
 	curstage = Number(document.getElementById("curstage").value);
 	setHelpers();
-console.log('3, '+wrapper.scrollHeight);
 	tmp1 = Number(document.getElementById("curarmor").value);
 	tmp2 = Number(document.getElementById("curhelmet").value);
 	coins = Number(document.getElementById("curcoins").value);
@@ -334,7 +331,6 @@ console.log('3, '+wrapper.scrollHeight);
 	curdmg = curarmor[0]+curhelmet[0]+stages[curstage]['helpersdmg'];
 	curminion = stages[curstage]['minionhp'];
 	ttb = Math.ceil(curminion/curdmg);
-console.log('4, '+wrapper.scrollHeight);
 	pouchtime = Math.ceil(stages[curstage]['maxcoins'] / stages[curstage]['minioncoins']) * ttb;
 	span = document.createElement('span');
 	img = document.createElement('img');
@@ -343,10 +339,8 @@ console.log('4, '+wrapper.scrollHeight);
 	//span.innerHTML = '<img name="pouchpic" src="assets/pouch.png" alt="maxpouch" /><b> (current max '+ stages[curstage]['maxcoins'] +') will fill in: '+formattime(pouchtime)+'</b>';
 	span.innerHTML += '<b> (current max '+ stages[curstage]['maxcoins'] +') will fill in: '+formattime(pouchtime)+'</b>';
 	results.appendChild(span);
-console.log('5, '+wrapper.scrollHeight);
 	mainresults = document.createElement('div');
 	//setimages('pouchpic');
-console.log('6, '+wrapper.scrollHeight);
 	for (let i=curstage; i < stages.length-1; i++){
 	  curtime = calcstage(i);
 	  curdmg = curarmor[0]+curhelmet[0]+stages[curstage]['helpersdmg'];
@@ -366,26 +360,21 @@ console.log('6, '+wrapper.scrollHeight);
 	  mainresults.appendChild(h2);
 	  mainresults.appendChild(table);
 	}
-console.log('7, '+wrapper.scrollHeight);
 	
 	var p = document.createElement('p');
 	p.innerHTML += '<br><b>Closest valuable upgrades<br>(reduced time to beat minion -> increased coins income):</b><br>';
-console.log('1, '+wrapper.scrollHeight);
 	for (let i=0; i < timeUpgrades.length; i++){
 	  p.innerHTML += timeUpgrades[i][1] + '/' + timeUpgrades[i][2] + ' in ' + formattime(timeUpgrades[i][0]) + '<br>'
 	  if (i == 2) break;
 	}
-console.log('8, '+wrapper.scrollHeight);
 	results.appendChild(p);
-console.log('9, '+wrapper.scrollHeight);
 	results.appendChild(mainresults);
-console.log('10, '+wrapper.scrollHeight);
 	//setimages('gempic')
-console.log('11, '+wrapper.scrollHeight);
 	h1 = document.createElement('h1');
 	h1.innerHTML += 'Total time: ' + formattime(totaltime);
 	results.appendChild(h1);
-console.log('12, '+wrapper.scrollHeight);
+	//checking if pouch image is loaded
+	//if not - adding 20px to iframe height
 	let addedheight = 0;
 	if (imgLoaded(img) == false) addedheight = 20;
 	let iframeSize = document.getElementById("wrapper").scrollHeight + addedheight;
