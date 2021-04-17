@@ -20,7 +20,6 @@
   var timeUpgrades = [];
   var totaltime;
   const defaultSiegeEvent = "Casabronco"
-  //const defaultSiegeEvent = "She's All Yak"
   
   function loadpage(){
     curstage = document.getElementById("curstage");
@@ -34,7 +33,6 @@
 	  }
 	}
 	updatepage();
-	console.log('loadpage,'+performance.now())
   }
   
   function updatepage(){
@@ -76,7 +74,6 @@
 	updatedmg("curarmor")
 	updatedmg("curhelmet")
 	skiprecendis();
-	console.log('updatepage,'+performance.now())
 	let iframeSize = document.getElementById("wrapper").scrollHeight;
 	parent.postMessage(iframeSize, "*");
   }
@@ -84,7 +81,6 @@
   function updatedmg(gear){
     let lvl = document.getElementById(gear).value;
     document.getElementById(gear+"dmg").value = upgradelevels[lvl];
-	console.log('updatedmg,'+performance.now())
   }
   
   function generateEventList(){
@@ -95,7 +91,6 @@
 	  eventlist.push(tmp);
 	}
 	addOptions(eventlist, siegeevent);
-	console.log('generateeventlist,'+performance.now())
   }
   
   function generateStages(){
@@ -108,7 +103,6 @@
 	  tmp += maindata["bosses"][i]["MinionCurrencyReward"] + ')';
 	  stagesarr.push([tmp,i])
 	}
-	console.log('generateStages,'+performance.now())
 	return stagesarr;
   }
   
@@ -116,7 +110,6 @@
     while (selBox.options.length > 0) {
       selBox.remove(0);
     }
-	console.log('removeOptions,'+performance.now())
   }
   
   function addOptions(arr, selBox) {
@@ -125,7 +118,6 @@
 	  newOption = new Option(arr[i][0],arr[i][1]);
 	  selBox.add(newOption, undefined);
 	}
-	console.log('addOptions,'+performance.now())
   }
   
   function generateHelpers(){
@@ -180,7 +172,6 @@
 	  table.append(tr);
 	}
 	document.getElementById("helpers").append(table)
-	console.log('generateHelpers,'+performance.now())
   }
   
   function setHelpers(){
@@ -202,7 +193,6 @@
 	  }
 	  stages[i]['maxcoins'] = maindata['bosses'][i]['CurrencyCappings'][stages[i]['helpnum']];
 	}
-	console.log('setHelpers,'+performance.now())
   }
   
   
@@ -250,7 +240,6 @@
 		tmptime = Math.ceil(stages[num]['minionhp'] / totalpower);
 	  }
 	}
-	console.log('calcstage,'+performance.now())
 	if (bosshits == 0){
 	  return stagetime + stages[num]['bosstime'] * 60
 	} else {
@@ -283,7 +272,6 @@
 	if (out == ""){
 	  out += time + 's ';
 	}
-	console.log('formattime,'+performance.now())
 	return out;
   }
   
@@ -293,7 +281,6 @@
 	for (let i = 0; i < imgs.length; i++){
 	  imgs[i].src=item;
     }
-	console.log('setimages,'+performance.now())
   }
   
   function calcgems(instage, inpower, incoins){
@@ -311,31 +298,7 @@
 	  incoins += stages[instage]['minioncoins']
 	}
 	gemtimes.push(gtime);
-	console.log('calcgems,'+performance.now())
     return gemtimes;
-  }
-  
-  function getdelta(){
-    startsleep = Number(document.getElementById("startsleep").value)
-	endsleep = Number(document.getElementById("endsleep").value)
-	if (startsleep>endsleep){
-	  delta = endsleep+24-startsleep;
-	  crossdays = true;
-	} else {
-	  delta = startsleep-endsleep;
-	  crossdays = false
-	}
-	var curdaytime = new Date();
-	var zeroday = new Date();
-	zeroday.setHours(0,0,0,0);
-	if ((zeroday+(startsleep*3600)) > Date.parse(curdaytime)){
-	  secondsleft = zeroday+(startsleep*3600) - Date.parse(curdaytime);
-	  secondsto = 0;
-	} else {
-	  secondsleft = 0;
-	  secondsto = zeroday+(endsleep*3600) - Date.parse(curdaytime)
-	}
-	console.log('getdelta,'+performance.now())
   }
   
   function skiprecendis(){
@@ -344,7 +307,6 @@
 	} else {
 	  document.getElementById("skiprechits").disabled = true;
 	}
-	console.log('skiprecendis,'+performance.now())
   }
   
   function calctime(){
@@ -361,11 +323,6 @@
 	totaltime = 0;
 	let curtime = 0;
 	let gemtimes = []
-	//var curdaytime = new Date();
-	//var hrs = "0" + curdaytime.getHours();
-	//var mnts = "0" + curdaytime.getMinutes();
-	//var formattedTime = hrs.substr(-2) + ':' + mnts.substr(-2);
-	//document.getElementById("curdaytime").value = formattedTime
 	curdmg = curarmor[0]+curhelmet[0]+stages[curstage]['helpersdmg'];
 	curminion = stages[curstage]['minionhp'];
 	ttb = Math.ceil(curminion/curdmg);
