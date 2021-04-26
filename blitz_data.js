@@ -266,7 +266,7 @@ const gamedata ={
 	  "dropvalues" : [[25,25], [50,50], [75,75], [100,100], [150,150]],
 	  "convrate":[1,2501,10001,25001,50001],
 	  "convgems":[3,5,10,15,20],
-	  "margin":0.015
+	  "margin":0.027
 	  },
 	  "Prank to the Future p2":
 	  {"vals": [
@@ -304,6 +304,6 @@ const gamedata ={
 	  "dropvalues" : [[25,25], [50,50], [75,75], [100,100], [150,150]],
 	  "convrate":[1,2501,10001,25001,50001],
 	  "convgems":[3,5,10,15,20],
-	  "margin":0.015
+	  "margin":0.025
 	  }
 }
