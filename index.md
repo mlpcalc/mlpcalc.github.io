@@ -11,7 +11,8 @@
 </script>
 
 <script>
-  var curEventType = 1;
+  //Default event type
+  var curEventType = 0;
   var iframe;
   
   window.addEventListener("message", function(e){
