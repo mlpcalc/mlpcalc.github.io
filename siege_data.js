@@ -480,8 +480,8 @@
 		"MinionsBeforeBoss" : 0
 		}
 	  ],
-	  "helpdmg" : [[5, 5, 5], [20, 20, 20], [25, 25, 25], [30, 30, 30], [35, 35, 35], [40, 40, 40], [50, 50, 50],[50, 50, 50]],
-	  "helpstage":[[0,1,2],[3,4,5],[3,4,5],[3,4,5],[6,7,8],[6,7,8],[6,7,8],[6,7,8]],
+	  "helpdmg" : [[5, 5, 5], [20, 20, 20], [25, 25, 25], [30, 30, 30], [35, 35, 35], [40, 40, 40], [50, 50, 50],[20, 20, 20]],
+	  "helpstage":[[0,1,2],[3,4,5],[3,4,5],[3,4,5],[6,7,8],[6,7,8],[6,7,8],[0,1,2]],
 	  "helpnames":["Starlight Glimmer","Twilight Sparkle","Rarity","Young Rarity","Young Fluttershy",
 	  "Young Applejack","Young Twilight Sparkle","Young Rainbow Dash","Young Pinkie Pie"],
 	  "convrate":[1,2501,10001,30001,100000],
