@@ -964,7 +964,7 @@
 		"MinionsBeforeBoss" : 0
 		}
 	  ],
-	  "helpdmg" : [[5, 5, 5], [20, 20, 20], [20, 20, 20], [25, 25, 25], [30, 30, 30], [45, 45, 45], [45, 45, 45], [45, 45, 45]],
+	  "helpdmg" : [[5, 5, 5], [20, 20, 20], [20, 20, 25], [25, 30, 35], [30, 30, 35], [45, 50, 55], [45, 50, 55], [45, 50, 55]],
 	  "helpstage":[[0,1,2],[3,4,5],[6,7,8],[9,10,11],[12,13,14],[15,16,17],[18,19,20],[18,19,20]],
 	  "helpnames":["Twilight Sparkle","Cheerilee","Forsythia", "Twilight Velvet", "Apple Bloom", "Clever Schoolpony", "Mage Meadowbrook's Mom", "Stuffy Dignitary", "Serene Dignitary", "Flash Magnus",
 	  "Chancellor Puddinghead", "Smart Cookie", "Private Pancy", "Duke of Maretonia", "Commander Hurricane",
