@@ -29,7 +29,7 @@
   
   function updateEventType(){
 	curEventType = document.getElementById('eventtype').value;
-    if (curEventType == 0){
+    if (curEventType == 1){
 	  iframe.src = "siege.html";
 	} else {
 	  iframe.src = "blitz.html";
