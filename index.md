@@ -12,7 +12,7 @@
 
 <script>
   //Default event type (0=siege, 1=blitz)
-  var curEventType = 0;
+  var curEventType = 1;
   var iframe;
   
   window.addEventListener("message", function(e){
