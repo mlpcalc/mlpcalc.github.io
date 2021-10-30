@@ -19,7 +19,7 @@
   var siegeevent;
   var timeUpgrades = [];
   var totaltime;
-  const defaultSiegeEvent = "The League of Evil"
+  const defaultSiegeEvent = "Changeling History"
   
   function loadpage(){
     curstage = document.getElementById("curstage");
@@ -183,6 +183,20 @@
 	  } else {
 	    helpers.push(0);
 	  }
+	}
+	
+	//exception for dark changelings M6
+	if (maindata['helpnames'].indexOf('Dark Changeling Applejack') != -1){
+	  let groupedhelpers=[[4,5],[7,8],[10,11],[13,14],[16,17],[19,20]]
+	  for (i=0;i<groupedhelpers.length;i++){
+		let helper_1 = document.getElementById('help'+groupedhelpers[i][0]).checked
+		let helper_2 = document.getElementById('help'+groupedhelpers[i][1]).checked
+	    if (helper_1 & helper_2){
+		  helpers[groupedhelpers[i][0]] = 0
+		  document.getElementById('help'+groupedhelpers[i][0]).checked = false
+		}
+	  }
+	  
 	}
 	for (i=0;i<stages.length;i++){
 	  stages[i]['helpnum'] = 0;
