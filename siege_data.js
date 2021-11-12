@@ -870,7 +870,7 @@
 	  "helpstage":[[0,1,2],[3,4,5],[3,6,7],[8,9,10],[8,11,12],[13,14,15],[13,16,17],[13,14,15]],
 	  "helpnames":["Applejack","Rarity","Twilight Sparkle","Future Sweetie Belle","Personal Shopper Pony",
 	  "Diamond Tiara","Perfect Pie","Trouble Shoes","Future Scootaloo","Fiddly Twang","Junior Deputy","Senior Deputy",
-	  "Sheriff Silverstar","Future Applebloom","Sunny Appleloosan","Gabby","Agent Sweetie Drops","Agent Lyra Heartstrings"],
+	  "Sheriff Silverstar","Future Apple Bloom","Sunny Appleloosan","Gabby","Agent Sweetie Drops","Agent Lyra Heartstrings"],
 	  "convrate":[1,2501,10001,30001,100000],
 	  "convgems":[0,5,10,20,30]
 	},
