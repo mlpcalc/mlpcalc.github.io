@@ -202,11 +202,19 @@
 	  table.append(tr);
 	}
 	document.getElementById("helpers").append(table)
+	
+	//automatically checking on Twilight Sparkle
+	//she's default very first pony
+	let TSIndex = maindata['helpnames'].indexOf('Twilight Sparkle')
+	if (TSIndex != -1){
+	  document.getElementById('help'+TSIndex).checked = true
+    }
   }
   
   function setHelpers(){
 	let i,j;
 	let helpers = []
+	
 	for (i=0;i<maindata['helpnames'].length;i++){
 	  if(document.getElementById('help'+i).checked){
 	    helpers.push(1);
