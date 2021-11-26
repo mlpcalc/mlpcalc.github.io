@@ -1361,7 +1361,7 @@
 		}
 	  ],
 	  "helpdmg" : [[5, 5, 5], [20, 20, 20], [20, 20, 25], [25, 30, 35], [30, 30, 35], [45, 50, 55], [45, 50, 55], [45, 50, 55]],
-	  "helpstage":[[0,1,2],[3,4,5],[6,4,5],[7,8,9],[10,11,12],[13,14,15],[16,17,18],[16,17,18]],
+	  "helpstage":[[0,1,2],[3,4,5],[6,4,5],[7,8,9],[10,11,12],[13,14,15],[16,17,18],[13,14,15]],
 	  "helpnames":["Twilight Sparkle","Rarity","Pinkie Pie","Inquisitive Shopper","Ancient Vagabond","Nightmare Rarity",
 	  "Avant-Garde Soiree-Goer","Chic Soiree-Goer","Cool Soiree-Goer","Nightmare Fluttershy","Golden Gavel","Kibitz",
 	  "Nightmare Pinkie Pie","Sheer Perfection","Roadwings the Awesome","Nightmare Rainbow Dash","Ms. Conductor",
