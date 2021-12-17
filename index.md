@@ -11,9 +11,14 @@
 </script>
 
 <script>
+  //
+  //
   //Default event type (0=siege, 1=blitz)
-  var curEventType = 0;
+  var curEventType = 1;
   var iframe;
+  //
+  //
+  //
   
   window.addEventListener("message", function(e){
     if (e.origin != "https://mlpcalc.github.io")
@@ -29,7 +34,7 @@
   
   function updateEventType(){
 	curEventType = document.getElementById('eventtype').value;
-    if (curEventType == 1){
+    if (curEventType == 0){
 	  iframe.src = "siege.html";
 	} else {
 	  iframe.src = "blitz.html";
