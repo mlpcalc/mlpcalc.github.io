@@ -627,7 +627,7 @@
 	if ((vals[index][0]==vals[index-1][0])&&(vals[index][2]==vals[index-1][2])){
 	  index -= 1;
 	}
-	tmp2 = vals[index][0];
+	tmp2 = vals[index][0] + curHelpers;
 	//if (help0.checked) tmp2 += helpers[0];
 	//if (help1.checked) tmp2 += helpers[1];
 	row.children[3].innerText = tmp2;
