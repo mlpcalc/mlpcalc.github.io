@@ -8,7 +8,7 @@
   var selectedEvent;
   var maindata;
   //const images = ["pouchpic","coinpic"];
-  var vals;
+  var vals, vals2;
   var curarmor;
   var curhelmet;
   var coins = 0;
@@ -20,7 +20,7 @@
   var timeUpgrades = [];
   var totaltime;
   var portraits = "helpers_portraits";
-  const defaultSiegeEvent = "Viva La Pinkie Pie"
+  const defaultSiegeEvent = "Siege of the Crystal Empire"
   
   function loadpage(){
     curstage = document.getElementById("curstage");
@@ -51,15 +51,19 @@
 	  stages[i]['maxcoins'] = maindata["bosses"][i]["CurrencyCappings"][0];
 	}
 	vals = maindata["upgrades"];
-	curarmor = [vals[0][0],0]; //[current value, index in vals]
-    curhelmet = [vals[0][0],0];
+	vals2 = vals
+	if ("upgrades2" in maindata){
+		vals2 = maindata["upgrades2"];
+	}
+	curhelmet = [vals[0][0],0];	//[current value, index in vals]
+	curarmor = [vals2[0][0],0]; 
 	for (i=0;i<vals.length;i++){
 	  upgradelevels.push(vals[i][0]+upgradelevels[i])	
 	}
 	egems = maindata['convgems'];
     generateHelpers();
-	document.getElementById("curarmor").max = vals.length-1;
 	document.getElementById("curhelmet").max = vals.length-1;
+	document.getElementById("curarmor").max = vals2.length-1;
 	curstage = document.getElementById("curstage");
 	removeOptions(curstage);
 	addOptions(generateStages(), curstage);
@@ -268,7 +272,7 @@
 	    nextupgrade = [true,vals[curhelmet[1]][1]];
 	  }
 	  else {
- 	    nextupgrade = [false,vals[curarmor[1]][1]];
+ 	    nextupgrade = [false,vals2[curarmor[1]][1]];
 	  }
 	  while (coins < nextupgrade[1]){
 	    curhp = stages[num]['minionhp'];
@@ -456,8 +460,8 @@
 <table>
 <td style="width:200px">
 Current gear levels: <br>
-<input id="curarmor" type="number" value="9" min="1" max="88" style="width:60px" onchange="updatedmg('curarmor')"/><br>
-<input id="curhelmet" type="number" value="9" min="1" max="88" style="width:60px" onchange="updatedmg('curhelmet')"/>
+<input id="curarmor" type="number" value="4" min="1" max="88" style="width:60px" onchange="updatedmg('curarmor')"/><br>
+<input id="curhelmet" type="number" value="4" min="1" max="88" style="width:60px" onchange="updatedmg('curhelmet')"/>
 </td><td>
 Current gear power: <br>
 <input id="curarmordmg" type="text" value="9" style="width:60px" disabled="true" /><br>
