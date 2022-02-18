@@ -14,7 +14,7 @@
   //
   //
   //Default event type (0=siege, 1=blitz)
-  var curEventType = 1;
+  var curEventType = 2;
   var iframe;
   //
   //
@@ -36,8 +36,10 @@
 	curEventType = document.getElementById('eventtype').value;
     if (curEventType == 0){
 	  iframe.src = "siege.html";
-	} else {
+	} else if (curEventType == 1){
 	  iframe.src = "blitz.html";
+	} else {
+	  iframe.src = "powerponies.html"
 	}
   }
 
@@ -49,6 +51,7 @@
 <p style="margin-top: 1px;margin-bottom: 1px;">Select event type: <select id="eventtype" onchange="updateEventType()">
 	<option value="0" selected>Siege</option>
     <option value="1">Blitz</option>
+	<option value="2">Power Ponies</option>
   </select></p>
 
 <iframe id="eventframe" src="" height="1000px" width="600px" style="border-style:none"></iframe>
