@@ -1571,7 +1571,7 @@
 	  "convrate":[0,1,2001,10001],
 	  "convgems":[0,5,15,30]
 	},
-	"High Plains Ponies (beta)":
+	"High Plains Ponies":
 	  {"upgrades": [
 		[ 2,     0],
         [ 1,     1], [ 1,     2], [ 1,     3], [ 1,     5], [ 1,     9], [ 2,    15], [ 2,    40], [ 2,    99],
@@ -1624,7 +1624,7 @@
 		"MinionCurrencyReward" : 9,
 		"MinionsBeforeBoss" : 40
 		},
-		{"ID" : "Bandana Lovin Rustler",
+		{"ID" : "Bandana-Lovin' Rustler",
 		"BossHP" : 9880,
 		"BossHits" : 20,
 		"TimeMinutes" : 15,
@@ -1633,7 +1633,7 @@
 		"MinionCurrencyReward" : 24,
 		"MinionsBeforeBoss" : 35
 		},
-		{"ID" : "Black And White Rustler",
+		{"ID" : "Black-and-White Rustler",
 		"BossHP" : 21300,
 		"BossHits" : 25,
 		"TimeMinutes" : 20,
