@@ -147,7 +147,7 @@ const gamedata ={
 	  ],
 	  "bosshealth" : 61000,
 	  "bossstages" : [1000,10000,50000],
-	  "helpdmg" : [50,75],
+	  "helpdmg" : [75,50],
 	  "helpnames":["Sendak the Elder","King Vorak"],
 	  "droprates" : [0.15, 0.70, 0.85, 0.95, 1],
 	  "dropvalues" : [[25,25], [50,50], [75,75], [100,100], [150,150]],
