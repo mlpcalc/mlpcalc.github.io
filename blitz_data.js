@@ -684,8 +684,8 @@ const gamedata ={
 	  "helpnames":["Toffee Truffle","Blade Sparxx","Summer van der Hoof","Super Chef Judge Pony"],
 	  "droprates" : [0.15, 0.70, 0.85, 0.95, 1],
 	  "dropvalues" : [[25,25], [50,50], [75,75], [100,100], [150,150]],
-	  "convrate":[1,25001,50001],
-	  "convgems":[10,20,30],
+	  "convrate":[1,2501,10001,25001,50001,75001,100001],
+	  "convgems":[3,5,10,15,20,25,30],
 	  "margin":0.016
 	  },
 	"Royal Dining: First Course":
