@@ -516,9 +516,6 @@
 	}
     totaldmg += Number(curdamage.value);
 	for (i = n; i <vals.length; i++){
-	  if (i == 100){
-	  aa=11
-	  }
 	  while (sapphiresleft < vals[i+1][3]) {
         totaldmg += vals[i][0] + curHelpers;
 		if (drop1.checked){
@@ -616,6 +613,7 @@
   
   function fillgemtarget(index, time, gemid){
     let row = document.getElementById(gemid);
+	let CurEnVal = Number(maxenergy.value);
 	row.children[1].innerText = formattime(time);
 	let tmp1 = formattime(time*margin);
 	if (tmp1 < vals[i][2]*60*0.75){tmp1 = 0}
@@ -624,9 +622,15 @@
 	} else {
 	  row.children[2].innerText = '';
 	}
+
+	//removing unnecesary upgrade (energy) from the final recommendation
+	//(if user don't already have it)
 	if ((vals[index][0]==vals[index-1][0])&&(vals[index][2]==vals[index-1][2])){
-	  index -= 1;
+		if (CurEnVal < vals[index][1]){
+		  index -= 1;
+		}
 	}
+
 	tmp2 = vals[index][0] + curHelpers;
 	//if (help0.checked) tmp2 += helpers[0];
 	//if (help1.checked) tmp2 += helpers[1];
