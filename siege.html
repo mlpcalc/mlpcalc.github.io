@@ -354,7 +354,13 @@
 	  gtime += cointime;
 	  incoins += stages[instage]['minioncoins']
 	}
-	gemtimes.push(gtime);
+	if (gemtimes.length == 1){
+		for (let i = 1; i<egems.length; i++){
+			gemtimes.push(gtime);
+		}
+	} else {
+		gemtimes.push(gtime);
+	}
     return gemtimes;
   }
   
