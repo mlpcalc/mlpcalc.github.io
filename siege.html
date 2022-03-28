@@ -20,7 +20,7 @@
   var timeUpgrades = [];
   var totaltime;
   var portraits = "helpers_portraits";
-  const defaultSiegeEvent = "High Plains Ponies"
+  const defaultSiegeEvent = "The Pinkie Parents Problem"
   
   function loadpage(){
     curstage = document.getElementById("curstage");
@@ -354,13 +354,17 @@
 	  gtime += cointime;
 	  incoins += stages[instage]['minioncoins']
 	}
-	if (gemtimes.length == 1){
+	
+	//fix if player already have needed amount of coins for some (or all)
+	//tiers of rewards
+	if (gemtimes.length < egems.length){
 		for (let i = 1; i<egems.length; i++){
 			gemtimes.push(gtime);
 		}
 	} else {
 		gemtimes.push(gtime);
 	}
+	
     return gemtimes;
   }
   
