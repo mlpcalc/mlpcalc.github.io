@@ -1,6 +1,7 @@
 <html>
 <head>
 <script src="siege_data.js"></script> 
+<script src="common.js"></script>
 <link rel="stylesheet" href="style.css">
 
 <script>
@@ -16,30 +17,31 @@
   var stages = [];
   var upgradelevels = [0];
   var egems = [];
-  var siegeevent;
+  var eventList;
   var timeUpgrades = [];
   var totaltime;
+  var helpnames, helpstage;
   var portraits = "helpers_portraits";
-  const defaultSiegeEvent = "Welcome to Ornithia"
+  const defaultEvent = "Welcome to Ornithia"
   
   function loadpage(){
     curstage = document.getElementById("curstage");
 	//setimages('coinpic');
-	siegeevent = document.getElementById("siegeevent");
+	eventList = document.getElementById("eventList");
     generateEventList();
-	for (i=0; i<siegeevent.options.length; i++){
-	  if (siegeevent.options[i].value == defaultSiegeEvent){
-	    siegeevent.options[i].selected = true;
+	for (i=0; i<eventList.options.length; i++){
+	  if (eventList.options[i].value == defaultEvent){
+	    eventList.options[i].selected = true;
 		break;
 	  }
 	}
-	updatepage();
+	resetPage();
   }
   
-  function updatepage(){
+  function resetPage(){
 	upgradelevels = [0];
 	document.getElementById("results").innerHTML = "";
-    selectedEvent = siegeevent[siegeevent.selectedIndex].value;
+    selectedEvent = eventList[eventList.selectedIndex].value;
 	maindata = gamedata[selectedEvent]
 	let i;
     for (i=0;i<maindata["bosses"].length; i++){
@@ -53,6 +55,8 @@
 	}
 	vals = maindata["upgrades"];
 	vals2 = vals
+	helpnames=maindata['helpnames'];
+	helpstage=maindata['helpstage'];
 	if ("upgrades2" in maindata){
 		vals2 = maindata["upgrades2"];
 	}
@@ -63,6 +67,14 @@
 	}
 	egems = maindata['convgems'];
     generateHelpers();
+	
+	//automatically checking on Twilight Sparkle
+	//she's default very first pony
+	let TSIndex = maindata['helpnames'].indexOf('Twilight Sparkle')
+	if (TSIndex != -1){
+	  document.getElementById('help'+TSIndex).checked = true
+    }
+	
 	document.getElementById("curhelmet").max = vals.length-1;
 	document.getElementById("curarmor").max = vals2.length-1;
 	curstage = document.getElementById("curstage");
@@ -89,16 +101,6 @@
     document.getElementById(gear+"dmg").value = upgradelevels[lvl];
   }
   
-  function generateEventList(){
-    removeOptions(siegeevent);
-	let eventlist=[], tmp;
-    for (i in gamedata){
-	  tmp = [i,i]
-	  eventlist.push(tmp);
-	}
-	addOptions(eventlist, siegeevent);
-  }
-  
   function generateStages(){
     var stagesarr = [];
 	var tmp;
@@ -111,38 +113,8 @@
 	}
 	return stagesarr;
   }
-  
-  function removeOptions(selBox) {
-    while (selBox.options.length > 0) {
-      selBox.remove(0);
-    }
-  }
-  
-  function addOptions(arr, selBox) {
-    let newOption
-    for (let i = 0; i <arr.length; i++){
-	  newOption = new Option(arr[i][0],arr[i][1]);
-	  selBox.add(newOption, undefined);
-	}
-  }
     
-  function swapImages(){
-	let tmp = '';
-	let helpers = document.getElementsByClassName("helperimage");
-	if (portraits == "helpers_portraits") {
-	  tmp = "helpers"
-	} else {
-	  tmp = "helpers_portraits"
-	}	
-	for(let i = 0; i < helpers.length; i++){
-	  let name = helpers[i].src.split("/");
-	  name = name[name.length-1];
-	  helpers[i].src = "assets/"+tmp+"/"+name
-	}
-	portraits = tmp
-  }
-  
-  function generateHelpers(){
+  /*function generateHelpers(){
     let p = document.getElementById("helpers");
 	p.innerHTML = '<b>Helpers:</b> <input style="width:100px" type="button" value="switch view" onclick="swapImages()"><br>'
     let helpnames = maindata['helpnames'];
@@ -208,13 +180,8 @@
 	}
 	document.getElementById("helpers").append(table)
 	
-	//automatically checking on Twilight Sparkle
-	//she's default very first pony
-	let TSIndex = maindata['helpnames'].indexOf('Twilight Sparkle')
-	if (TSIndex != -1){
-	  document.getElementById('help'+TSIndex).checked = true
-    }
-  }
+
+  }*/
   
   function setHelpers(){
 	let i,j;
@@ -304,41 +271,6 @@
 	}
   }
   
-  function formattime(time){
-    var out = "";
-	var count = [0,0];
-    if (Math.trunc(time / 86400) > 0){
-	  out += Math.trunc(time / 86400) + 'd ';
-	  time -= 86400 * Math.trunc(time / 86400);
-	  count[0] = 1;
-	}
-	if (Math.trunc(time / 3600) > 0){
-	  out += Math.trunc(time / 3600) + 'h ';
-	  time -= 3600 * Math.trunc(time / 3600);
-	  count[1] = 1;
-	}
-	if (Math.trunc(time / 60) > 0){
-	  if ((count[0] == 1) && (count[1] == 0)){
-	    out += '0h '+Math.trunc(time / 60) + 'm ';
-	  }
-	  else {
-	  out += Math.trunc(time / 60) + 'm ';
-	  }
-	  time -= 60 * Math.ceil(time / 60);
-	}
-	if (out == ""){
-	  out += time + 's ';
-	}
-	return out;
-  }
-  
-  /*function setimages(imgitem){
-    let item = document.getElementById(imgitem+"data").innerText;
-	let imgs = document.getElementsByName(imgitem);
-	for (let i = 0; i < imgs.length; i++){
-	  imgs[i].src=item;
-    }
-  }*/
   
   function calcgems(instage, inpower, incoins){
     var maxgems = maindata["convrate"][maindata["convrate"].length-1];
@@ -472,7 +404,7 @@
 <body onload="loadpage()">
 <div id="wrapper" class="container-lg markdown-body">
 
-<p style="margin-top: 1px;">Select event: <select id="siegeevent" onchange="updatepage()">
+<p style="margin-top: 1px;">Select event: <select id="eventList" onchange="resetPage()">
   </select></p>
 
 <img name="coinpic" src="assets/coin.png" alt="Current coins" /> <input id="curcoins" type="number" value="0" min="0" max="950000" style="width:80px"/>

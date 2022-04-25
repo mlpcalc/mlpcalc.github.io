@@ -1,6 +1,7 @@
 <html>
 <head>
 <script src="blitz_data.js"></script> 
+<script src="common.js"></script>
 <link rel="stylesheet" href="style.css">
 <script>
   const times = {
@@ -41,54 +42,46 @@
   };
   
   const images = ["powerpic","maxenergypic","cooldownpic","energypic","sapphirepic","gempic"];
-  //var help0, help1;
-  var helpersChecked
-  var power, maxenergy, time;
-  var curHelpers;
-  var curstage, prevstage, curdamage;
+  var power, maxenergy, cooldown;
+  var basePower, helpersPower;
+  var curstage, curdamage;
   var gemtimes = []
   var gemindexes = []
-  var drop1;
-  var drop2;
-  var blitzeventlist;
+  var dropAverage, dropRandom;
+  var eventList;
   var vals, sapphiresavg, bosshealth;
-  var hstate=[false,false];
   var droprates, dropvalues;
   var convrate, convgems;
   var margin;
   var maindata;
   var portraits = "helpers_portraits";
-  const defaultBlitzEvent = "Tale of Tirek Part 2"
+  var helpnames, helpstage, helpdmg, helpchecked;
+  const defaultEvent = "Freedom of the Press"
 
+  //tying variables to page elements
   function loadpage(){
-    let i;
-    /*for (i = 0; i <images.length; i++){
-	  setimages(images[i]);
-	}*/
-	//help0 = document.getElementById("help0");
-    //help1 = document.getElementById("help1");
 	power = document.getElementById("power");
     maxenergy = document.getElementById("maxenergy");
-	time = document.getElementById("time");
-	//curstage = document.getElementById("curstage");
+	cooldown = document.getElementById("time");
+	curstage = document.getElementById("curstage");
 	curdamage = document.getElementById("curdamage");
-	drop1 = document.getElementById("drop1");
-	drop2 = document.getElementById("drop2");
-	blitzeventlist = document.getElementById("blitzevents");
+	dropAverage = document.getElementById("dropAverage");
+	dropRandom = document.getElementById("dropRandom");
+	eventList = document.getElementById("eventList");
     generateEventList();
-	for (i=0; i<blitzeventlist.options.length; i++){
-	  if (blitzeventlist.options[i].value == defaultBlitzEvent){
-	    blitzeventlist.options[i].selected = true;
+	for (let i=0; i<eventList.options.length; i++){
+	  if (eventList.options[i].value == defaultEvent){
+	    eventList.options[i].selected = true;
 		break;
 	  }
 	}
-	updatepage();
+	resetPage();
   }
   
-  function updatepage(){
-    maindata = gamedata[blitzeventlist[blitzeventlist.selectedIndex].value];
-	vals = maindata['vals'];
-	//helpers = maindata['helpers'];
+  //set default values
+  function resetPage(){
+    maindata = gamedata[eventList[eventList.selectedIndex].value];
+	vals = maindata['vals']; //levels with [pow, maxenergy, cooldown, price]
     bosshealth = maindata['bosshealth'];
 	bossstages = maindata['bossstages'];
     droprates = maindata['droprates'];
@@ -96,19 +89,23 @@
     convrate=maindata['convrate'];
     convgems=maindata['convgems'];
 	margin=maindata['margin'];
-	
-	curstage = document.getElementById("curstage");
+	helpnames=maindata['helpnames'];
+	helpstage=maindata['helpstage'];
+	helpdmg=maindata['helpdmg'];
 	removeOptions(curstage);
 	addOptions(generateStages(), curstage);
 	curstage.selectedIndex = 0;
-	prevstage = 0;
 	
 	
     power.value = vals[0][0];
 	power.min = vals[0][0];
 	power.max = vals[vals.length-1][0];
-	//document.getElementById("h0value").innerText = helpers[0]
-	//document.getElementById("h1value").innerText = helpers[1]
+	basePower = [vals[0][0],vals[0][0],vals[vals.length-1][0]]
+	helpersPower = 0;
+	helpchecked = [];
+	for (let i = 0;i < helpnames.length;i++){
+	  helpchecked.push(false);
+	}
 	curdamage.value = "0";
 	curdamage.max = bossstages[0]-1;
 	generateHelpers();
@@ -126,6 +123,8 @@
 	  gemindexes.push(-1);
 	}
 	
+	//set average value for sapphire drops
+	//based on droprated and dropvalues
 	sapphiresavg=0;
 	let lastrate=0;
 	for (let i=0;i<droprates.length;i++){
@@ -143,23 +142,20 @@
 	}
 	sapphiresavg = Math.round(sapphiresavg);
 	
+	//set min-max range of random values of droprates
 	let dropnums=[]
 	for (let i=0;i<dropvalues.length;i++){
 	  dropnums.push(dropvalues[i][0])
       dropnums.push(dropvalues[i][1])
 	}
+	dropAverage.nextSibling.remove();
+	dropRandom.nextSibling.remove();
+	dropAverage.insertAdjacentText('afterend',"Average ("+sapphiresavg+")");
+	//"..." (spread) to arrays used in functions when elements of array required as arguments (replaces .apply)
+	dropRandom.insertAdjacentText('afterend',"Random ("+Math.min(...dropnums)+"-"+Math.max(...dropnums)+")");
 	
-    document.getElementById("error").innerText = (margin*100).toFixed(1);
-	//setimages(images[images.length-1]);
-	drop1.nextSibling.remove();
-	drop2.nextSibling.remove();
-	drop1.insertAdjacentText('afterend',"Average ("+sapphiresavg+")");
-	drop2.insertAdjacentText('afterend',"Random ("+Math.min(...dropnums)+"-"+Math.max(...dropnums)+")");
-	//help0.checked = false;
-	//help1.checked = false;
-	hstate=[false,false];
+	document.getElementById("errorMargin").innerText = (margin*100).toFixed(1);
 	processETOptions();
-	//checkstage();
 	document.getElementById("warning0").style.display = "none";
 	document.getElementById("warning1").style.display = "none";
 	let iframeSize = document.getElementById("wrapper").scrollHeight;
@@ -175,153 +171,45 @@
 	return stagesarr;
   }
   
-  function generateEventList(){
-    removeOptions(blitzeventlist);
-	let eventlist=[], tmp;
-    for (i in gamedata){
-	  tmp = [i,i]
-	  eventlist.push(tmp);
-	}
-	addOptions(eventlist, blitzeventlist);
-  }
- 
-  function swapImages(){
-	let tmp = '';
-	let helpers = document.getElementsByClassName("helperimage");
-	if (portraits == "helpers_portraits") {
-	  tmp = "helpers"
-	} else {
-	  tmp = "helpers_portraits"
-	}	
-	for(let i = 0; i < helpers.length; i++){
-	  let name = helpers[i].src.split("/");
-	  name = name[name.length-1];
-	  helpers[i].src = "assets/"+tmp+"/"+name
-	}
-	portraits = tmp
-  }
-
-  function generateHelpers(){
-    curHelpers = 0;
-    let p = document.getElementById("helpers");
-	p.innerHTML = '<b>Helpers:</b> <input style="width:100px" type="button" value="switch view" onclick="swapImages()"><br>'
-	//p.innerHTML = '<b>Helpers:</b><br>'
-    let helpnames = maindata['helpnames'];
-	let helpdmgs = maindata['helpdmg'];
-	//let helpers = maindata['helpers'];
-	let i, j;
-	var table, td, tr, input, span, img;
-	
-	table = document.createElement('table');
-	table.style.textAlign="center"
-	j=0;
-	helpersChecked = []
-	for (i=0;i<helpnames.length;i++){
-	  helpersChecked.push(false)
-	  if (j==0){
- 	    tr = document.createElement('tr');
-	  }
-	  j+=1;
-	  td = document.createElement('td');
-	  input = document.createElement('input');
-	  input.id = 'help' + i;
-	  input.type = 'checkbox';
-	  td.append(input)
-	  tr.append(td);
-	  td = document.createElement('td');
-	  span = document.createElement('span');
-  	  let hstages = ''
-	  if (i > 1){
-	    hstages = "stages IV - VI";
-	  }
-	  img = document.createElement('img');
-	  img.id = "helperimg"+i;
-	  img.src = "assets/"+portraits+"/"+helpnames[i]+".png";
-	  img.className = "helperimage";
-	  img.alt = helpnames[i];
-	  img.title = helpnames[i];
-	  img.height = 80;
-	  img.onerror = function() {
-	    let imgerr = document.getElementById(this.id); 
-	  	imgerr.outerHTML = imgerr.alt
-	  };
-	  span.append(img);
-	  if (hstages != '') {
-	    span.innerHTML += '<br>('+hstages+')';
-	  }
-	  td.append(span);
-	  tr.append(td);
-	  if (j==2){
-		table.append(tr);
-		j=0;
-	  }
-	}
-	if (j>0){
-	  table.append(tr);
-	}
-	document.getElementById("helpers").append(table)
-	
-	for (i=0;i<maindata['helpnames'].length;i++){
-	  document.getElementById('help' + i).onchange = setHelpers
-	}
-	
-  }
-  
-  function addPower(value, sign){
-    power.value = Number(power.value) + sign * value;
-    power.min = Number(power.min)+(sign * value);
-	power.max = Number(power.max)+(sign * value);
-	curHelpers += value * sign;
-  }
-  
+  //subtract or add helper power if it was (un)checked
   function setHelpers(){
-    for (i=0;i<maindata['helpnames'].length;i++){
-	  let checked = document.getElementById('help'+i).checked;
-	  let helperID = i;
-	  let sign = 0;
-	  if (checked) {sign = 1}
-	  else {sign = -1}
-	  stageindex = document.getElementById("curstage").selectedIndex;
-      if (helpersChecked[i] != checked) {
-	      addPower(maindata['helpdmg'][helperID], sign)
-		  helpersChecked[i] = !helpersChecked[i];
-	  }
+    helpersPower = 0;
+	let stageIndex = document.getElementById("curstage").selectedIndex;
+    for (helperID=0;helperID<maindata['helpnames'].length;helperID++){
+	  if (document.getElementById('help'+helperID).checked){
+	    helpchecked[helperID] = true;
+	    if (helpstage[stageIndex].indexOf(helperID) != -1){
+		  helpersPower += helpdmg[helperID];
+		}
+	  } else helpchecked[helperID] = false;
 	}
-	checkStage()
+	power.value = basePower[0] + helpersPower;
+	power.min = basePower[1] + helpersPower;
+	power.max = basePower[2] + helpersPower;
   }
+  
+  //get helpers sum power for specific stage
+  function getStageHelpers(stageID){
+	stageHelpers = 0;
+	for (let i = 0; i<helpchecked.length;i++){
+		if (helpchecked[i] && helpstage[stageID].indexOf(i) != -1){
+			stageHelpers += helpdmg[i];
+		}
+	}
+	return stageHelpers;
+  }  
+  
   
   function checkStage(){
     let stageindex = Number(curstage[curstage.selectedIndex].value);
     curdamage.max = bossstages[stageindex]-1;
 	curdamage.value = "0";
-	if (stageindex < 3){
-	  for (i=2;i<maindata['helpnames'].length;i++){
-	    if (document.getElementById('help'+i).checked){
-		  addPower(maindata['helpdmg'][i], -1);
-		  document.getElementById('help'+i).checked = false;
-		  helpersChecked[i] = !helpersChecked[i];
-		}
-		
-	  }
-	}
+	setHelpers()
   }
   
-  /*function setimages(imgitem){
-    let item = document.getElementById(imgitem+"data").innerText;
-	let imgs = document.getElementsByName(imgitem);
-	for (let i = 0; i <imgs.length; i++){
-	  imgs[i].src=item;
-    }
-  }*/
-
-  function check_pow(p){
-	if ((p % 1 === 0)&&(p >= vals[0][0])&&(p <= vals[vals.length-1][0])){
-	  return true;
-	} else {
-	  return false;
-	}
-  }
-
+  //collects indexes of X value in vals
+  //for example indexes of power=12 are 2,3,4
+  //indexes of maxenergy=14 are 15,16,17,18
   function getIndexes(value, pos) {
     let indexes = [];
     for (let i = 0; i <vals.length; i++){
@@ -332,15 +220,10 @@
     return indexes;
   }
 
-  function removeOptions(selBox) {
-    while (selBox.options.length > 0) {
-      selBox.remove(0);
-    }
-  }
-
+  //
   function getETValues(items, pos) {
-    let values = [], i;
-    for (i = 0; i <items.length; i++){
+    let values = [];
+    for (let i = 0; i <items.length; i++){
 	  val = vals[items[i]][pos];
 	  if (!values.includes(val)){
 		values.push(val);
@@ -350,14 +233,6 @@
 	  values[i] = [values[i],values[i]];
 	}
     return values;
-  }
-
-  function addOptions(arr, selBox) {
-    let newOption
-    for (let i = 0; i <arr.length; i++){
-	  newOption = new Option(arr[i][0],arr[i][1]);
-	  selBox.add(newOption, undefined);
-	}
   }
 
   function setTimes(arr) {
@@ -387,36 +262,29 @@
   }
   
   function processETOptions(arg=0) {
-	let charPower = Number(power.value) - curHelpers;
-	let ev = Number(maxenergy.value);
-	let tv = Number(time.value);
-	//if (help0.checked) pv-=helpers[0];
-	//if (help1.checked) pv-=helpers[1];
-	if (!check_pow(charPower)){
-	  maxenergy.value = '';
-	  time.value = '';
-	  return;
-	}
+	let charPower = Number(power.value) - helpersPower;
+	let maxenergyValue = Number(maxenergy.value);
+	let cooldownValue = Number(cooldown.value);
 	let pows = getIndexes(charPower, 0);
-	let enrgs = getIndexes(ev, 1);
-	let cooldowns = getIndexes(tv, 2);
+	let enrgs = getIndexes(maxenergyValue, 1);
+	let cooldowns = getIndexes(cooldownValue, 2);
 	let n = [];
 	let ETVals; 
 	if (arg==0){
 	  removeOptions(maxenergy);
 	  ETVals = getETValues(pows, 1);
 	  addOptions(ETVals, maxenergy);
-	  removeOptions(time);
+	  removeOptions(cooldown);
 	  ETVals = getETValues(pows, 2);
 	  let converted = setTimes(ETVals);
-	  addOptions(converted, time);
+	  addOptions(converted, cooldown);
 	}
 	else if (arg==1){
 	  n = getIntersection(pows,enrgs);
-	  removeOptions(time);
+	  removeOptions(cooldown);
 	  ETVals = getETValues(n, 2);
 	  let converted = setTimes(ETVals);
-	  addOptions(converted, time);
+	  addOptions(converted, cooldown);
 	}
 	else {
 	  n = getIntersection(pows,cooldowns);
@@ -425,7 +293,7 @@
 	  addOptions(ETVals, maxenergy);
 	}
 	switchElement(maxenergy);
-	switchElement(time);
+	switchElement(cooldown);
   }
   
   function randomdrop(num=1){
@@ -443,56 +311,23 @@
 	return sum;
   }
   
-  function formattime(time){
-    var out = "";
-	var count = [0,0];
-    if (Math.trunc(time / 86400) > 0){
-	  out += Math.trunc(time / 86400) + 'd ';
-	  time -= 86400 * Math.trunc(time / 86400);
-	  count[0] = 1;
-	}
-	if (Math.trunc(time / 3600) > 0){
-	  out += Math.trunc(time / 3600) + 'h ';
-	  time -= 3600 * Math.trunc(time / 3600);
-	  count[1] = 1;
-	}
-	if (Math.trunc(time / 60) > 0){
-	  if ((count[0] == 1) && (count[1] == 0)){
-	    out += '0h '+Math.trunc(time / 60) + 'm ';
-	  }
-	  else {
-	  out += Math.trunc(time / 60) + 'm ';
-	  }
-	  time -= 60 * Math.ceil(time / 60);
-	}
-	if (out == ""){
-	  out += time + 's ';
-	}
-	return out;
-  }
-
   var testrand=[];
   function calctime(){
     let results = document.getElementById("results");
 	results.innerHTML = ""
-    let totaldmg = 0;
+	let stageHelpers = helpersPower;
+	let fullHelpers = 0;
+    let stagedmg = 0;
+	let stageProcessing = Number(curstage.value);
     let totaltime = 0;
     let sapphiresleft = 0;
     let storedenergy = 0;
-  	let charPower = Number(power.value) - curHelpers;
-	let ev = Number(maxenergy.value);
-	let tv = Number(time.value);
-	/*if (help0.checked) {
-	  pv-=helpers[0];
-	  curhelpers += helpers[0];
-	}
-	if (help1.checked) {
- 	  pv-=helpers[1];
-	  curhelpers += helpers[1];
-	}*/
+  	let charPower = Number(power.value) - stageHelpers;
+	let maxenergyValue = Number(maxenergy.value);
+	let cooldownValue = Number(cooldown.value);
 	let pows = getIndexes(charPower, 0);
-	let nrgs = getIndexes(ev, 1);
-	let cooldowns = getIndexes(tv, 2);
+	let nrgs = getIndexes(maxenergyValue, 1);
+	let cooldowns = getIndexes(cooldownValue, 2);
 	let n, i;
 	for (i = 0; i <pows.length; i++){
 	  if ((nrgs.includes(pows[i]))&&(cooldowns.includes(pows[i]))){
@@ -501,47 +336,50 @@
 	  }
 	}
 	
-	pouchtime = ev * tv * 60;
-	//mainresults = document.createElement('div');
+	pouchtime = maxenergyValue * cooldownValue * 60;
 	
 	span = document.createElement('span');
 	span.innerHTML = '<img name="maxenergypic" src="assets/en_max.png" alt="max energy" width="20" /><b> will fill in: '+formattime(pouchtime)+'</b>';
 	
-	//<h1 id="results" style="width:450px" align="center"></h1>
-	
 	sapphiresleft = Number(document.getElementById("curcurrency").value);
 	storedenergy = Number(document.getElementById("curenergy").value);
-	for (i = 0; i <Number(curstage.value); i++){
-	  totaldmg += bossstages[i];
+	stagedmg = Number(curdamage.value);
+	
+	for (i = 0; i<helpchecked.length;i++){
+		if (helpchecked[i]){
+			fullHelpers += helpdmg[i];
+		}
 	}
-    totaldmg += Number(curdamage.value);
+	
 	for (i = n; i <vals.length; i++){
-	  while (sapphiresleft < vals[i+1][3]) {
-        totaldmg += vals[i][0] + curHelpers;
-		if (drop1.checked){
-		  sapphiresleft += sapphiresavg;
-		} else{
-		  sapphiresleft += randomdrop();
+		while (sapphiresleft < vals[i+1][3]){
+			stagedmg += vals[i][0] + stageHelpers;
+			if (dropAverage.checked){
+			  sapphiresleft += sapphiresavg;
+			} else{
+			  sapphiresleft += randomdrop();
+			}
+			if (storedenergy >0){
+			  storedenergy -= 1;
+			} else {
+			  totaltime += vals[i][2]*60;
+			}
+			if (stagedmg >= bossstages[stageProcessing]){
+				stageProcessing++;
+				if (stageProcessing < bossstages.length) stageHelpers = getStageHelpers(stageProcessing);
+				stagedmg = 0;
+			}
+			if (stageProcessing == bossstages.length){
+				break;
+			}
 		}
-		if (storedenergy >0){
-		  storedenergy -= 1;
-		} else {
-		  totaltime += vals[i][2]*60;
+		if (stageProcessing == bossstages.length){
+			break;
 		}
-	    if (totaldmg >= bosshealth){
-		  checkforgems(i,totaldmg,curHelpers,storedenergy,totaltime,sapphiresleft);
-	      break;
-	    }
-      }
-	  if (totaldmg >= bosshealth){
-	    break;
-	  }
-	  checkforgems(i,totaldmg,curHelpers,storedenergy,totaltime,sapphiresleft);
-	  sapphiresleft -= vals[i+1][3];
-	  storedenergy += vals[i+1][1] - vals[i][1];
+		checkforgems(i,stagedmg,stageProcessing,storedenergy,totaltime,sapphiresleft);
+		sapphiresleft -= vals[i+1][3];
+		storedenergy += vals[i+1][1] - vals[i][1];
 	}
-	
-	
 	
 	let h1 = document.createElement('h1');
 	h1.style.width = "450px";
@@ -550,7 +388,7 @@
 	if (marginoferror < vals[i][2]*60*0.75){marginoferror = 0} //zeroing margin if it is less than 75% of latest cooldown time
 	let print1 = formattime(totaltime);
 	print2 = formattime(marginoferror);
-	if (drop1.checked){
+	if (dropAverage.checked){
 	  h1.innerText = print1 + '    (±'+print2+')';
 	  document.getElementById("warning0").style.display = "inline";
 	  document.getElementById("warning1").style.display = "inline";
@@ -562,42 +400,45 @@
 	testrand.push(totaltime);
 	results.appendChild(h1);
 	results.appendChild(span);
-	//setimages('maxenergypic');
 	setgems();
 	let iframeSize = document.getElementById("wrapper").scrollHeight;
 	parent.postMessage(iframeSize, "*");
   }
   
-  function checkforgems(index,totaldmg,curHelpers,storedenergy,totaltime,sapphiresleft){
-    while ((sapphiresleft<50000)&&(totaldmg<bosshealth)){
-      if (storedenergy>0){
-	    storedenergy -= 1;
-		totaldmg += vals[index][0]+curHelpers;
-		if (drop1.checked){
-		  sapphiresleft += sapphiresavg;
-		} else{
-		  sapphiresleft += randomdrop();
+	function checkforgems(index,stagedmg,stageProcessing,storedenergy,totaltime,sapphiresleft){
+		for (let stageID = stageProcessing; stageID < bossstages.length; stageID++){
+			stageHelpers = getStageHelpers(stageProcessing);
+			while ((sapphiresleft<convrate[convrate.length-1])&&(stagedmg < bossstages[stageID])){
+				if (storedenergy>0){
+					storedenergy -= 1;
+					stagedmg += vals[index][0]+stageHelpers;
+					if (dropAverage.checked){
+						sapphiresleft += sapphiresavg;
+					} else {
+						sapphiresleft += randomdrop();
+					}
+				} else {
+					let mult = Math.ceil((bossstages[stageID] - stagedmg)/(vals[index][0]+stageHelpers));
+					stagedmg += mult*(vals[index][0]+stageHelpers);
+					totaltime += mult*vals[index][2]*60;
+					if (dropAverage.checked){
+						sapphiresleft += mult*sapphiresavg;
+					} else {
+						sapphiresleft += randomdrop(mult);
+					}
+				}
+			}
+			stagedmg = 0;
 		}
-	  } else {
-		let mult = Math.ceil((bosshealth - totaldmg)/(vals[index][0]+curHelpers));
-	    totaldmg += mult*(vals[index][0]+curHelpers);
-		totaltime += mult*vals[index][2]*60;
-		if (drop1.checked){
-		  sapphiresleft += mult*sapphiresavg;
-		} else{
-		  sapphiresleft += randomdrop(mult);
+		for (let i = 0; i <convrate.length; i++){
+			if (sapphiresleft > convrate[i]){
+				if (totaltime <= gemtimes[i]){
+					gemtimes[i] = totaltime;
+					gemindexes[i] = index;
+				}
+			}
 		}
-	  }
 	}
-	for (let i = 0; i <convrate.length; i++){
-	  if (sapphiresleft > convrate[i]){
-	    if (totaltime <= gemtimes[i]){
-		  gemtimes[i] = totaltime;
-		  gemindexes[i] = index;
-		}
-	  }
-	}
-  }
   
   function setgems(){
     for (i = 0; i <gemindexes.length; i++){
@@ -617,7 +458,7 @@
 	row.children[1].innerText = formattime(time);
 	let tmp1 = formattime(time*margin);
 	if (tmp1 < vals[i][2]*60*0.75){tmp1 = 0}
-	if (drop1.checked){
+	if (dropAverage.checked){
 	  row.children[2].innerText = '±'+tmp1;  
 	} else {
 	  row.children[2].innerText = '';
@@ -631,9 +472,7 @@
 		}
 	}
 
-	tmp2 = vals[index][0] + curHelpers;
-	//if (help0.checked) tmp2 += helpers[0];
-	//if (help1.checked) tmp2 += helpers[1];
+	tmp2 = vals[index][0] + stageHelpers;
 	row.children[3].innerText = tmp2;
 	row.children[4].innerText = vals[index][1];
 	row.children[5].innerText = times[vals[index][2]];
@@ -652,7 +491,7 @@
 <body onload="loadpage()">
 <div id="wrapper" class="container-lg markdown-body">
 
-  <p style="margin-top: 1px;">Select event: <select id="blitzevents" onchange="updatepage()">
+  <p style="margin-top: 1px;">Select event: <select id="eventList" onchange="resetPage()">
     <option>Tale of Tirek</option>
   </select></p>
   <p><table style="border-collapse: collapse;"><thead>
@@ -747,12 +586,12 @@
   your luck with number of sapphires dropping for every hit<br></p>
   <p>You can check the spread of values by switching the option<br>
   below and calculating the result several times.</p>
-  <p>Margin of error calculated as <span id="error">2.5</span>% from average value<br>
+  <p>Margin of error calculated as <span id="errorMargin">2.5</span>% from average value<br>
   since more than 90% of spread included in these boundaries</p></i>
   <b>Sapphires per hit:</b>
   <table>
-  <td><input id="drop1" name="sappdrop" type="radio" value="avg" checked>Average (60)</td>
-  <td><input id="drop2" name="sappdrop" type="radio" value="rand">Random (25-150)</td>
+  <td><input id="dropAverage" name="sappdrop" type="radio" value="avg" checked>Average (60)</td>
+  <td><input id="dropRandom" name="sappdrop" type="radio" value="rand">Random (25-150)</td>
   </table>
 </div>
 </body>
