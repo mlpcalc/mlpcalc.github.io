@@ -365,9 +365,10 @@
 			  totaltime += vals[i][2]*60;
 			}
 			if (stagedmg >= bossstages[stageProcessing]){
+				stagedmg = stagedmg-bossstages[stageProcessing];
 				stageProcessing++;
 				if (stageProcessing < bossstages.length) stageHelpers = getStageHelpers(stageProcessing);
-				stagedmg = 0;
+				//stagedmg = 0;
 			}
 			if (stageProcessing == bossstages.length){
 				break;
