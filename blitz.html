@@ -4,6 +4,7 @@
 <script src="common.js"></script>
 <link rel="stylesheet" href="style.css">
 <script>
+/*
   const times = {
 	0.25:"15s",
 	0.5:"30s",
@@ -40,6 +41,7 @@
 	16:"16m",
 	17:"17m"
   };
+*/
   
   const images = ["powerpic","maxenergypic","cooldownpic","energypic","sapphirepic","gempic"];
   var power, maxenergy, cooldown;
@@ -238,7 +240,8 @@
   function setTimes(arr) {
     let values = [];
     for (let i = 0; i <arr.length; i++){
-	  values.push([times[arr[i][0]],arr[i][0]]);
+	  //values.push([times[arr[i][0]],arr[i][0]]);
+	  values.push([formattime(arr[i][0]*60),arr[i][0]]);
 	}
 	return values;
   }
@@ -476,7 +479,8 @@
 	tmp2 = vals[index][0] + stageHelpers;
 	row.children[3].innerText = tmp2;
 	row.children[4].innerText = vals[index][1];
-	row.children[5].innerText = times[vals[index][2]];
+	//row.children[5].innerText = times[vals[index][2]];
+	row.children[5].innerText = formattime(vals[index][2]*60);
   }
   function fillgemnull(gemid){
     let row = document.getElementById(gemid);
