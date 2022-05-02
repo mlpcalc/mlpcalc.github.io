@@ -1,30 +1,58 @@
+/*
   function formattime(time){
     var out = "";
-	var count = [0,0];
+	var d_h_m = [false,false,false];
     if (Math.trunc(time / 86400) > 0){
-	  out += Math.trunc(time / 86400) + 'd ';
+	  out += Math.trunc(time / 86400) + 'd';
 	  time -= 86400 * Math.trunc(time / 86400);
-	  count[0] = 1;
+	  d_h_m[0] = true;
 	}
 	if (Math.trunc(time / 3600) > 0){
-	  out += Math.trunc(time / 3600) + 'h ';
+	  out += ' ' + Math.trunc(time / 3600) + 'h';
 	  time -= 3600 * Math.trunc(time / 3600);
-	  count[1] = 1;
+	  d_h_m[1] = true;
 	}
 	if (Math.trunc(time / 60) > 0){
-	  if ((count[0] == 1) && (count[1] == 0)){
-	    out += '0h '+Math.trunc(time / 60) + 'm ';
+	  if (d_h_m[0] && !d_h_m[1]){
+	    out += ' 0h ' + Math.trunc(time / 60) + 'm';
 	  }
 	  else {
-	  out += Math.trunc(time / 60) + 'm ';
+	  out += ' ' + Math.trunc(time / 60) + 'm';
 	  }
 	  time -= 60 * Math.ceil(time / 60);
 	}
-	if (out == ""){
-	  out += time + 's ';
+	if ((out == "")||(!d_h_m[0] && !d_h_m[1])){
+	  out += ' ' + time + 's';
 	}
 	return out;
   }
+*/
+
+function formattime(time){
+	var out = "";
+	var d_h_m_s = [0,0,0,0];
+	var letters = ["d","h","m","s"];
+	[time, d_h_m_s[0]] = trunctime(time,86400);
+	[time, d_h_m_s[1]] = trunctime(time,3600);
+	[time, d_h_m_s[2]] = trunctime(time,60);
+	if (d_h_m_s[0] > 0 || d_h_m_s[1] > 0) d_h_m_s[3] =  0
+	else d_h_m_s[3] =  Math.trunc(time);
+	for (var i=0; i < d_h_m_s.length; i++){
+		if (d_h_m_s[i]>0) {
+			out += ' ' + d_h_m_s[i] + letters[i]
+		}
+	}
+	return out.trim();
+}
+
+function trunctime(time,value){
+	var num = Math.trunc(time / value);
+	time -= value * num;
+	return [time, num];
+}
+
+
+
   
   function swapImages(){
 	let tmp = '';
