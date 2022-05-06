@@ -203,7 +203,7 @@
   
   
   function checkStage(){
-    let stageindex = Number(curstage[curstage.selectedIndex].value);
+    let stageIndex = Number(curstage[curstage.selectedIndex].value);
     curdamage.max = bossstages[stageindex]-1;
 	curdamage.value = "0";
 	setHelpers()
@@ -274,6 +274,7 @@
 	let n = [];
 	let ETVals; 
 	if (arg==0){
+	  basePower[0] = charPower;
 	  removeOptions(maxenergy);
 	  ETVals = getETValues(pows, 1);
 	  addOptions(ETVals, maxenergy);
@@ -389,7 +390,7 @@
 	h1.style.width = "450px";
 	h1.align = "center";
 	let marginoferror = totaltime*margin;
-	if (marginoferror < vals[i][2]*60*0.75){marginoferror = 0} //zeroing margin if it is less than 75% of latest cooldown time
+//	if (marginoferror < vals[i][2]*60*0.75){marginoferror = 0} //zeroing margin if it is less than 75% of latest cooldown time
 	let print1 = formattime(totaltime);
 	print2 = formattime(marginoferror);
 	if (dropAverage.checked){
