@@ -29,6 +29,7 @@
 */
 
 function formattime(time){
+	if (Math.trunc(time) == 0) return '0s';
 	var out = "";
 	var d_h_m_s = [0,0,0,0];
 	var letters = ["d","h","m","s"];
