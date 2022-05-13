@@ -385,7 +385,7 @@
 	  "helpdmg" : [[5, 5, 5], [20, 20, 20], [20, 20, 25], [25, 30, 35], [30, 30, 35], [45, 50, 55], [45, 50, 55], [45, 50, 55]],
 	  "helpstage":[[0,1,2],[3,4,5],[6,7,8],[9,10,11],[12,13,14],[15,16,17],[18,19,20],[18,19,20]],
 	  "helpnames":["Twilight Sparkle","Applejack","Pinkie Pie","Rarity","Mane Allgood","Rainbow Dash",
-	  "Cheery Zebra","Cranky Doodle","Ragamuffin","Cardsharp Pirate","Future Big Mac","Marini","Spearhead",
+	  "Cheery Zebra","Captain Cranky","Ragamuffin","Cardsharp Pirate","Future Big Mac","Marini","Spearhead",
 	  "Fizzlepop Berrytwist","Crystal","Accord","Chill Zebra","Dust Devil","Rockhoof","Ms Alegre","Cactus Rose"],
 	  "convrate":[1,2501,10001,30001,100000],
 	  "convgems":[0,5,10,20,30]
