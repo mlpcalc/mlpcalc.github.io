@@ -235,7 +235,7 @@ const gamedata ={
 	  "helpnames":["Terri Belle","Swift Foot"],
 	  "droprates" : [0.15, 0.70, 0.85, 0.95, 1],
 	  "dropvalues" : [[25,25], [50,50], [75,75], [100,100], [150,150]],
-	  "convrate":[1,2501,10001,25001,50001],
+	  "convrate":[1,2,10001,25001,50001],
 	  "convgems":[3,5,10,15,20],
 	  "margin":0.025
 	  },
