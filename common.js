@@ -1,33 +1,3 @@
-/*
-  function formattime(time){
-    var out = "";
-	var d_h_m = [false,false,false];
-    if (Math.trunc(time / 86400) > 0){
-	  out += Math.trunc(time / 86400) + 'd';
-	  time -= 86400 * Math.trunc(time / 86400);
-	  d_h_m[0] = true;
-	}
-	if (Math.trunc(time / 3600) > 0){
-	  out += ' ' + Math.trunc(time / 3600) + 'h';
-	  time -= 3600 * Math.trunc(time / 3600);
-	  d_h_m[1] = true;
-	}
-	if (Math.trunc(time / 60) > 0){
-	  if (d_h_m[0] && !d_h_m[1]){
-	    out += ' 0h ' + Math.trunc(time / 60) + 'm';
-	  }
-	  else {
-	  out += ' ' + Math.trunc(time / 60) + 'm';
-	  }
-	  time -= 60 * Math.ceil(time / 60);
-	}
-	if ((out == "")||(!d_h_m[0] && !d_h_m[1])){
-	  out += ' ' + time + 's';
-	}
-	return out;
-  }
-*/
-
 function formattime(time){
 	if (Math.trunc(time) == 0) return '0s';
 	var out = "";
