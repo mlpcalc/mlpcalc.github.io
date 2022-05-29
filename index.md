@@ -1,13 +1,22 @@
 <html>
 <head>
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-191706851-1"></script>
 <link rel="stylesheet" href="style.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-191706851-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
   gtag('config', 'UA-191706851-1');
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XZC0JCSGZS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-XZC0JCSGZS');
 </script>
 
 <script>
