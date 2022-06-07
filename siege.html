@@ -70,10 +70,13 @@
 	
 	//automatically checking on Twilight Sparkle
 	//she's default very first pony
-	let TSIndex = maindata['helpnames'].indexOf('Twilight Sparkle')
-	if (TSIndex != -1){
-	  document.getElementById('help'+TSIndex).checked = true
-    }
+	let TSIndex = -1;
+	while (true) {
+		TSIndex = maindata['helpnames'].indexOf('Twilight Sparkle',TSIndex+1)
+		if (TSIndex != -1){
+		  document.getElementById('help'+TSIndex).checked = true;
+		} else break;
+	}
 	
 	document.getElementById("curhelmet").max = vals.length-1;
 	document.getElementById("curarmor").max = vals2.length-1;
