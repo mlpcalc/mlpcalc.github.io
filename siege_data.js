@@ -1967,7 +1967,7 @@
 	  "Kibitz","Chaos Rain Shine","Chaos Amore",
 	  "Chaos Roadhouse Sentry","Chaos Skystar","Chaos Novo",
 	  "Chaos Princess Pinkie Pie","Grogar","Twilight Sparkle",
-	  "Shining Armor","Future Flurry Heart","Chaos Cadance",
+	  "Chaos Shining Armor","Future Flurry Heart","Chaos Cadance",
 	  "Chaos Twilight","Chaos Luna","Chaos Celestia"],
 	  "convrate":[1,2501,10001,30001,100000],
 	  "convgems":[0,5,10,20,30]
