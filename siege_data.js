@@ -1960,13 +1960,13 @@
 		"MinionsBeforeBoss" : 0
 		}
 	  ],
-	  "helpdmg" : [[3, 3, 3], [10, 10, 10], [20, 20, 20], [40, 40, 40], [1, 1, 0], [60, 80, 80], [100, 100, 100], [45, 50, 55]],
+	  "helpdmg" : [[5, 5, 5], [20, 20, 20], [20, 20, 25], [25, 30, 35], [30, 30, 0], [45, 50, 55], [45, 50, 55], [45, 50, 55]],
 	  "helpstage":[[0,1,2],[3,4,5],[6,7,8],[9,10,11],[12,13,14],[15,16,17],[18,19,20],[18,19,20]],
 	  "helpnames":["Twilight Sparkle","Rarity","Fluttershy",
 	  "Princess Cadence","Flurry Heart","Shining Armor",
 	  "Kibitz","Chaos Rain Shine","Chaos Amore",
 	  "Chaos Roadhouse Sentry","Chaos Skystar","Chaos Novo",
-	  "Chaos Princess Pinkie Pie","Grogar","Twilight Sparkle",
+	  "Chaos Princess Pinkie Pie","Grogar","NONE",
 	  "Chaos Shining Armor","Future Flurry Heart","Chaos Cadance",
 	  "Chaos Twilight","Chaos Luna","Chaos Celestia"],
 	  "convrate":[1,2501,10001,30001,100000],
