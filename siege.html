@@ -140,8 +140,22 @@
 		  document.getElementById('help'+groupedhelpers[i][0]).checked = false
 		}
 	  }
-	  
 	}
+	
+	//exception for Grogar-tized Discord
+	if (maindata['helpnames'].indexOf('Grogar-tized Discord') != -1){
+	  let groupedhelpers=[[13,14]]
+	  for (i=0;i<groupedhelpers.length;i++){
+		let helper_1 = document.getElementById('help'+groupedhelpers[i][0]).checked
+		let helper_2 = document.getElementById('help'+groupedhelpers[i][1]).checked
+	    if (helper_1 & helper_2){
+		  helpers[groupedhelpers[i][0]] = 0
+		  document.getElementById('help'+groupedhelpers[i][0]).checked = false
+		}
+	  }
+	}
+	
+	
 	for (i=0;i<stages.length;i++){
 	  stages[i]['helpnum'] = 0;
 	  stages[i]['helpersdmg'] = 0;
