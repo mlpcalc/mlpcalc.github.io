@@ -23,7 +23,7 @@
   //
   //
   //Default event type (0=siege, 1=blitz)
-  var curEventType = 1;
+  var curEventType = 0;
   var iframe;
   //
   //
