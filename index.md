@@ -1,14 +1,14 @@
 <html>
 <head>
 <link rel="stylesheet" href="style.css">
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-191706851-1"></script>
+<!--<script async src="https://www.googletagmanager.com/gtag/js?id=UA-191706851-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
   gtag('config', 'UA-191706851-1');
-</script>
+</script>-->
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XZC0JCSGZS"></script>
 <script>
@@ -23,7 +23,7 @@
   //
   //
   //Default event type (0=siege, 1=blitz)
-  var curEventType = 0;
+  var curEventType = 1;
   var iframe;
   //
   //
