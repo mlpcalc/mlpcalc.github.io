@@ -1972,7 +1972,7 @@
 	  "convrate":[1,2501,10001,30001,100000],
 	  "convgems":[0,5,10,20,30]
 	},
-	"(NOT FINAL)Welcome Back Twilight":
+	"Welcome Back Twilight":
 	  {"upgrades": [
 		[ 2,     0],
         [ 1,     1], [ 1,     2], [ 1,     3], [ 1,     5], [ 1,     9], [ 2,    15], [ 2,    40], [ 2,    99],
@@ -2066,11 +2066,11 @@
 	  "helpstage":[[0,1,2],[3,4,5],[6,7,8],[9,10,11],[12,13,14],[15,16,17],[18,19,20],[18,19,20]],
 	  "helpnames":["Fluttershy","Rarity","Pinkie Pie",
 	  "Poised Catering Pony","Frazzled Catering Pony","Unflappable Catering Pony",
-	  "Las Pegasus Singer","Bellhop Pony","Poné Fantastique Aerialist",
-	  "Shady Resortgoer","Sunny Resortgoer","Tacky Resortgoer",
-	  "Silver Berry","Runway Model","Merry",
-	  "Apple Bloom","Scootaloo","Sweetie Belle",
-	  "Dapper Prairie Dog Trainer","Jack Pot","Apple Rose"],
+	  "Chaperone Schoolteacher","Wisecracking Schoolteacher","Gingersnap",
+	  "Shadowy Unicorn Parent","Brusque Unicorn Parent","Dapper PTC Member",
+	  "Amiable Schoolteacher","Encouraging Unicorn Parent","Giddilee",
+	  "Eager Unicorn Student","Honey Sweet","Stubborn Unicorn Student",
+	  "Chance","Floribunda","Inkwell"],
 	  "convrate":[1,2501,10001,30001,100000],
 	  "convgems":[0,5,10,20,30]
 	},
@@ -2100,7 +2100,7 @@
 		"MinionCurrencyReward" : 1,
 		"MinionsBeforeBoss" : 12
 		},
-		{"ID" : "Capper",
+		{"ID" : "Jim 1",
 		"BossHP" : 570,
 		"BossHits" : 15,
 		"TimeMinutes" : 5,
@@ -2109,7 +2109,7 @@
 		"MinionCurrencyReward" : 2,
 		"MinionsBeforeBoss" : 50
 		},
-		{"ID" : "Princess Ember",
+		{"ID" : "Jim 2",
 		"BossHP" : 1200,
 		"BossHits" : 15,
 		"TimeMinutes" : 10,
@@ -2118,7 +2118,7 @@
 		"MinionCurrencyReward" : 3,
 		"MinionsBeforeBoss" : 45
 		},
-		{"ID" : "Toothy Klugetowner",
+		{"ID" : "Cerberus 1",
 		"BossHP" : 4680,
 		"BossHits" : 20,
 		"TimeMinutes" : 15,
@@ -2127,7 +2127,7 @@
 		"MinionCurrencyReward" : 9,
 		"MinionsBeforeBoss" : 40
 		},
-		{"ID" : "Scaly Klugetowner",
+		{"ID" : "Cerberus 2",
 		"BossHP" : 9880,
 		"BossHits" : 20,
 		"TimeMinutes" : 15,
@@ -2136,7 +2136,7 @@
 		"MinionCurrencyReward" : 24,
 		"MinionsBeforeBoss" : 35
 		},
-		{"ID" : "Louise",
+		{"ID" : "Fido",
 		"BossHP" : 21300,
 		"BossHits" : 25,
 		"TimeMinutes" : 20,
@@ -2145,7 +2145,7 @@
 		"MinionCurrencyReward" : 47,
 		"MinionsBeforeBoss" : 30
 		},
-		{"ID" : "Vera",
+		{"ID" : "Rover",
 		"BossHP" : 32100,
 		"BossHits" : 25,
 		"TimeMinutes" : 25,
@@ -2167,12 +2167,12 @@
 	  "helpdmg" : [[5, 5, 5], [20, 20, 20], [20, 20, 25], [25, 30, 35], [30, 30, 35], [45, 50, 55], [45, 50, 55], [45, 50, 55]],
 	  "helpstage":[[0,1,2],[3,4,5],[6,7,8],[9,10,11],[12,13,14],[15,16,17],[18,19,20],[18,19,20]],
 	  "helpnames":["Pinkie Pie","Rarity","Fluttershy",
-	  "Capper","Princess Ember","Toothy Klugetowner",
-	  "Scaly Klugetowner","Louise","Vera",
-	  "Mullet","Spiky Klugetowner","Boyle",
-	  "Klugetown Potter","Verko","Chummer",
-	  "Abyssinian King","Abyssinian Queen","Smolder",
-	  "Purple Dragon","Pale Dragon","Charcoal Dragon"],
+	  "Blasé Diamond Dog","Diamond Dog Dad","Bone Salesdog",
+	  "Chipper Diamond Dog","Smug Diamond Dog","Uncertain Diamond Dog",
+	  "Bacon-Loving Diamond Dog","Shocked Diamond Dog","Horrified Diamond Dog",
+	  "Diamond Dog Builder","Diamond Dog Carpenter","Diamond Dog Painter",
+	  "Diamond Dog Duchess","Jim","Diamond Guard Dog",
+	  "Diamond Dog Diplomat","Diamond Dog Duke","Diamond Dog Dignitary"],	  
 	  "convrate":[1,2501,10001,30001,100000],
 	  "convgems":[0,5,10,20,30]
 	}
