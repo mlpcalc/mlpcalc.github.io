@@ -2074,7 +2074,7 @@
 	  "convrate":[1,2501,10001,30001,100000],
 	  "convgems":[0,5,10,20,30]
 	},
-	"(NOT FINAL)Danger In Dimondia":
+	"Danger In Dimondia":
 	  {"upgrades": [
 		[ 2,     0],
         [ 1,     1], [ 1,     2], [ 1,     3], [ 1,     5], [ 1,     9], [ 2,    15], [ 2,    40], [ 2,    99],
