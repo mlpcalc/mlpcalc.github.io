@@ -80,7 +80,7 @@
 	for (let i=convrate.length-1; i>=0; i--){
 	  tr = document.createElement('tr');
 	  tr.id = "gem"+convrate[i];
-	  tr.innerHTML += '<td><img name="gempic" src="assets/gem.png" alt="Gems" /><b>'+convgems[i]+'</br>(≥'+'<img name="sapphirepic" src="assets/sapphire.png" alt="Sapphires" width="12" />'+convrate[i]+')</b></td>';
+	  tr.innerHTML += '<td><img name="gempic" src="assets/common/gem.png" alt="Gems" /><b>'+convgems[i]+'</br>(≥'+'<img name="sapphirepic" src="assets/common/sapphire.png" alt="Sapphires" width="12" />'+convrate[i]+')</b></td>';
 	  tr.innerHTML += '<td></td><td></td><td></td><td></td><td></td></tr>';
 	  gemtable.appendChild(tr);
 	  gemtimes.push(999999);
@@ -305,7 +305,7 @@
 	pouchtime = maxenergyValue * cooldownValue * 60;
 	
 	span = document.createElement('span');
-	span.innerHTML = '<img name="maxenergypic" src="assets/en_max.png" alt="max energy" width="20" /><b> will fill in: '+formattime(pouchtime)+'</b>';
+	span.innerHTML = '<img name="maxenergypic" src="assets/common/en_max.png" alt="max energy" width="20" /><b> will fill in: '+formattime(pouchtime)+'</b>';
 	
 	sapphiresleft = Number(document.getElementById("curcurrency").value);
 	storedenergy = Number(document.getElementById("curenergy").value);
@@ -464,11 +464,11 @@
   </select></p>
   <p><table style="border-collapse: collapse;"><thead>
   <tr>
-  <th align="center"><img name="powerpic" src="assets/power.png" alt="Power" /></th>
-  <th align="center"><img name="maxenergypic" src="assets/en_max.png" alt="Max energy" /></th>
-  <th align="center" style="width:85px"><img name="cooldownpic" src="assets/time.png" alt="Cooldown time" /></th>
-  <th style="border-left: 3px double #000;" align="right" ><img name="energypic" src="assets/energy.png" alt="Current energy" /></th>
-  <th align="center"><img name="sapphirepic" src="assets/sapphire.png" alt="Current sapphires" /></th>
+  <th align="center"><img name="powerpic" src="assets/common/power.png" alt="Power" /></th>
+  <th align="center"><img name="maxenergypic" src="assets/common/en_max.png" alt="Max energy" /></th>
+  <th align="center" style="width:85px"><img name="cooldownpic" src="assets/common/time.png" alt="Cooldown time" /></th>
+  <th style="border-left: 3px double #000;" align="right" ><img name="energypic" src="assets/common/energy.png" alt="Current energy" /></th>
+  <th align="center"><img name="sapphirepic" src="assets/common/sapphire.png" alt="Current sapphires" /></th>
   </tr></thead>
   <tbody><tr>
   <td align="center"><input id="power" type="number" value="10" min="10" max="63" style="width:60px" onchange="processETOptions()"/></td>
@@ -503,9 +503,9 @@
   <th style="vertical-align:bottom width:20px">Extra<br>gems</th>
   <th style="vertical-align:bottom width:60px">Time<br>to reach</th>
   <th style="vertical-align:bottom width:60px">Margin<br>of error</th>
-  <th><img name="powerpic" src="assets/power.png" alt="Power" /></th>
-  <th><img name="maxenergypic" src="assets/en_max.png" alt="Max energy" /></th>
-  <th><img name="cooldownpic" src="assets/time.png" alt="Cooldown time" /></th>
+  <th><img name="powerpic" src="assets/common/power.png" alt="Power" /></th>
+  <th><img name="maxenergypic" src="assets/common/en_max.png" alt="Max energy" /></th>
+  <th><img name="cooldownpic" src="assets/common/time.png" alt="Cooldown time" /></th>
   </tr></thead>
   <tbody id="gemtable" align="center"></tbody>
   </table>
