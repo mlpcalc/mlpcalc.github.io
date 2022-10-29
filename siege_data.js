@@ -2206,7 +2206,7 @@
 		"BossHP" : 570,
 		"BossHits" : 15,
 		"TimeMinutes" : 5,
-		"CurrencyCappings" : [ 576, 676, 776, 876 ],
+		"CurrencyCappings" : [ 676, 776, 876, 876 ], //each stage here one helper shorter, so all cappings shifted by one
 		"MinionHP" : 800,
 		"MinionCurrencyReward" : 2,
 		"MinionsBeforeBoss" : 50
@@ -2215,7 +2215,7 @@
 		"BossHP" : 1200,
 		"BossHits" : 15,
 		"TimeMinutes" : 10,
-		"CurrencyCappings" : [ 1065, 1215, 1365, 1515 ],
+		"CurrencyCappings" : [ 1215, 1365, 1515, 1515 ],
 		"MinionHP" : 1500,
 		"MinionCurrencyReward" : 3,
 		"MinionsBeforeBoss" : 45
@@ -2224,7 +2224,7 @@
 		"BossHP" : 4680,
 		"BossHits" : 20,
 		"TimeMinutes" : 15,
-		"CurrencyCappings" : [ 2619, 3069, 3519, 3969 ],
+		"CurrencyCappings" : [ 3069, 3519, 3969, 3969 ],
 		"MinionHP" : 4000,
 		"MinionCurrencyReward" : 9,
 		"MinionsBeforeBoss" : 40
@@ -2233,7 +2233,7 @@
 		"BossHP" : 9880,
 		"BossHits" : 20,
 		"TimeMinutes" : 15,
-		"CurrencyCappings" : [ 8328, 9528, 10728, 11928 ],
+		"CurrencyCappings" : [ 9528, 10728, 11928, 11928 ],
 		"MinionHP" : 8000,
 		"MinionCurrencyReward" : 24,
 		"MinionsBeforeBoss" : 35
@@ -2242,7 +2242,7 @@
 		"BossHP" : 21300,
 		"BossHits" : 25,
 		"TimeMinutes" : 20,
-		"CurrencyCappings" : [ 15980, 18330, 20680, 23030 ],
+		"CurrencyCappings" : [ 18330, 20680, 23030, 23030 ],
 		"MinionHP" : 15000,
 		"MinionCurrencyReward" : 47,
 		"MinionsBeforeBoss" : 30
@@ -2251,7 +2251,7 @@
 		"BossHP" : 32100,
 		"BossHits" : 25,
 		"TimeMinutes" : 25,
-		"CurrencyCappings" : [ 24640, 28490, 32340, 36190 ],
+		"CurrencyCappings" : [ 28490, 32340, 36190, 36190 ],
 		"MinionHP" : 25000,
 		"MinionCurrencyReward" : 77,
 		"MinionsBeforeBoss" : 25
@@ -2260,7 +2260,7 @@
 		"BossHP" : 0,
 		"BossHits" : 0,
 		"TimeMinutes" : 0,
-		"CurrencyCappings" : [ 40425, 40600, 40775, 40950 ],
+		"CurrencyCappings" : [ 40600, 40775, 40950, 40950 ],
 		"MinionHP" : 24000,
 		"MinionCurrencyReward" : 77,
 		"MinionsBeforeBoss" : 0
