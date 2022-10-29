@@ -2269,12 +2269,12 @@
 	  "helpdmg" : [[5, 5, 5], [20, 20, 40], [20, 20, 40], [30, 30, 60], [30, 30, 60], [50, 50, 100], [50, 50, 100], [50, 50, 100]],
 	  "helpstage":[[0,1,2],[3,4,5],[6,7,8],[9,10,11],[12,13,14],[15,16,17],[18,19,20],[18,19,20]],
 	  "helpnames":["Rarity","Flim","Flam",
-	  "Young Burnt Oak","Autojack","Supercharged Autojack",
-	  "Short Fuse","Robo Dash","Supercharged Robo Dash",
-	  "Washout Scootaloo","Pinkie v3.14","Supercharged Pinkie v3.14",
-	  "Princess Code-Dense","RAMity","Supercharged RAMity",
-	  "Princess LUN-4","CyberShy","Supercharged Cybershy",
-	  "Princess Celestiatron","Terabyte Sparkle","Supercharged Terabyte Sparkle"],	  
+	  "Young Burnt Oak","Cyber Applejack","Supercharged Applejack",
+	  "Short Fuse","Robo Rainbow Dash","Supercharged Rainbow Dash",
+	  "Washout Scootaloo","Cyber Pinkie Pie","Supercharged Pinkie Pie",
+	  "Cyber Princess Cadance","Robo Rarity","Supercharged Rarity",
+	  "Cyber Princess Luna","Cyber Fluttershy","Supercharged Fluttershy",
+	  "Cyber Princess Celestia","Robo Twilight Sparkle","Supercharged Twilight Sparkle"],	  
 	  "convrate":[1,2501,10001,30001,100000],
 	  "convgems":[0,5,10,20,30]
 	}
