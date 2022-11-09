@@ -2229,7 +2229,7 @@
 		"MinionCurrencyReward" : 9,
 		"MinionsBeforeBoss" : 40
 		},
-		{"ID" : "Ti-Mech",
+		{"ID" : "Robo Lord Tirek",
 		"BossHP" : 9880,
 		"BossHits" : 20,
 		"TimeMinutes" : 15,
@@ -2238,7 +2238,7 @@
 		"MinionCurrencyReward" : 24,
 		"MinionsBeforeBoss" : 35
 		},
-		{"ID" : "Queen Circuitryx",
+		{"ID" : "Cyber Queen Chrysalis",
 		"BossHP" : 21300,
 		"BossHits" : 25,
 		"TimeMinutes" : 20,
@@ -2247,7 +2247,7 @@
 		"MinionCurrencyReward" : 47,
 		"MinionsBeforeBoss" : 30
 		},
-		{"ID" : "Gizmo-Gar",
+		{"ID" : "Robo Grogar",
 		"BossHP" : 32100,
 		"BossHits" : 25,
 		"TimeMinutes" : 25,
