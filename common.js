@@ -133,7 +133,13 @@ function trunctime(time,value){
 	document.getElementById("helpers").append(table);
 	
 	for (i=0;i<maindata['helpnames'].length;i++){
-	  document.getElementById('help' + i).onchange = setHelpers;
+	  //https://developer.mozilla.org/en-US/docs/Glossary/IIFE
+	  //to prevent setting setHelpers always with LAST item
+	  //https://stackoverflow.com/questions/30476721/passing-parameter-onclick-in-a-loop
+	  document.getElementById('help' + i).onchange = (function(i){
+		  return function(){
+			  setHelpers(i);
+		  }
+	  })(i);		  
 	}
-	
   }

@@ -20,9 +20,9 @@
   var eventList;
   var timeUpgrades = [];
   var totaltime;
-  var helpnames, helpstage;
+  var helpnames, helpstage, helpSwappable;
   var portraits = "helpers_portraits";
-  const defaultEvent = "Viva La Pinkie Pie"
+  const defaultEvent = "Rin Rage"
   
   function loadpage(){
     curstage = document.getElementById("curstage");
@@ -52,11 +52,13 @@
 	  stages[i]['minionhp'] = maindata["bosses"][i]["MinionHP"];
 	  stages[i]['minioncoins'] = maindata["bosses"][i]["MinionCurrencyReward"];
 	  stages[i]['maxcoins'] = maindata["bosses"][i]["CurrencyCappings"][0];
+	  stages[i]['helpersdmg'] = 0
 	}
 	vals = maindata["upgrades"];
 	vals2 = vals
 	helpnames=maindata['helpnames'];
 	helpstage=maindata['helpstage'];
+	helpSwappable=maindata['helpSwappable'];
 	if ("upgrades2" in maindata){
 		vals2 = maindata["upgrades2"];
 	}
@@ -88,13 +90,13 @@
 	  document.getElementById("bosstip1").style.display = "inline";
 	  document.getElementById("bosstip2").style.display = "inline";
 	} else {
-	  document.getElementById("skiprec").checked = false;
+	  document.getElementById("chanceExtraHit").checked = false;
 	  document.getElementById("bosstip1").style.display = "none";
 	  document.getElementById("bosstip2").style.display = "none";
 	}
 	updatedmg("curarmor")
 	updatedmg("curhelmet")
-	skiprecendis();
+	//chanceExtraHit();
 	let iframeSize = document.getElementById("wrapper").scrollHeight + 5;
 	parent.postMessage(iframeSize, "*");
   }
@@ -117,7 +119,7 @@
 	return stagesarr;
   }
     
-  function setHelpers(){
+  /*function setHelpers(){
 	let i,j;
 	let helpers = []
 	
@@ -129,45 +131,17 @@
 	  }
 	}
 	
-	//exception for dark changelings M6
-	if (maindata['helpnames'].indexOf('Dark Changeling Applejack') != -1){
-	  let groupedhelpers=[[4,5],[7,8],[10,11],[13,14],[16,17],[19,20]]
-	  for (i=0;i<groupedhelpers.length;i++){
-		let helper_1 = document.getElementById('help'+groupedhelpers[i][0]).checked
-		let helper_2 = document.getElementById('help'+groupedhelpers[i][1]).checked
+	//exception for helpers that are same character in different forms
+	if (helpSwappable.length > 0) {
+	  for (i=0;i<helpSwappable.length;i++){
+		let helper_1 = document.getElementById('help'+helpSwappable[i][0]).checked
+		let helper_2 = document.getElementById('help'+helpSwappable[i][1]).checked
 	    if (helper_1 & helper_2){
-		  helpers[groupedhelpers[i][0]] = 0
-		  document.getElementById('help'+groupedhelpers[i][0]).checked = false
+		  helpers[helpSwappable[i][0]] = 0
+		  document.getElementById('help'+helpSwappable[i][0]).checked = false
 		}
 	  }
 	}
-	
-	//exception for supercharged M6
-	if (maindata['helpnames'].indexOf('Supercharged Applejack') != -1){
-	  let groupedhelpers=[[4,5],[7,8],[10,11],[13,14],[16,17],[19,20]]
-	  for (i=0;i<groupedhelpers.length;i++){
-		let helper_1 = document.getElementById('help'+groupedhelpers[i][0]).checked
-		let helper_2 = document.getElementById('help'+groupedhelpers[i][1]).checked
-	    if (helper_1 & helper_2){
-		  helpers[groupedhelpers[i][0]] = 0
-		  document.getElementById('help'+groupedhelpers[i][0]).checked = false
-		}
-	  }
-	}
-	
-	//exception for Grogar-tized Discord
-	if (maindata['helpnames'].indexOf('Grogar-tized Discord') != -1){
-	  let groupedhelpers=[[13,14]]
-	  for (i=0;i<groupedhelpers.length;i++){
-		let helper_1 = document.getElementById('help'+groupedhelpers[i][0]).checked
-		let helper_2 = document.getElementById('help'+groupedhelpers[i][1]).checked
-	    if (helper_1 & helper_2){
-		  helpers[groupedhelpers[i][0]] = 0
-		  document.getElementById('help'+groupedhelpers[i][0]).checked = false
-		}
-	  }
-	}
-	
 	
 	for (i=0;i<stages.length;i++){
 	  stages[i]['helpnum'] = 0;
@@ -178,16 +152,49 @@
 	  }
 	  stages[i]['maxcoins'] = maindata['bosses'][i]['CurrencyCappings'][stages[i]['helpnum']];
 	}
-  }
+  }*/
   
+  function setHelpers(helpId){
+	let stageList = [];
+	maindata["helpstage"].forEach(function(stageHelpers,index,array){
+	  if (stageHelpers.includes(helpId)){
+	    stageList.push([index,array[index].indexOf(helpId)]);
+	  }
+	})
+	
+	change = document.getElementById("help"+helpId).checked ? 1 : -1;
+
+    stageList.forEach(function(stage,index){
+	  let curStage = stage[0];
+	  let helperPos = stage[1];
+	  stages[curStage]['helpersdmg'] += maindata['helpdmg'][curStage][helperPos] * change;
+	  let maxCoinsArr = maindata['bosses'][curStage]['CurrencyCappings'];
+	  let curCoinPos = maxCoinsArr.indexOf(stages[curStage]['maxcoins']);
+	  stages[curStage]['maxcoins'] = maxCoinsArr[curCoinPos+change];
+	})
+	
+	//swap for helpers that are same character in different forms
+	if (change == 1){
+	  maindata["helpSwappable"].forEach(function(sameHelpers,index){
+		if (sameHelpers.includes(helpId)) {
+	      let swapId = sameHelpers.filter(id  => id != helpId)[0];
+		  let swapHelper = document.getElementById('help'+swapId);
+		  if (swapHelper.checked){
+		    swapHelper.checked = false;
+			setHelpers(swapId)
+		  }
+	    }
+	  })
+	}
+  }
   
   function calcstage(num){
     var nextupgrade;
 	var stagetime = 0;
 	var totalpower = curarmor[0]+curhelmet[0]+stages[num]['helpersdmg'];
-	if (document.getElementById("skiprec").checked){
-	  skip = Number(document.getElementById("skiprechits").value)
-	  bosshits = stages[num]['bosshits']+skip;
+	if (document.getElementById("chanceExtraHit").checked){
+	  //skip = Number(document.getElementById("skiprechits").value)
+	  bosshits = stages[num]['bosshits']+1;
 	}
 	else {
 	  bosshits = stages[num]['bosshits'];
@@ -261,13 +268,13 @@
     return gemtimes;
   }
   
-  function skiprecendis(){
+  /*function chanceExtraHit(){
     if (document.getElementById("skiprec").checked){
 	  document.getElementById("skiprechits").disabled = false;
 	} else {
 	  document.getElementById("skiprechits").disabled = true;
 	}
-  }
+  }*/
   
   function imgLoaded(imgElement) {
     return imgElement.complete && imgElement.naturalHeight !== 0;
@@ -279,7 +286,7 @@
 	results.innerHTML = "";
 	timeUpgrades = [];
 	curstage = Number(document.getElementById("curstage").value);
-	setHelpers();
+	//setHelpers();
 	tmp1 = Number(document.getElementById("curarmor").value);
 	tmp2 = Number(document.getElementById("curhelmet").value);
 	coins = Number(document.getElementById("curcoins").value);
@@ -390,20 +397,20 @@ Current gear power: <br>
  Current stage: <select id="curstage">
   </select>
   <br>
+  <br>
   
-     
+  <input id="chanceExtraHit" type="checkbox"> <span id="">Calc with chance of extra hit <span id="" style="color:red; font-size:18pt display:inline"><b>*   </b></span> </span>
+  <p><input style="width:450px" type="button" value="Calculate" onclick="calctime()"></p>     
   <div id="results"></div>
 
   <p id="bosstip1" style="display:none">
   <br>
-  <input id="skiprec" type="checkbox" onchange="skiprecendis()"> <span id="">Calc with chance of extra hit <span id="" style="color:red; font-size:18pt display:inline"><b>*   </b></span> </span>
-  <select id="skiprechits" disabled="true">
-    <option value="1">1 hit</option>
-	<option value="2">2 hits (rare)</option>
-  </select>
-  </p>
   
-  <p><input style="width:450px" type="button" value="Calculate" onclick="calctime()"></p>
+  <!---<select id="skiprechits" disabled="true">
+    <option value="1">1 hit</option>
+	<option value="2">2 hits (very rare)</option>
+  </select>-->
+  </p>
   
   <p id="bosstip2" style="display:none"><span style="color:red; font-size:18pt">*</span> It's possible to defeat the bosses with power less than<br>
   recommended, if there will be more target icons than usual during<br>
