@@ -9,16 +9,11 @@
 
   gtag('config', 'G-XZC0JCSGZS');
 </script>
+<script src="defaultEvent.js"></script>
 
 <script>
-  //
-  //
-  //Default event type (0=siege, 1=blitz)
-  var curEventType = 0;
+  var curEventType = eventsSelector["eventType"];
   var iframe;
-  //
-  //
-  //
   
   window.addEventListener("message", function(e){
     if (e.origin != "https://mlpcalc.github.io")
