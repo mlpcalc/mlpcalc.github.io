@@ -1,6 +1,6 @@
 const eventsSelector = {
 	"siege" : "Rin Rage",
-	"blitz" : "Pony of the Dance",
+	"blitz" : "Tale of Tirek",
 	//Default event type (0=siege, 1=blitz)
 	"eventType" : 1
 }
