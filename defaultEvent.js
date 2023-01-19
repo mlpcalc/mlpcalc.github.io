@@ -1,8 +1,8 @@
 const eventsSelector = {
-	"siege" : "Rin Rage",
+	"siege" : "A Mistmane New Year",
 	"blitz" : "Tale of Tirek Part 2",
 	//Default event type (0=siege, 1=blitz)
-	"eventType" : 1
+	"eventType" : 0
 }
 /*
 siege events:
@@ -32,6 +32,7 @@ Danger In Dimondia
 Applejack Dreams of Robot Ponies
 Generations
 Rin Rage
+A Mistmane New Year
 
 ===================
 blitz events:
@@ -62,4 +63,6 @@ Bump, Set, Spike!
 I Am Ponyacci
 Zipline Blues
 Pony of the Dance
+A Mermare's Tale
+Generations - Dance Party!
 */
