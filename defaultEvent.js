@@ -1,8 +1,8 @@
 const eventsSelector = {
 	"siege" : "A Mistmane New Year",
-	"blitz" : "Tale of Tirek Part 2",
+	"blitz" : "A New-Fashioned Wedding",
 	//Default event type (0=siege, 1=blitz)
-	"eventType" : 0
+	"eventType" : 1
 }
 /*
 siege events:
