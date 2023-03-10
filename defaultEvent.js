@@ -1,6 +1,6 @@
 const eventsSelector = {
 	"siege" : "High Plains Ponies",
-	"blitz" : "Generations - Dance Party!",
+	"blitz" : "The Pony Whisperer",
 	//Default event type (0=siege, 1=blitz)
 	"eventType" : 1
 }
