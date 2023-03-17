@@ -1,8 +1,8 @@
 const eventsSelector = {
-	"siege" : "High Plains Ponies",
+	"siege" : "Dash to the Future",
 	"blitz" : "The Pony Whisperer",
 	//Default event type (0=siege, 1=blitz)
-	"eventType" : 1
+	"eventType" : 0
 }
 /*
 siege events:
