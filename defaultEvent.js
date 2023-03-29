@@ -1,5 +1,5 @@
 const eventsSelector = {
-	"siege" : "Dash to the Future",
+	"siege" : "Nightmare Rarity, Retold",
 	"blitz" : "The Pony Whisperer",
 	//Default event type (0=siege, 1=blitz)
 	"eventType" : 0
@@ -33,6 +33,7 @@ Applejack Dreams of Robot Ponies
 Generations
 Rin Rage
 A Mistmane New Year
+Nightmare Rarity, Retold
 
 ===================
 blitz events:
