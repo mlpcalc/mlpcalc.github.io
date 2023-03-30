@@ -33,7 +33,7 @@ Applejack Dreams of Robot Ponies
 Generations
 Rin Rage
 A Mistmane New Year
-Nightmare Rarity, Retold
+Nightmare Rarity, Retold 
 
 ===================
 blitz events:
