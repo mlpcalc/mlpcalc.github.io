@@ -1,5 +1,5 @@
 const eventsSelector = {
-	"siege" : "Kid's Play",
+	"siege" : "Adventures in Rockology",
 	"blitz" : "The Pony Whisperer",
 	//Default event type (0=siege, 1=blitz)
 	"eventType" : 0
@@ -34,6 +34,7 @@ Generations
 Rin Rage
 A Mistmane New Year
 Nightmare Rarity, Retold
+Adventures in Rockology
 
 ===================
 blitz events:
