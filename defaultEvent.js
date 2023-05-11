@@ -1,8 +1,8 @@
 const eventsSelector = {
 	"siege" : "Adventures in Rockology",
-	"blitz" : "The Pony Whisperer",
+	"blitz" : "The Perfect Pear",
 	//Default event type (0=siege, 1=blitz)
-	"eventType" : 0
+	"eventType" : 1
 }
 /*
 siege events:
