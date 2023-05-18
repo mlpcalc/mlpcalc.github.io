@@ -1,8 +1,8 @@
 const eventsSelector = {
-	"siege" : "Adventures in Rockology",
-	"blitz" : "The Perfect Pear",
+	"siege" : "Generation Gap - Picnic Day!",
+	"blitz" : "Tale of Tirek Part Three",
 	//Default event type (0=siege, 1=blitz)
-	"eventType" : 1
+	"eventType" : 0
 }
 /*
 siege events:
@@ -35,6 +35,7 @@ Rin Rage
 A Mistmane New Year
 Nightmare Rarity, Retold
 Adventures in Rockology
+Generation Gap - Picnic Day!
 
 ===================
 blitz events:
@@ -67,4 +68,5 @@ Zipline Blues
 Pony of the Dance
 A Mermare's Tale
 Generations - Dance Party!
+Tale of Tirek Part Three
 */
