@@ -2948,7 +2948,7 @@
 	  "helpdmg" : [[5, 5, 5], [20, 20, 20], [20, 20, 25], [25, 30, 35], [30, 30, 35], [45, 50, 55], [45, 50, 55], [45, 50, 55]],
 	  "helpstage":[[0,1,2],[3,4,5],[6,7,8],[9,10,11],[12,13,14],[15,16,17],[18,19,20],[18,19,20]],
 	  "helpnames":["Bon Bon","Applejack","Cherry Berry",
-	  "Cherry Jubilee","Gusty","Cotton Candy",
+	  "Cherry Jubilee","Gusty","Cotton Candy Colt",
 	  "Cherries Jubilee","Skyflier","Tootsie",
 	  "Confetti","Skydancer","Peachy",
 	  "Sunlight","Moonstone","Butterscotch",
