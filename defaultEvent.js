@@ -2,7 +2,7 @@ const eventsSelector = {
 	"siege" : "Generation Gap - Picnic Day!",
 	"blitz" : "Zipline Blues",
 	//Default event type (0=siege, 1=blitz)
-	"eventType" : 0
+	"eventType" : 1
 }
 /*
 siege events:
