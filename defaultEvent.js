@@ -1,6 +1,6 @@
 const eventsSelector = {
 	"siege" : "Generation Gap - Picnic Day!",
-	"blitz" : "Zipline Blues",
+	"blitz" : "Tale of Tirek Part Three",
 	//Default event type (0=siege, 1=blitz)
 	"eventType" : 1
 }
