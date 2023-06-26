@@ -1,8 +1,8 @@
 const eventsSelector = {
-	"siege" : "Generation Gap - Picnic Day!",
+	"siege" : "The Hooffields and McColts",
 	"blitz" : "Tale of Tirek Part Three",
 	//Default event type (0=siege, 1=blitz)
-	"eventType" : 1
+	"eventType" : 0
 }
 /*
 siege events:
@@ -36,6 +36,7 @@ A Mistmane New Year
 Nightmare Rarity, Retold
 Adventures in Rockology
 Generation Gap - Picnic Day!
+The Hooffields and McColts
 
 ===================
 blitz events:
