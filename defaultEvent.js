@@ -1,5 +1,5 @@
 const eventsSelector = {
-	"siege" : "The Hooffields and McColts",
+	"siege" : "Crowns and Chaos",
 	"blitz" : "Tale of Tirek Part Three",
 	//Default event type (0=siege, 1=blitz)
 	"eventType" : 0
