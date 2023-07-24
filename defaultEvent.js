@@ -1,8 +1,8 @@
 const eventsSelector = {
 	"siege" : "Crowns and Chaos",
-	"blitz" : "Tale of Tirek Part Three",
+	"blitz" : "Bump, Set, Spike!",
 	//Default event type (0=siege, 1=blitz)
-	"eventType" : 0
+	"eventType" : 1
 }
 /*
 siege events:
