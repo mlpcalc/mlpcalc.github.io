@@ -52,5 +52,5 @@
 <iframe id="eventframe" src="" height="1000px" width="600px" style="border-style:none"></iframe>
 
   
-<p id="footer">Send any questions and suggestions <a href="https://www.reddit.com/user/Nice_Coconut">here</a></p>
+<p id="footer">Send me <a href="https://www.reddit.com/user/Nice_Coconut">PM on Reddit</a> for any questions and suggestions</p>
 </div>
