@@ -1,8 +1,8 @@
 const eventsSelector = {
-	"siege" : "Crowns and Chaos",
-	"blitz" : "Bump, Set, Spike!",
+	"siege" : "Crystal Ghost Chaos!",
+	"blitz" : "Abyssinian Adventure!",
 	//Default event type (0=siege, 1=blitz)
-	"eventType" : 1
+	"eventType" : 0
 }
 /*
 siege events:
@@ -37,6 +37,7 @@ Nightmare Rarity, Retold
 Adventures in Rockology
 Generation Gap - Picnic Day!
 The Hooffields and McColts
+Crystal Ghost Chaos!
 
 ===================
 blitz events:
@@ -70,4 +71,5 @@ Pony of the Dance
 A Mermare's Tale
 Generations - Dance Party!
 Tale of Tirek Part Three
+Abyssinian Adventure!
 */
