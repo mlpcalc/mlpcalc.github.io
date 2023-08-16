@@ -2,7 +2,7 @@ const eventsSelector = {
 	"siege" : "Crystal Ghost Chaos!",
 	"blitz" : "Abyssinian Adventure!",
 	//Default event type (0=siege, 1=blitz)
-	"eventType" : 0
+	"eventType" : 1
 }
 /*
 siege events:
