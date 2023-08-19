@@ -375,7 +375,7 @@
   
 	function checkforgems(index,stagedmg,stageProcessing,storedenergy,totaltime,sapphiresleft){
 		for (let stageID = stageProcessing; stageID < bossstages.length; stageID++){
-			stageHelpers = getStageHelpers(stageProcessing);
+			stageHelpers = getStageHelpers(stageID);
 			while (stagedmg < bossstages[stageID]){
 				if (storedenergy>0){
 					storedenergy -= 1;
