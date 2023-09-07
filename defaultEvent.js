@@ -1,5 +1,5 @@
 const eventsSelector = {
-	"siege" : "I Dream of Breezies",
+	"siege" : "Welcome Back Twilight",
 	"blitz" : "Abyssinian Adventure!",
 	//Default event type (0=siege, 1=blitz)
 	"eventType" : 0
