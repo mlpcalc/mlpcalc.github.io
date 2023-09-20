@@ -1,5 +1,5 @@
 const eventsSelector = {
-	"siege" : "Welcome Back Twilight",
+	"siege" : "The Case of the Pilfered Pins!",
 	"blitz" : "Abyssinian Adventure!",
 	//Default event type (0=siege, 1=blitz)
 	"eventType" : 0
@@ -38,6 +38,7 @@ Adventures in Rockology
 Generation Gap - Picnic Day!
 The Hooffields and McColts
 Crystal Ghost Chaos!
+The Case of the Pilfered Pins!
 
 ===================
 blitz events:
