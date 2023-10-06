@@ -1,5 +1,5 @@
 const eventsSelector = {
-	"siege" : "The Case of the Pilfered Pins!",
+	"siege" : "Generations",
 	"blitz" : "Abyssinian Adventure!",
 	//Default event type (0=siege, 1=blitz)
 	"eventType" : 0
