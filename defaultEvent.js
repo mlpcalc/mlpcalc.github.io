@@ -1,6 +1,6 @@
 const eventsSelector = {
-	"siege" : "Generations",
-	"blitz" : "Rin Rage",
+	"siege" : "Rin Rage",
+	"blitz" : "Abyssinian Adventure!",
 	//Default event type (0=siege, 1=blitz)
 	"eventType" : 0
 }
