@@ -1,8 +1,8 @@
 const eventsSelector = {
 	"siege" : "Rin Rage",
-	"blitz" : "Abyssinian Adventure!",
+	"blitz" : "A Mermare's Tale",
 	//Default event type (0=siege, 1=blitz)
-	"eventType" : 0
+	"eventType" : 1
 }
 /*
 siege events:
