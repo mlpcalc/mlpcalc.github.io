@@ -1,8 +1,8 @@
 const eventsSelector = {
-	"siege" : "Rin Rage",
+	"siege" : "Fashion Is Cyclical",
 	"blitz" : "A Mermare's Tale",
 	//Default event type (0=siege, 1=blitz)
-	"eventType" : 1
+	"eventType" : 0
 }
 /*
 siege events:
@@ -39,6 +39,9 @@ Generation Gap - Picnic Day!
 The Hooffields and McColts
 Crystal Ghost Chaos!
 The Case of the Pilfered Pins!
+
+
+Fashion Is Cyclical
 
 ===================
 blitz events:
