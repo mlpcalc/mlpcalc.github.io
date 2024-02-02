@@ -1,5 +1,5 @@
 const eventsSelector = {
-	"siege" : "Fashion Is Cyclical",
+	"siege" : "A Mistmane New Year",
 	"blitz" : "A Mermare's Tale",
 	//Default event type (0=siege, 1=blitz)
 	"eventType" : 0
@@ -39,8 +39,8 @@ Generation Gap - Picnic Day!
 The Hooffields and McColts
 Crystal Ghost Chaos!
 The Case of the Pilfered Pins!
-
-
+Boss Rush -- Nightmare Mode
+Seaquestria Couture
 Fashion Is Cyclical
 
 ===================
