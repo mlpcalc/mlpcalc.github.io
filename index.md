@@ -48,7 +48,8 @@
 <p style="margin-top: 1px;margin-bottom: 1px;">Select event type: <select id="eventtype" onchange="updateEventType()">
 	<option value="0" selected>Siege</option>
     <option value="1">Blitz</option>
-	<option value="2">Power Ponies</option>
+	<option value="2">Blitz2</option>
+	<option value="3">Power Ponies</option>
   </select></p>
 
 <iframe id="eventframe" src="" height="1000px" width="600px" style="border-style:none"></iframe>
