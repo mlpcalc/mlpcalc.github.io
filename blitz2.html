@@ -1,6 +1,6 @@
 <html>
 <head>
-<script src="blitz_data.js"></script> 
+<script src="blitz2_data.js"></script> 
 <script src="common.js"></script>
 <script src="defaultEvent.js"></script>
 <link rel="stylesheet" href="style.css">
@@ -11,7 +11,6 @@
   var basePower, helpersPower;
   var curstage, curdamage;
   var gemtimes = []
-  var gemindexes = []
   var dropAverage, dropRandom;
   var eventList;
   var vals, sapphiresavg, bosshealth;
@@ -21,7 +20,7 @@
   var maindata;
   var portraits = "helpers_portraits";
   var helpnames, helpstage, helpdmg, helpchecked;
-  const defaultEvent = eventsSelector["blitz"]
+  const defaultEvent = eventsSelector["blitz2"]
   const POWER = 0
   const ENERGY = 1
   const TIME = 2
@@ -80,15 +79,12 @@
 	gemtable = document.getElementById("gemtable");
 	gemtable.innerHTML = "";
 	gemtimes = [];
-	gemindexes = [];
 	for (let i=convrate.length-1; i>=0; i--){
 	  tr = document.createElement('tr');
 	  tr.id = "gem"+convrate[i];
 	  tr.innerHTML += '<td><img name="gempic" src="assets/common/gem.png" alt="Gems" /><b>'+convgems[i]+'</br>(≥'+'<img name="sapphirepic" src="assets/common/sapphire.png" alt="Sapphires" width="12" />'+convrate[i]+')</b></td>';
-	  tr.innerHTML += '<td></td><td></td><td></td><td></td><td></td></tr>';
+	  tr.innerHTML += '<td></td><td></td></tr>';
 	  gemtable.appendChild(tr);
-	  gemtimes.push(999999);
-	  gemindexes.push(-1);
 	}
 	
 	//set average value for sapphire drops
@@ -124,8 +120,6 @@
 	
 	document.getElementById("errorMargin").innerText = (margin*100).toFixed(1);
 	processETOptions();
-	document.getElementById("warning0").style.display = "none";
-	document.getElementById("warning1").style.display = "none";
 	let iframeSize = document.getElementById("wrapper").scrollHeight;
 	parent.postMessage(iframeSize, "*");
   }
@@ -188,7 +182,6 @@
     return indexes;
   }
 
-
   function getCurrentUpgradeLevel(powValue, maxEnergyValue, cooldownValue){
 	let pows = getIndexes(powValue, POWER);
 	let nrgs = getIndexes(maxEnergyValue, ENERGY);
@@ -245,6 +238,7 @@
 	return arr3;
   }
   
+  
   function processETOptions(keyOption=POWER) {
 	let charPower = Number(power.value) - helpersPower;
 	let maxenergyValue = Number(maxenergy.value);
@@ -262,7 +256,7 @@
 	  clearDropDownList(cooldown);
 	  ETVals = getETValues(pows, 2);
 	  let converted = setTimes(ETVals);
-	  addToDropDownList(cooldown, converted,);
+	  addToDropDownList(cooldown, converted);
 	}
 	else if (keyOption==ENERGY){
 	  n = getIntersection(pows,enrgs);
@@ -296,6 +290,15 @@
 	return sum;
   }
   
+  function calcSpentSapphires(curUPower, curEenergy, curCooldown){
+	let currentUpgrade = getCurrentUpgradeLevel(curPower, curEenergy, curCooldown);
+	let sappsSpent = 0;
+	for (i = 0; i<=currentUpgrade;i++){
+		sappsSpent += vals[i][3];
+	}
+	return sappsSpent;
+  }
+
   var testrand=[];
   function calctime(){
     let results = document.getElementById("results");
@@ -304,23 +307,45 @@
 	let fullHelpers = 0;
     let stagedmg = 0;
 	let stageProcessing = Number(curstage.value);
-    let totaltime = 0;
-    let sapphiresleft = 0;
-    let storedenergy = 0;
+    let totalTime = 0;
+    let sapphiresLeft = 0;
+	let sapphiresSpent = 0;
+	let sapphiresCollected = 0;
+    let storedEnergy = 0;
   	let charPower = Number(power.value) - stageHelpers;
 	let maxenergyValue = Number(maxenergy.value);
 	let cooldownValue = Number(cooldown.value);
 	let i;
-	let initialUpgrade = getCurrentUpgradeLevel(charPower, maxenergyValue, cooldownValue)
+	let initialUpgrade = getCurrentUpgradeLevel(charPower, maxenergyValue, cooldownValue);
+	let conversionIndex = 0;
+	gemtimes = []
 	
 	pouchtime = maxenergyValue * cooldownValue * 60;
 	
-	span = document.createElement('span');
-	span.innerHTML = '<img name="maxenergypic" src="assets/common/en_max.png" alt="max energy" width="20" /><b> will fill in: '+formattime(pouchtime)+'</b>';
+	pouchInfo = document.createElement('span');
+	pouchInfo.innerHTML = '<img name="maxenergypic" src="assets/common/en_max.png" alt="max energy" width="20" /><b> will fill in: '+formattime(pouchtime)+'</b>';
 	
-	sapphiresleft = Number(document.getElementById("curcurrency").value);
-	storedenergy = Number(document.getElementById("curenergy").value);
+	for (i = 0; i<=initialUpgrade;i++){
+		sapphiresSpent += vals[i][3];
+	}	
+	sapphiresLeft = Number(document.getElementById("curcurrency").value);
+	storedEnergy = Number(document.getElementById("curenergy").value);
 	stagedmg = Number(curdamage.value);
+	sapphiresCollected = sapphiresSpent + sapphiresLeft;
+	
+	sappsCollectedInfo = document.createElement('span');
+	sappsCollectedInfo.innerHTML = '<br><img name="sapphirepic" src="assets/common/sapphire.png" alt="Sapphires collected" width="20" /><b> currently collected: '+sapphiresCollected+'</b>';
+	
+	//get currently completed conversion levels (set to 0 seconds)
+	for (i = 0; i<convrate.length; i++){
+		if (sapphiresCollected >= convrate[i]){
+			gemtimes.push(0);
+			conversionIndex += 1;
+		}
+		else {
+			break
+		}
+	}
 	
 	for (i = 0; i<helpchecked.length;i++){
 		if (helpchecked[i]){
@@ -328,24 +353,30 @@
 		}
 	}
 	
-	for (i = initialUpgrade; i <vals.length; i++){
-		while (sapphiresleft < vals[i+1][3]){
-			stagedmg += vals[i][0] + stageHelpers;
+	for (curUpgrade = initialUpgrade; curUpgrade <vals.length; curUpgrade++){
+		while (sapphiresLeft < vals[curUpgrade+1][3]){
+			stagedmg += vals[curUpgrade][0] + stageHelpers;
 			if (dropAverage.checked){
-			  sapphiresleft += sapphiresavg;
+			  sapphiresLeft += sapphiresavg;
+			  sapphiresCollected += sapphiresavg;
 			} else{
-			  sapphiresleft += randomdrop();
+			  sappsRand = randomdrop();
+			  sapphiresLeft += sappsRand;
+			  sapphiresCollected += sappsRand;
 			}
-			if (storedenergy >0){
-			  storedenergy -= 1;
+			if (storedEnergy >0){
+			  storedEnergy -= 1;
 			} else {
-			  totaltime += vals[i][2]*60;
+			  totalTime += vals[curUpgrade][2]*60;
 			}
 			if (stagedmg >= bossstages[stageProcessing]){
 				stagedmg = stagedmg-bossstages[stageProcessing];
 				stageProcessing++;
 				if (stageProcessing < bossstages.length) stageHelpers = getStageHelpers(stageProcessing);
-				//stagedmg = 0;
+			}
+			if (sapphiresCollected >= convrate[conversionIndex]){
+				gemtimes.push(totalTime);
+				conversionIndex += 1
 			}
 			if (stageProcessing == bossstages.length){
 				break;
@@ -354,118 +385,78 @@
 		if (stageProcessing == bossstages.length){
 			break;
 		}
-		checkforgems(i,stagedmg,stageProcessing,storedenergy,totaltime,sapphiresleft);
-		sapphiresleft -= vals[i+1][3];
-		storedenergy += vals[i+1][1] - vals[i][1];
+		sapphiresLeft -= vals[curUpgrade+1][3];
+		storedEnergy += vals[curUpgrade+1][1] - vals[curUpgrade][1];
 	}
 	
-	let h1 = document.createElement('h1');
-	h1.style.width = "450px";
-	h1.align = "center";
-	let marginoferror = totaltime*margin;
+	let resultTime = document.createElement('h1');
+	resultTime.style.width = "450px";
+	resultTime.align = "center";
+	let marginoferror = totalTime*margin;
 //	if (marginoferror < vals[i][2]*60*0.75){marginoferror = 0} //zeroing margin if it is less than 75% of latest cooldown time
-	let print1 = formattime(totaltime);
+	let print1 = formattime(totalTime);
 	print2 = formattime(marginoferror);
 	if (dropAverage.checked){
-	  h1.innerText = print1 + '    (±'+print2+')';
-	  document.getElementById("warning0").style.display = "inline";
-	  document.getElementById("warning1").style.display = "inline";
+	  resultTime.innerText = print1 + '    (±'+print2+')';
 	} else {
-	  h1.innerText = print1;
-	  document.getElementById("warning0").style.display = "none";
-	  document.getElementById("warning1").style.display = "none";
+	  resultTime.innerText = print1;
 	}
-	testrand.push(totaltime);
-	results.appendChild(h1);
-	results.appendChild(span);
+	testrand.push(totalTime);
+	results.appendChild(resultTime);
+	results.appendChild(pouchInfo);
+	results.appendChild(sappsCollectedInfo);
+	continueForGems(conversionIndex,curUpgrade,sapphiresCollected,sapphiresLeft,storedEnergy,totalTime);
 	setgems();
 	let iframeSize = document.getElementById("wrapper").scrollHeight;
 	parent.postMessage(iframeSize, "*");
   }
   
-	function checkforgems(index,stagedmg,stageProcessing,storedenergy,totaltime,sapphiresleft){
-		for (let stageID = stageProcessing; stageID < bossstages.length; stageID++){
-			stageHelpers = getStageHelpers(stageID);
-			while (stagedmg < bossstages[stageID]){
-				if (storedenergy>0){
-					storedenergy -= 1;
-					stagedmg += vals[index][0]+stageHelpers;
-					if (dropAverage.checked){
-						sapphiresleft += sapphiresavg;
-					} else {
-						sapphiresleft += randomdrop();
-					}
-				} else {
-					let mult = Math.ceil((bossstages[stageID] - stagedmg)/(vals[index][0]+stageHelpers));
-					stagedmg += mult*(vals[index][0]+stageHelpers);
-					totaltime += mult*vals[index][2]*60;
-					if (dropAverage.checked){
-						sapphiresleft += mult*sapphiresavg;
-					} else {
-						sapphiresleft += randomdrop(mult);
-					}
-				}
+  function continueForGems(conversionIndex,curUpgrade,sapphiresCollected,sapphiresLeft,storedEnergy,totalTime){
+	for (i = curUpgrade; i < vals.length; i++){
+		while (sapphiresLeft < vals[i+1][3] && conversionIndex < convrate.length){
+			if (dropAverage.checked){
+			  sapphiresLeft += sapphiresavg;
+			  sapphiresCollected += sapphiresavg;
+			} else{
+			  sappsRand = randomdrop();
+			  sapphiresLeft += sappsRand;
+			  sapphiresCollected += sappsRand;
 			}
-			stagedmg = 0;
-		}
-		for (let i = 0; i <convrate.length; i++){
-			if (sapphiresleft > convrate[i]){
-				if (totaltime <= gemtimes[i]){
-					gemtimes[i] = totaltime;
-					gemindexes[i] = index;
-				}
+			if (storedEnergy >0){
+			  storedEnergy -= 1;
+			} else {
+			  totalTime += vals[i][2]*60;
+			}
+			if (sapphiresCollected >= convrate[conversionIndex]){
+				gemtimes.push(totalTime);
+				conversionIndex += 1
 			}
 		}
-	}
-  
-  function setgems(){
-    for (i = 0; i <gemindexes.length; i++){
-	  if (gemindexes[i] > -1){
-	    fillgemtarget(gemindexes[i], gemtimes[i], "gem"+convrate[i]);
-		gemindexes[i] = -1;
-		gemtimes[i] = 999999;
-	  } else {
-	    fillgemnull("gem"+convrate[i]);
-	  }
+		if (sapphiresCollected >= convrate[convrate.length-1]){
+			break
+		}
+		sapphiresLeft -= vals[i+1][3];
+		storedEnergy += vals[i+1][1] - vals[i][1];
 	}
   }
   
-  function fillgemtarget(index, time, gemid){
-    let row = document.getElementById(gemid);
-	let CurEnVal = Number(maxenergy.value);
+  function setgems(){
+    for (i=0; i < gemtimes.length; i++){
+	    fillgemtarget(gemtimes[i], "gem"+convrate[i]);
+	}
+  }
+  
+  function fillgemtarget(time, rowId){
+    let row = document.getElementById(rowId);
 	row.children[1].innerText = formattime(time);
 	let tmp1 = formattime(time*margin);
-	//if (tmp1 < vals[i][2]*60*0.75){
-	//  tmp1 = 0
-	//}
 	if (dropAverage.checked){
 	  row.children[2].innerText = '±'+tmp1;  
 	} else {
 	  row.children[2].innerText = '';
 	}
-
-	//removing unnecesary upgrade (energy) from the final recommendation
-	//(if user don't already have it)
-	if ((vals[index][0]==vals[index-1][0])&&(vals[index][2]==vals[index-1][2])){
-		if (CurEnVal < vals[index][1]){
-		  index -= 1;
-		}
-	}
-
-	tmp2 = vals[index][0] + stageHelpers;
-	row.children[3].innerText = tmp2;
-	row.children[4].innerText = vals[index][1];
-	//row.children[5].innerText = times[vals[index][2]];
-	row.children[5].innerText = formattime(vals[index][2]*60);
   }
-  function fillgemnull(gemid){
-    let row = document.getElementById(gemid);
-	row.children[1].innerText = "Impossible";
-	row.children[2].innerText = '';
-	row.children[3].innerText = '';
-	row.children[4].innerText = '';
-	row.children[5].innerText = '';
-  }
+
   
 </script>
 </head>
@@ -509,23 +500,13 @@
       
   <p><input style="width:450px" type="button" value="Calculate" onclick="calctime()"></p>
   
-  <table><thead align="center"><tr>
-  <th colspan="3"></th>
-  <td colspan="3" style="width:150px" align="center">Stop upgrading at: <span id="warning0" style="color:red; font-size:18pt display:none"><b>*</b></span></td></tr>
-  <tr>
-  <th style="vertical-align:bottom width:20px">Extra<br>gems</th>
-  <th style="vertical-align:bottom width:60px">Time<br>to reach</th>
-  <th style="vertical-align:bottom width:60px">Margin<br>of error</th>
-  <th><img name="powerpic" src="assets/common/power.png" alt="Power" /></th>
-  <th><img name="maxenergypic" src="assets/common/en_max.png" alt="Max energy" /></th>
-  <th><img name="cooldownpic" src="assets/common/time.png" alt="Cooldown time" /></th>
+  <table><thead align="center">
+  <th style="vertical-align:bottom width:30px">Extra gems</th>
+  <th style="vertical-align:bottom width:100px">Time to reach</th>
+  <th style="vertical-align:bottom width:100px">Margin of error</th>
   </tr></thead>
   <tbody id="gemtable" align="center"></tbody>
   </table>
-  <p id="warning1" style="display:none"><span style="color:red; font-size:18pt">*</span> Due to random nature of sapphire drops, their amount might be<br>
-  slightly less than needed in the end. Consider to stop upgrading one<br>
-  step earlier than suggested, if you have spare time.<br>
-  Just to be safe.</p>  
   <br>
   <br>
   <i><p>This calculator <b>does not</b> account for rainbow piles scattered across<br>

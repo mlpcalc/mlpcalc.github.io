@@ -84,8 +84,8 @@
 	document.getElementById("curhelmet").max = vals.length-1;
 	document.getElementById("curarmor").max = vals2.length-1;
 	curstage = document.getElementById("curstage");
-	removeOptions(curstage);
-	addOptions(generateStages(), curstage);
+	clearDropDownList(curstage);
+	addToDropDownList(curstage, generateStages());
 	curstage.selectedIndex = 1;
 	if (stages[0]['bosshits']>0){
 	  document.getElementById("bosstip1").style.display = "inline";

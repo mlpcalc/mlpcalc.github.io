@@ -33,6 +33,8 @@
 	  iframe.src = "siege.html";
 	} else if (curEventType == 1){
 	  iframe.src = "blitz.html";
+	} else if (curEventType == 2){
+	  iframe.src = "blitz2.html";
 	} else {
 	  iframe.src = "powerponies.html"
 	}

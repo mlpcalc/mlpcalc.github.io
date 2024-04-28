@@ -1,8 +1,9 @@
 const eventsSelector = {
 	"siege" : "A Mistmane New Year",
 	"blitz" : "A Mermare's Tale",
-	//Default event type (0=siege, 1=blitz)
-	"eventType" : 0
+	"blitz2" : "The Bashful Barber",
+	//Default event type (0=siege, 1=blitz, 2= new blitz)
+	"eventType" : 2
 }
 /*
 siege events:
@@ -76,4 +77,13 @@ A Mermare's Tale
 Generations - Dance Party!
 Tale of Tirek Part Three
 Abyssinian Adventure!
+
+
+
+
+new blitz:
+
+The Bashful Barber
+
+
 */

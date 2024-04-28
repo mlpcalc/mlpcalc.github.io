@@ -22,9 +22,6 @@ function trunctime(time,value){
 	return [time, num];
 }
 
-
-
-  
   function swapImages(){
 	let tmp = '';
 	let helpers = document.getElementsByClassName("helperimage");
@@ -41,7 +38,7 @@ function trunctime(time,value){
 	portraits = tmp;
   }
 
-  function addOptions(arr, selBox) {
+  function addToDropDownList(selBox, arr) {
     let newOption;
     for (let i = 0; i <arr.length; i++){
 	  newOption = new Option(arr[i][0],arr[i][1]);
@@ -49,21 +46,31 @@ function trunctime(time,value){
 	}
   }
   
-  function removeOptions(selBox) {
+  function clearDropDownList(selBox) {
     while (selBox.options.length > 0) {
       selBox.remove(0);
     }
   }
 
   function generateEventList(){
-    removeOptions(eventList);
+    clearDropDownList(eventList);
 	let htmlEventList=[], tmp;
     for (i in gamedata){
 	  tmp = [i,i];
 	  htmlEventList.push(tmp);
 	}
-	addOptions(htmlEventList, eventList);
+	addToDropDownList(eventList, htmlEventList);
   }
+  
+  function checkUncheck(checkboxId){
+	chbox = document.getElementById(checkboxId);
+    chbox.checked = !chbox.checked
+  }
+
+function enlargeImage(imgElement){
+    window.alert("Hi, I'm going to enlarge this image: "+imgElement.src);
+    // create modal with <img src="imgElement.src">
+}	
   
   function generateHelpers(){
     let p = document.getElementById("helpers");
@@ -140,6 +147,15 @@ function trunctime(time,value){
 		  return function(){
 			  setHelpers(i);
 		  }
-	  })(i);		  
+	  })(i);
+	  
+	  //assigning onclick to every image (not just to checkboxes)
+	  //same as above
+	  document.getElementById('helperimg' + i).onclick = (function(i){
+		  return function(){
+			checkUncheck('help' + i);
+			setHelpers(i)
+		  }
+	  })(i);
 	}
   }
