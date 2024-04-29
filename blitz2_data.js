@@ -36,7 +36,7 @@ const gamedata ={
 	  "bosshealth" : 80800,
 	  "bossstages" : [800,5000,8000,15000,22000,30000],
 	  "helpdmg" : [50,75,50,75],
-	  "helpstage":[[0,1],[0,1],[0,1],[0,1,2,3],[0,1,2,3],[0,1,2,3]],
+	  "helpstage":[[0,1,2,3],[0,1,2,3],[0,1,2,3],[0,1,2,3],[0,1,2,3],[0,1,2,3]],
 	  "helpnames":["Up-and-Coming Stylist","Quiff-Style Pony","Haute ManeCon Judge","Canterlot Lob-Style Pony"],
 	  "droprates" : [0.15, 0.70, 0.85, 0.95, 1],
 	  "dropvalues" : [[25,25], [50,50], [75,75], [100,100], [150,150]],
