@@ -67,11 +67,6 @@ function trunctime(time,value){
     chbox.checked = !chbox.checked
   }
 
-function enlargeImage(imgElement){
-    window.alert("Hi, I'm going to enlarge this image: "+imgElement.src);
-    // create modal with <img src="imgElement.src">
-}	
-  
   function generateHelpers(){
     let p = document.getElementById("helpers");
 	p.innerHTML = '<b>Helpers:</b> <input style="width:100px" type="button" value="switch view" onclick="swapImages()"><br>'
@@ -117,8 +112,16 @@ function enlargeImage(imgElement){
 	  img.className = "helperimage";
 	  img.alt = helpnames[i];
 	  img.title = helpnames[i];
+	  //exception for blitz with 4 helpers available on all stages
+	  //so their portraits wouldn't be too small
+	  if (helpstage[0].length == 4){
+		  helpLen = 2;
+	  } else {
+		  helpLen = helpstage[0].length;
+	  }
 	  //set portrait size according to number of helpers in each stage
-	  img.height = Math.trunc(180 / helpstage[0].length);
+	  //(with exception of blitz with 4 helpers available on all stages)
+	  img.height = Math.trunc(180 / helpLen);
 	  img.onerror = function() {
 	    let imgerr = document.getElementById(this.id); 
 	  	imgerr.outerHTML = imgerr.alt;
@@ -129,7 +132,7 @@ function enlargeImage(imgElement){
 	  }
 	  td.append(span);
 	  tr.append(td);
-	  if (j == helpstage[0].length){
+	  if (j == helpLen){
 		table.append(tr);
 		j=0;
 	  }
