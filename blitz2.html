@@ -293,7 +293,7 @@
   function calcSpentSapphires(curUPower, curEenergy, curCooldown){
 	let currentUpgrade = getCurrentUpgradeLevel(curPower, curEenergy, curCooldown);
 	let sappsSpent = 0;
-	for (i = 0; i<=currentUpgrade;i++){
+	for (i = 0; i <= currentUpgrade;i++){
 		sappsSpent += vals[i][3];
 	}
 	return sappsSpent;
@@ -307,7 +307,8 @@
 	let fullHelpers = 0;
     let stagedmg = 0;
 	let stageProcessing = Number(curstage.value);
-    let totalTime = 0;
+    let totalTime = 0; //overall time spent on all event actuvity (inc. extra gems farming)
+	let finalTime = 0; //time for completing main part of event
     let sapphiresLeft = 0;
 	let sapphiresSpent = 0;
 	let sapphiresCollected = 0;
@@ -319,6 +320,12 @@
 	let initialUpgrade = getCurrentUpgradeLevel(charPower, maxenergyValue, cooldownValue);
 	let conversionIndex = 0;
 	gemtimes = []
+	//values for extra gems, gained for defeating bosses after event
+	let extraBossesHP = [5000, 35000, 81000, 95000, 161000, 243000, 266000, 368000, 486000, 518000, 656000, 810000];
+	let extraBossesGems = [5, 10, 15, 5, 10, 15, 5, 10, 15, 5, 10, 15];
+	let extraGemsIndex = 0;
+	let extraGemsTimes = [];
+	let eventEnded=false;
 	
 	pouchtime = maxenergyValue * cooldownValue * 60;
 	
@@ -353,7 +360,11 @@
 		}
 	}
 	
-	for (curUpgrade = initialUpgrade; curUpgrade <vals.length; curUpgrade++){
+	//give one extra day to event (in case someone will extend it)
+	eventDays = bossstages.length + 1;
+	maxTime = eventDays*24*3600;
+	curUpgrade = initialUpgrade;
+	while (totalTime < maxTime) {
 		while (sapphiresLeft < vals[curUpgrade+1][3]){
 			stagedmg += vals[curUpgrade][0] + stageHelpers;
 			if (dropAverage.checked){
@@ -369,6 +380,26 @@
 			} else {
 			  totalTime += vals[curUpgrade][2]*60;
 			}
+			if (!eventEnded){
+				if (stagedmg >= bossstages[stageProcessing]){
+					stagedmg = stagedmg-bossstages[stageProcessing];
+					//if it's the last stage
+					if (stageProcessing >= bossstages.length-1){
+						eventEnded = true;
+						finalTime = totalTime;
+					} else {
+						stageProcessing += 1;
+						stageHelpers = getStageHelpers(stageProcessing);
+					}
+				}
+			}
+			//now stagedmg will act as total damage inflicted after the end of main part of event
+			else {
+				if (stagedmg >= extraBossesHP[extraGemsIndex]){
+					extraGemsIndex += 1;
+					extraGemsTimes.push(totalTime);
+				}
+			}
 			if (stagedmg >= bossstages[stageProcessing]){
 				stagedmg = stagedmg-bossstages[stageProcessing];
 				stageProcessing++;
@@ -378,66 +409,38 @@
 				gemtimes.push(totalTime);
 				conversionIndex += 1
 			}
-			if (stageProcessing == bossstages.length){
-				break;
-			}
-		}
-		if (stageProcessing == bossstages.length){
-			break;
 		}
 		sapphiresLeft -= vals[curUpgrade+1][3];
 		storedEnergy += vals[curUpgrade+1][1] - vals[curUpgrade][1];
+		curUpgrade += 1;
+	}
+	
+	
+	let extraGemsInfo = document.createElement('p');
+	extraGemsInfo.innerHTML += '<br><b>Extra gems for completing bonus stages after the end of event:';
+	for (let i = 0; i < extraGemsTimes.length; i++){
+		extraGemsInfo.innerHTML += '<br><img name="gempic" src="assets/common/gem.png" alt="Gems" />'+extraBossesGems[i]+' -> in '+formattime(extraGemsTimes[i])
 	}
 	
 	let resultTime = document.createElement('h1');
 	resultTime.style.width = "450px";
 	resultTime.align = "center";
-	let marginoferror = totalTime*margin;
-//	if (marginoferror < vals[i][2]*60*0.75){marginoferror = 0} //zeroing margin if it is less than 75% of latest cooldown time
-	let print1 = formattime(totalTime);
+	let marginoferror = finalTime*margin;
+	let print1 = formattime(finalTime);
 	print2 = formattime(marginoferror);
 	if (dropAverage.checked){
 	  resultTime.innerText = print1 + '    (±'+print2+')';
 	} else {
 	  resultTime.innerText = print1;
 	}
-	testrand.push(totalTime);
+	testrand.push(finalTime);
 	results.appendChild(resultTime);
 	results.appendChild(pouchInfo);
 	results.appendChild(sappsCollectedInfo);
-	continueForGems(conversionIndex,curUpgrade,sapphiresCollected,sapphiresLeft,storedEnergy,totalTime);
+	results.appendChild(extraGemsInfo);
 	setgems();
 	let iframeSize = document.getElementById("wrapper").scrollHeight;
 	parent.postMessage(iframeSize, "*");
-  }
-  
-  function continueForGems(conversionIndex,curUpgrade,sapphiresCollected,sapphiresLeft,storedEnergy,totalTime){
-	for (i = curUpgrade; i < vals.length; i++){
-		while (sapphiresLeft < vals[i+1][3] && conversionIndex < convrate.length){
-			if (dropAverage.checked){
-			  sapphiresLeft += sapphiresavg;
-			  sapphiresCollected += sapphiresavg;
-			} else{
-			  sappsRand = randomdrop();
-			  sapphiresLeft += sappsRand;
-			  sapphiresCollected += sappsRand;
-			}
-			if (storedEnergy >0){
-			  storedEnergy -= 1;
-			} else {
-			  totalTime += vals[i][2]*60;
-			}
-			if (sapphiresCollected >= convrate[conversionIndex]){
-				gemtimes.push(totalTime);
-				conversionIndex += 1
-			}
-		}
-		if (sapphiresCollected >= convrate[convrate.length-1]){
-			break
-		}
-		sapphiresLeft -= vals[i+1][3];
-		storedEnergy += vals[i+1][1] - vals[i][1];
-	}
   }
   
   function setgems(){
