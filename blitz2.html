@@ -298,8 +298,8 @@
 	}
 	return sappsSpent;
   }
-
-  var testrand=[];
+  
+  //var testrand=[];
   function calctime(){
     let results = document.getElementById("results");
 	results.innerHTML = ""
@@ -320,6 +320,8 @@
 	let initialUpgrade = getCurrentUpgradeLevel(charPower, maxenergyValue, cooldownValue);
 	let conversionIndex = 0;
 	gemtimes = []
+	let stageTimes = []
+	let stageIndexes = []
 	//values for extra gems, gained for defeating bosses after event
 	let extraBossesHP = [5000, 35000, 81000, 95000, 161000, 243000, 266000, 368000, 486000, 518000, 656000, 810000];
 	let extraBossesGems = [5, 10, 15, 5, 10, 15, 5, 10, 15, 5, 10, 15];
@@ -331,6 +333,7 @@
 	
 	pouchInfo = document.createElement('span');
 	pouchInfo.innerHTML = '<img name="maxenergypic" src="assets/common/en_max.png" alt="max energy" width="20" /><b> will fill in: '+formattime(pouchtime)+'</b>';
+	pouchInfo.style.marginTop = "16px";
 	
 	for (i = 0; i<=initialUpgrade;i++){
 		sapphiresSpent += vals[i][3];
@@ -383,6 +386,8 @@
 			if (!eventEnded){
 				if (stagedmg >= bossstages[stageProcessing]){
 					stagedmg = stagedmg-bossstages[stageProcessing];
+					stageIndexes.push(stageProcessing)
+					stageTimes.push(totalTime)
 					//if it's the last stage
 					if (stageProcessing >= bossstages.length-1){
 						eventEnded = true;
@@ -424,6 +429,9 @@
 	
 	let resultTime = document.createElement('h1');
 	resultTime.style.width = "450px";
+	if (stageIndexes.length > 1){
+		resultTime.style.borderBottomWidth = "0px"
+	}
 	resultTime.align = "center";
 	let marginoferror = finalTime*margin;
 	let print1 = formattime(finalTime);
@@ -433,8 +441,36 @@
 	} else {
 	  resultTime.innerText = print1;
 	}
-	testrand.push(finalTime);
+	//testrand.push(finalTime);
 	results.appendChild(resultTime);
+	
+	//adding times for each stage
+	for (i=0; i < stageIndexes.length-1; i++){
+		resultTime = document.createElement('p');
+		resultTime.style.fontWeight = "600";
+		resultTime.style.marginTop = "0px";
+		resultTime.style.marginBottom = "0px";
+		marginoferror = stageTimes[i]*margin;
+		print1 = formattime(stageTimes[i]);
+		print2 = formattime(marginoferror);
+		resultTime.innerText = "Stage " + (stageIndexes[i]+1) + ": "
+		if (dropAverage.checked){
+			resultTime.innerText += print1 + '    (±'+print2+')';
+			} else {
+				resultTime.innerText += print1;
+			}
+		resultTime.innerHTML += "<br>";
+		if (i == stageIndexes.length - 2){
+			resultTime.style.width = "450px";
+			resultTime.style.marginBottom = "16px";
+			resultTime.style.paddingBottom = "16px";
+			resultTime.style.borderBottomWidth = "1px";
+			resultTime.style.borderBottomStyle = "solid";
+			resultTime.style.borderBottomColor = "#eaecef";
+		}
+		results.appendChild(resultTime);
+	}
+	
 	results.appendChild(pouchInfo);
 	results.appendChild(sappsCollectedInfo);
 	results.appendChild(extraGemsInfo);
