@@ -299,7 +299,7 @@
 	return sappsSpent;
   }
   
-  //var testrand=[];
+  var testrand=[];
   function calctime(){
     let results = document.getElementById("results");
 	results.innerHTML = ""
@@ -319,6 +319,7 @@
 	let i;
 	let initialUpgrade = getCurrentUpgradeLevel(charPower, maxenergyValue, cooldownValue);
 	let conversionIndex = 0;
+	let marginOfError = 0;
 	gemtimes = []
 	let stageTimes = []
 	let stageIndexes = []
@@ -422,9 +423,11 @@
 	
 	
 	let extraGemsInfo = document.createElement('p');
-	extraGemsInfo.innerHTML += '<br><b>Extra gems for completing bonus stages after the end of event:';
+	extraGemsInfo.innerHTML += '<br><b>Extra gems for completing bonus stages after the end of event';
+	extraGemsInfo.innerHTML += '<br><b>(other prize types are not counted here):';
 	for (let i = 0; i < extraGemsTimes.length; i++){
-		extraGemsInfo.innerHTML += '<br><img name="gempic" src="assets/common/gem.png" alt="Gems" />'+extraBossesGems[i]+' -> in '+formattime(extraGemsTimes[i])
+		marginOfError = extraGemsTimes[i]*margin;
+		extraGemsInfo.innerHTML += '<br><img name="gempic" src="assets/common/gem.png" alt="Gems" />'+extraBossesGems[i]+' -> in '+formattime(extraGemsTimes[i]) + " (±" + formattime(marginOfError) + ")";
 	}
 	
 	let resultTime = document.createElement('h1');
@@ -433,9 +436,9 @@
 		resultTime.style.borderBottomWidth = "0px"
 	}
 	resultTime.align = "center";
-	let marginoferror = finalTime*margin;
+	marginOfError = finalTime*margin;
 	let print1 = formattime(finalTime);
-	print2 = formattime(marginoferror);
+	print2 = formattime(marginOfError);
 	if (dropAverage.checked){
 	  resultTime.innerText = print1 + '    (±'+print2+')';
 	} else {
@@ -450,9 +453,9 @@
 		resultTime.style.fontWeight = "600";
 		resultTime.style.marginTop = "0px";
 		resultTime.style.marginBottom = "0px";
-		marginoferror = stageTimes[i]*margin;
+		marginOfError = stageTimes[i]*margin;
 		print1 = formattime(stageTimes[i]);
-		print2 = formattime(marginoferror);
+		print2 = formattime(marginOfError);
 		resultTime.innerText = "Stage " + (stageIndexes[i]+1) + ": "
 		if (dropAverage.checked){
 			resultTime.innerText += print1 + '    (±'+print2+')';
