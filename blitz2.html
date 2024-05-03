@@ -442,6 +442,11 @@
 	if (eventEnded){
 		stagedmg = getBonusStagesDmg();
 		eventEnded_ = true;
+		//set to 0 all times for completed bonus stages
+		while (stagedmg >= extraBossesHP[extraGemsIndex]){
+			extraGemsIndex += 1;
+			extraGemsTimes.push(0);
+		}	
 	}
 	
 	//give extra 12 hours to event (to account margins)
@@ -506,14 +511,16 @@
 	let extraGemsInfo = document.createElement('p');
 	extraGemsInfo.innerHTML += '<br><b>Extra gems for completing bonus stages after the end of event';
 	extraGemsInfo.innerHTML += '<br><b>(other prize types are not counted here):';
+	let print1 = "";
 	for (let i = 0; i < extraGemsTimes.length; i++){
-		totalBonusGems += extraBossesGems[i];
-		if (extraGemsTimes[i] > 0){
-			marginOfError = extraGemsTimes[i]*margin;
-			extraGemsInfo.innerHTML += '<br><img name="gempic" src="assets/common/gem.png" alt="Gems" />'+extraBossesGems[i]+' -> in '+formattime(extraGemsTimes[i]) + " (±" + formattime(marginOfError) + ")";
+		if (extraGemsTimes[i] == 0){
+			totalBonusGems += extraBossesGems[i];
+			continue;
 		}
+		marginOfError = extraGemsTimes[i]*margin;
+		print1 += '<br><img name="gempic" src="assets/common/gem.png" alt="Gems" />'+extraBossesGems[i]+' -> in '+formattime(extraGemsTimes[i]) + " (±" + formattime(marginOfError) + ")";
 	}
-	extraGemsInfo.innerHTML += "<br>Total: <img name=\"gempic\" src=\"assets/common/gem.png\" alt=\"Gems\" />" + totalBonusGems;
+	extraGemsInfo.innerHTML += "<br>Already got: <img name=\"gempic\" src=\"assets/common/gem.png\" alt=\"Gems\" />" + totalBonusGems + print1;
 	
 	let resultTime = document.createElement('h1');
 	resultTime.style.width = "450px";
@@ -522,7 +529,7 @@
 	}
 	resultTime.align = "center";
 	marginOfError = finalTime*margin;
-	let print1 = formattime(finalTime);
+	print1 = formattime(finalTime);
 	print2 = formattime(marginOfError);
 	if (dropAverage.checked){
 	  resultTime.innerText = print1 + '    (±'+print2+')';
