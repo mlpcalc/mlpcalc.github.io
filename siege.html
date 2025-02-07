@@ -1,126 +1,126 @@
 <html>
+
 <head>
-<script src="siege_data.js"></script> 
-<script src="common.js"></script>
-<script src="defaultEvent.js"></script>
-<link rel="stylesheet" href="style.css">
+	<script src="siege_data.js"></script>
+	<script src="common.js"></script>
+	<script src="defaultEvent.js"></script>
+	<link rel="stylesheet" href="style.css">
 
-<script>
+	<script>
+		var selectedEvent;
+		var maindata;
+		//const images = ["pouchpic","coinpic"];
+		var vals, vals2;
+		var curarmor;
+		var curhelmet;
+		var coins = 0;
+		var curstage, curdamage;
+		var stages = [];
+		var upgradelevels = [0];
+		var egems = [];
+		var eventList;
+		var timeUpgrades = [];
+		var totaltime;
+		var helpnames, helpstage, helpSwappable;
+		var portraits = "helpers_portraits";
+		const defaultEvent = eventsSelector["siege"]
 
-  var selectedEvent;
-  var maindata;
-  //const images = ["pouchpic","coinpic"];
-  var vals, vals2;
-  var curarmor;
-  var curhelmet;
-  var coins = 0;
-  var curstage, curdamage;
-  var stages = [];
-  var upgradelevels = [0];
-  var egems = [];
-  var eventList;
-  var timeUpgrades = [];
-  var totaltime;
-  var helpnames, helpstage, helpSwappable;
-  var portraits = "helpers_portraits";
-  const defaultEvent = eventsSelector["siege"]
-  
-  function loadpage(){
-    curstage = document.getElementById("curstage");
-	//setimages('coinpic');
-	eventList = document.getElementById("eventList");
-    generateEventList();
-	for (i=0; i<eventList.options.length; i++){
-	  if (eventList.options[i].value == defaultEvent){
-	    eventList.options[i].selected = true;
-		break;
-	  }
-	}
-	resetPage();
-  }
-  
-  function resetPage(){
-	upgradelevels = [0];
-	document.getElementById("results").innerHTML = "";
-    selectedEvent = eventList[eventList.selectedIndex].value;
-	maindata = gamedata[selectedEvent]
-	let i;
-    for (i=0;i<maindata["bosses"].length; i++){
-	  stages[i]={};
-	  stages[i]['bosshp'] = maindata["bosses"][i]["BossHP"];
-	  stages[i]['bosshits'] = maindata["bosses"][i]["BossHits"];
-	  stages[i]['bosstime'] = maindata["bosses"][i]["TimeMinutes"];
-	  stages[i]['minionhp'] = maindata["bosses"][i]["MinionHP"];
-	  stages[i]['minioncoins'] = maindata["bosses"][i]["MinionCurrencyReward"];
-	  stages[i]['maxcoins'] = maindata["bosses"][i]["CurrencyCappings"][0];
-	  stages[i]['helpersdmg'] = 0
-	}
-	vals = maindata["upgrades"];
-	vals2 = vals
-	helpnames=maindata['helpnames'];
-	helpstage=maindata['helpstage'];
-	helpSwappable=maindata['helpSwappable'];
-	if ("upgrades2" in maindata){
-		vals2 = maindata["upgrades2"];
-	}
-	curhelmet = [vals[0][0],0];	//[current value, index in vals]
-	curarmor = [vals2[0][0],0]; 
-	for (i=0;i<vals.length;i++){
-	  upgradelevels.push(vals[i][0]+upgradelevels[i])	
-	}
-	egems = maindata['convgems'];
-    generateHelpers();
-	
-	//automatically checking on Twilight Sparkle
-	//she's default very first pony
-	let TSIndex = -1;
-	while (true) {
-		TSIndex = maindata['helpnames'].indexOf('Twilight Sparkle',TSIndex+1)
-		if (TSIndex != -1){
-		  document.getElementById('help'+TSIndex).checked = true;
-		} else break;
-	}
-	
-	document.getElementById("curhelmet").max = vals.length-1;
-	document.getElementById("curarmor").max = vals2.length-1;
-	curstage = document.getElementById("curstage");
-	clearDropDownList(curstage);
-	addToDropDownList(curstage, generateStages());
-	curstage.selectedIndex = 1;
-	if (stages[0]['bosshits']>0){
-	  document.getElementById("bosstip1").style.display = "inline";
-	  document.getElementById("bosstip2").style.display = "inline";
-	} else {
-	  document.getElementById("chanceExtraHit").checked = false;
-	  document.getElementById("bosstip1").style.display = "none";
-	  document.getElementById("bosstip2").style.display = "none";
-	}
-	updatedmg("curarmor")
-	updatedmg("curhelmet")
-	//chanceExtraHit();
-	let iframeSize = document.getElementById("wrapper").scrollHeight + 5;
-	parent.postMessage(iframeSize, "*");
-  }
-  
-  function updatedmg(gear){
-    let lvl = document.getElementById(gear).value;
-    document.getElementById(gear+"dmg").value = upgradelevels[lvl];
-  }
-  
-  function generateStages(){
-    var stagesarr = [];
-	var tmp;
-	for (i=0;i<maindata["bosses"].length-1; i++){
-	  tmp = (i+1) + '. ';
-	  tmp += maindata["bosses"][i]["ID"] + ' (';
-	  tmp += maindata["bosses"][i]["MinionHP"] + ', ';
-	  tmp += maindata["bosses"][i]["MinionCurrencyReward"] + ')';
-	  stagesarr.push([tmp,i])
-	}
-	return stagesarr;
-  }
-    
-  /*function setHelpers(){
+		function loadpage() {
+			curstage = document.getElementById("curstage");
+			//setimages('coinpic');
+			eventList = document.getElementById("eventList");
+			generateEventList();
+			for (i = 0; i < eventList.options.length; i++) {
+				if (eventList.options[i].value == defaultEvent) {
+					eventList.options[i].selected = true;
+					break;
+				}
+			}
+			resetPage();
+		}
+
+		function resetPage() {
+			upgradelevels = [0];
+			document.getElementById("results").innerHTML = "";
+			selectedEvent = eventList[eventList.selectedIndex].value;
+			maindata = gamedata[selectedEvent]
+			let i;
+			for (i = 0; i < maindata["bosses"].length; i++) {
+				stages[i] = {};
+				stages[i]['bosshp'] = maindata["bosses"][i]["BossHP"];
+				stages[i]['bosshits'] = maindata["bosses"][i]["BossHits"];
+				stages[i]['bosstime'] = maindata["bosses"][i]["TimeMinutes"];
+				stages[i]['minionhp'] = maindata["bosses"][i]["MinionHP"];
+				stages[i]['minioncoins'] = maindata["bosses"][i]["MinionCurrencyReward"];
+				stages[i]['maxcoins'] = maindata["bosses"][i]["CurrencyCappings"][0];
+				stages[i]['helpersdmg'] = 0
+			}
+			vals = maindata["upgrades"];
+			vals2 = vals
+			helpnames = maindata['helpnames'];
+			helpstage = maindata['helpstage'];
+			helpSwappable = maindata['helpSwappable'];
+			if ("upgrades2" in maindata) {
+				vals2 = maindata["upgrades2"];
+			}
+			curhelmet = [vals[0][0], 0]; //[current value, index in vals]
+			curarmor = [vals2[0][0], 0];
+			for (i = 0; i < vals.length; i++) {
+				upgradelevels.push(vals[i][0] + upgradelevels[i])
+			}
+			egems = maindata['convgems'];
+			generateHelpers();
+
+			//automatically checking on Twilight Sparkle
+			//she's default very first pony
+			let TSIndex = -1;
+			while (true) {
+				TSIndex = maindata['helpnames'].indexOf('Twilight Sparkle', TSIndex + 1)
+				if (TSIndex != -1) {
+					document.getElementById('help' + TSIndex).checked = true;
+				} else break;
+			}
+
+			document.getElementById("curhelmet").max = vals.length - 1;
+			document.getElementById("curarmor").max = vals2.length - 1;
+			curstage = document.getElementById("curstage");
+			clearDropDownList(curstage);
+			addToDropDownList(curstage, generateStages());
+			curstage.selectedIndex = 1;
+			if (stages[0]['bosshits'] > 0) {
+				document.getElementById("bosstip1").style.display = "inline";
+				document.getElementById("bosstip2").style.display = "inline";
+			} else {
+				document.getElementById("chanceExtraHit").checked = false;
+				document.getElementById("bosstip1").style.display = "none";
+				document.getElementById("bosstip2").style.display = "none";
+			}
+			updatedmg("curarmor")
+			updatedmg("curhelmet")
+			//chanceExtraHit();
+			let iframeSize = document.getElementById("wrapper").scrollHeight + 5;
+			parent.postMessage(iframeSize, "*");
+		}
+
+		function updatedmg(gear) {
+			let lvl = document.getElementById(gear).value;
+			document.getElementById(gear + "dmg").value = upgradelevels[lvl];
+		}
+
+		function generateStages() {
+			var stagesarr = [];
+			var tmp;
+			for (i = 0; i < maindata["bosses"].length - 1; i++) {
+				tmp = (i + 1) + '. ';
+				tmp += maindata["bosses"][i]["ID"] + ' (';
+				tmp += maindata["bosses"][i]["MinionHP"] + ', ';
+				tmp += maindata["bosses"][i]["MinionCurrencyReward"] + ')';
+				stagesarr.push([tmp, i])
+			}
+			return stagesarr;
+		}
+
+		/*function setHelpers(){
 	let i,j;
 	let helpers = []
 	
@@ -154,283 +154,294 @@
 	  stages[i]['maxcoins'] = maindata['bosses'][i]['CurrencyCappings'][stages[i]['helpnum']];
 	}
   }*/
-  
-  function setHelpers(helpId){
-	let stageList = [];
-	maindata["helpstage"].forEach(function(stageHelpers,index,array){
-	  if (stageHelpers.includes(helpId)){
-	    stageList.push([index,array[index].indexOf(helpId)]);
-	  }
-	})
-	
-	change = document.getElementById("help"+helpId).checked ? 1 : -1;
 
-    stageList.forEach(function(stage,index){
-	  let curStage = stage[0];
-	  let helperPos = stage[1];
-	  stages[curStage]['helpersdmg'] += maindata['helpdmg'][curStage][helperPos] * change;
-	  let maxCoinsArr = maindata['bosses'][curStage]['CurrencyCappings'];
-	  let curCoinPos = maxCoinsArr.indexOf(stages[curStage]['maxcoins']);
-	  stages[curStage]['maxcoins'] = maxCoinsArr[curCoinPos+change];
-	})
-	
-	//swap for helpers that are same character in different forms
-	if (change == 1){
-	  maindata["helpSwappable"].forEach(function(sameHelpers,index){
-		if (sameHelpers.includes(helpId)) {
-	      let swapId = sameHelpers.filter(id  => id != helpId)[0];
-		  let swapHelper = document.getElementById('help'+swapId);
-		  if (swapHelper.checked){
-		    swapHelper.checked = false;
-			setHelpers(swapId)
-		  }
-	    }
-	  })
-	}
-  }
-  
-  function calcstage(num){
-    var nextupgrade;
-	var stagetime = 0;
-	var totalpower = curarmor[0]+curhelmet[0]+stages[num]['helpersdmg'];
-	if (document.getElementById("chanceExtraHit").checked){
-	  //skip = Number(document.getElementById("skiprechits").value)
-	  bosshits = stages[num]['bosshits']+1;
-	}
-	else {
-	  bosshits = stages[num]['bosshits'];
-	}
-	if (bosshits == 0){
-	  bosshits = stages[num]['bosstime'] * 60
-	}
-	var tmptime = Math.ceil(stages[num]['minionhp'] / totalpower);
-	while (totalpower * bosshits < stages[num]['bosshp']){
-	  if (curarmor[1] > curhelmet[1]){
-	    nextupgrade = [true,vals[curhelmet[1]][1]];
-	  }
-	  else {
- 	    nextupgrade = [false,vals2[curarmor[1]][1]];
-	  }
-	  while (coins < nextupgrade[1]){
-	    curhp = stages[num]['minionhp'];
-  	    while (curhp > 0){
-	      stagetime += 1;
-	      curhp -= totalpower;
-	    }
- 	    coins += stages[num]['minioncoins'];
-	  }
-	  coins -= nextupgrade[1];
-	  if (!nextupgrade[0]){
-	    curarmor[0] = upgradelevels[curarmor[1]+1];
-	    curarmor[1] += 1;
-	  } else {
-	    curhelmet[0] = upgradelevels[curhelmet[1]+1];
-	    curhelmet[1] += 1;
-  	  }
-	  totalpower = curarmor[0]+curhelmet[0]+stages[num]['helpersdmg'];
-	  if (Math.ceil(stages[num]['minionhp'] / totalpower)<tmptime){
-	    timeUpgrades.push([totaltime + stagetime,curarmor[1],curhelmet[1]]);
-		tmptime = Math.ceil(stages[num]['minionhp'] / totalpower);
-	  }
-	}
-	if (bosshits == 0){
-	  return stagetime + stages[num]['bosstime'] * 60
-	} else {
-	  return stagetime
-	}
-  }
-  
-  
-  function calcgems(instage, inpower, incoins){
-    var maxgems = maindata["convrate"][maindata["convrate"].length-1];
-	var cointime = Math.ceil(stages[instage]['minionhp'] / inpower);
-	var gemtimes = [0];
-	var count = 1;
-	var gtime = 0;
-    while (incoins <= maxgems){
-	  if (incoins >= maindata["convrate"][count]){
-	    gemtimes.push(gtime);
-		count += 1;
-	  }
-	  gtime += cointime;
-	  incoins += stages[instage]['minioncoins']
-	}
-	
-	//fix if player already have needed amount of coins for some (or all)
-	//tiers of rewards
-	if (gemtimes.length < egems.length){
-		for (let i = 1; i<egems.length; i++){
-			gemtimes.push(gtime);
+		function setHelpers(helpId) {
+			let stageList = [];
+			maindata["helpstage"].forEach(function (stageHelpers, index, array) {
+				if (stageHelpers.includes(helpId)) {
+					stageList.push([index, array[index].indexOf(helpId)]);
+				}
+			})
+
+			change = document.getElementById("help" + helpId).checked ? 1 : -1;
+
+			stageList.forEach(function (stage, index) {
+				let curStage = stage[0];
+				let helperPos = stage[1];
+				stages[curStage]['helpersdmg'] += maindata['helpdmg'][curStage][helperPos] * change;
+				let maxCoinsArr = maindata['bosses'][curStage]['CurrencyCappings'];
+				let curCoinPos = maxCoinsArr.indexOf(stages[curStage]['maxcoins']);
+				stages[curStage]['maxcoins'] = maxCoinsArr[curCoinPos + change];
+			})
+
+			//swap for helpers that are same character in different forms
+			if (change == 1) {
+				maindata["helpSwappable"].forEach(function (sameHelpers, index) {
+					if (sameHelpers.includes(helpId)) {
+						let swapId = sameHelpers.filter(id => id != helpId)[0];
+						let swapHelper = document.getElementById('help' + swapId);
+						if (swapHelper.checked) {
+							swapHelper.checked = false;
+							setHelpers(swapId)
+						}
+					}
+				})
+			}
 		}
-	} else {
-		gemtimes.push(gtime);
-	}
-	
-    return gemtimes;
-  }
-  
-  /*function chanceExtraHit(){
+
+		function calcstage(num) {
+			var nextupgrade;
+			var stagetime = 0;
+			var totalpower = curarmor[0] + curhelmet[0] + stages[num]['helpersdmg'];
+			if (document.getElementById("chanceExtraHit").checked) {
+				//skip = Number(document.getElementById("skiprechits").value)
+				bosshits = stages[num]['bosshits'] + 1;
+			} else {
+				bosshits = stages[num]['bosshits'];
+			}
+			if (bosshits == 0) {
+				bosshits = stages[num]['bosstime'] * 60
+			}
+			var tmptime = Math.ceil(stages[num]['minionhp'] / totalpower);
+			while (totalpower * bosshits < stages[num]['bosshp']) {
+				if (curarmor[1] > curhelmet[1]) {
+					nextupgrade = [true, vals[curhelmet[1]][1]];
+				} else {
+					nextupgrade = [false, vals2[curarmor[1]][1]];
+				}
+				while (coins < nextupgrade[1]) {
+					curhp = stages[num]['minionhp'];
+					while (curhp > 0) {
+						stagetime += 1;
+						curhp -= totalpower;
+					}
+					coins += stages[num]['minioncoins'];
+				}
+				coins -= nextupgrade[1];
+				if (!nextupgrade[0]) {
+					curarmor[0] = upgradelevels[curarmor[1] + 1];
+					curarmor[1] += 1;
+				} else {
+					curhelmet[0] = upgradelevels[curhelmet[1] + 1];
+					curhelmet[1] += 1;
+				}
+				totalpower = curarmor[0] + curhelmet[0] + stages[num]['helpersdmg'];
+				if (Math.ceil(stages[num]['minionhp'] / totalpower) < tmptime) {
+					timeUpgrades.push([totaltime + stagetime, curarmor[1], curhelmet[1]]);
+					tmptime = Math.ceil(stages[num]['minionhp'] / totalpower);
+				}
+			}
+			if (bosshits == 0) {
+				return stagetime + stages[num]['bosstime'] * 60
+			} else {
+				return stagetime
+			}
+		}
+
+
+		function calcgems(instage, inpower, incoins) {
+			var maxgems = maindata["convrate"][maindata["convrate"].length - 1];
+			var cointime = Math.ceil(stages[instage]['minionhp'] / inpower);
+			var gemtimes = [0];
+			var count = 1;
+			var gtime = 0;
+			while (incoins <= maxgems) {
+				if (incoins >= maindata["convrate"][count]) {
+					gemtimes.push(gtime);
+					count += 1;
+				}
+				gtime += cointime;
+				incoins += stages[instage]['minioncoins']
+			}
+
+			//fix if player already have needed amount of coins for some (or all)
+			//tiers of rewards
+			if (gemtimes.length < egems.length) {
+				for (let i = 1; i < egems.length; i++) {
+					gemtimes.push(gtime);
+				}
+			} else {
+				gemtimes.push(gtime);
+			}
+
+			return gemtimes;
+		}
+
+		/*function chanceExtraHit(){
     if (document.getElementById("skiprec").checked){
 	  document.getElementById("skiprechits").disabled = false;
 	} else {
 	  document.getElementById("skiprechits").disabled = true;
 	}
   }*/
-  
-  function imgLoaded(imgElement) {
-    return imgElement.complete && imgElement.naturalHeight !== 0;
-  }
-  
-  function calctime(){
-    let wrapper = document.getElementById("wrapper");
-    results = document.getElementById("results");
-	results.innerHTML = "";
-	timeUpgrades = [];
-	curstage = Number(document.getElementById("curstage").value);
-	//setHelpers();
-	tmp1 = Number(document.getElementById("curarmor").value);
-	tmp2 = Number(document.getElementById("curhelmet").value);
-	coins = Number(document.getElementById("curcoins").value);
-	curarmor = [upgradelevels[tmp1],tmp1];
-    curhelmet = [upgradelevels[tmp2],tmp2];
-	totaltime = 0;
-	let curtime = 0;
-	let gemtimes = []
-	curdmg = curarmor[0]+curhelmet[0]+stages[curstage]['helpersdmg'];
-	curminion = stages[curstage]['minionhp'];
-	ttb = Math.ceil(curminion/curdmg);
-	pouchtime = Math.ceil(stages[curstage]['maxcoins'] / stages[curstage]['minioncoins']) * ttb;
-	span = document.createElement('span');
-	img = document.createElement('img');
-	img.src = "assets/common/pouch.png";
-	span.appendChild(img);
-	//span.innerHTML = '<img name="pouchpic" src="assets/common/pouch.png" alt="maxpouch" /><b> (current max '+ stages[curstage]['maxcoins'] +') will fill in: '+formattime(pouchtime)+'</b>';
-	span.innerHTML += '<b> (current max '+ stages[curstage]['maxcoins'] +') will fill in: '+formattime(pouchtime)+'</b>';
-	results.appendChild(span);
-	mainresults = document.createElement('div');
-	//setimages('pouchpic');
-	for (let i=curstage; i < stages.length-1; i++){
-	  curtime = calcstage(i);
-	  curdmg = curarmor[0]+curhelmet[0]+stages[curstage]['helpersdmg'];
-	  gemtimes = calcgems(i+1,curdmg,coins)
-	  totaltime += curtime;
-	  h2 = document.createElement('h2');
-	  h2.innerHTML += 'Stage ' + (i+1) + ' will require ' + formattime(curtime) + ' and gear levels ' + curarmor[1] + '/' + curhelmet [1] + '<br>';
-	  table = document.createElement('table');
-	  tbdy = document.createElement('tbody');
-	  tr = document.createElement('tr');
-	  tr.innerHTML += '<td>Extra<br>gems</td>'
-	  for (let j=1; j<egems.length;j++){
-	    tr.innerHTML += '<td align="center" width="120"><img name="gempic" src="assets/common/gem.png" alt="Gems" />'+egems[j] + ': <br>+' + formattime(gemtimes[j]) + '</td>';
-	  }
-	  tbdy.appendChild(tr);
-	  table.appendChild(tbdy);
-	  mainresults.appendChild(h2);
-	  mainresults.appendChild(table);
-	}
-	
-	var p = document.createElement('p');
-	p.innerHTML += '<br><b>Closest valuable upgrades<br>(reduced time to beat minion -> increased coins income):</b><br>';
-	for (let i=0; i < timeUpgrades.length; i++){
-	  p.innerHTML += timeUpgrades[i][1] + '/' + timeUpgrades[i][2] + ' in ' + formattime(timeUpgrades[i][0]) + '<br>'
-	  if (i == 2) break;
-	}
-	results.appendChild(p);
-	
-	p = document.createElement('p');
-	p.innerHTML += '<b>Extra gems conversion rate<br>(after the end of event):</b><br>';
-	for (let i=1; i < egems.length; i++){
-	  p.innerHTML += '<img name="gempic" src="assets/common/gem.png" alt="Gems" />'+egems[i]+' ≥ '+
-	  '<img name="coinpic" src="assets/common/coin.png" alt="Coins" width="20" />'+maindata["convrate"][i]+'<br>'
-	}
-	results.appendChild(p);
-	
-	
-	results.appendChild(mainresults);
-	//setimages('gempic')
-	h1 = document.createElement('h1');
-	h1.innerHTML += 'Total time: ' + formattime(totaltime);
-	results.appendChild(h1);
-	//checking if pouch image is loaded
-	//if not - adding 30px to iframe height
-	//if yes - adding 5px
-	let addedheight = 0;
-	if (imgLoaded(img) == false) {
-	  addedheight = 30;
-	} else {
-	  addedheight = 5;
-	}
-	let iframeSize = document.getElementById("wrapper").scrollHeight + addedheight;
-	parent.postMessage(iframeSize, "*");
 
-  }
+		function imgLoaded(imgElement) {
+			return imgElement.complete && imgElement.naturalHeight !== 0;
+		}
+
+		function calctime() {
+			let wrapper = document.getElementById("wrapper");
+			results = document.getElementById("results");
+			results.innerHTML = "";
+			timeUpgrades = [];
+			curstage = Number(document.getElementById("curstage").value);
+			//setHelpers();
+			tmp1 = Number(document.getElementById("curarmor").value);
+			tmp2 = Number(document.getElementById("curhelmet").value);
+			coins = Number(document.getElementById("curcoins").value);
+			curarmor = [upgradelevels[tmp1], tmp1];
+			curhelmet = [upgradelevels[tmp2], tmp2];
+			totaltime = 0;
+			let curtime = 0;
+			let gemtimes = []
+			curdmg = curarmor[0] + curhelmet[0] + stages[curstage]['helpersdmg'];
+			curminion = stages[curstage]['minionhp'];
+			ttb = Math.ceil(curminion / curdmg);
+			pouchtime = Math.ceil(stages[curstage]['maxcoins'] / stages[curstage]['minioncoins']) * ttb;
+			span = document.createElement('span');
+			img = document.createElement('img');
+			img.src = "assets/common/pouch.png";
+			span.appendChild(img);
+			//span.innerHTML = '<img name="pouchpic" src="assets/common/pouch.png" alt="maxpouch" /><b> (current max '+ stages[curstage]['maxcoins'] +') will fill in: '+formattime(pouchtime)+'</b>';
+			span.innerHTML += '<b> (current max ' + stages[curstage]['maxcoins'] + ') will fill in: ' + formattime(
+				pouchtime) + '</b>';
+			results.appendChild(span);
+			mainresults = document.createElement('div');
+			//setimages('pouchpic');
+			for (let i = curstage; i < stages.length - 1; i++) {
+				curtime = calcstage(i);
+				curdmg = curarmor[0] + curhelmet[0] + stages[curstage]['helpersdmg'];
+				gemtimes = calcgems(i + 1, curdmg, coins)
+				totaltime += curtime;
+				h2 = document.createElement('h2');
+				h2.innerHTML += 'Stage ' + (i + 1) + ' will require ' + formattime(curtime) + ' and gear levels ' + curarmor[
+					1] + '/' + curhelmet[1] + '<br>';
+				table = document.createElement('table');
+				tbdy = document.createElement('tbody');
+				tr = document.createElement('tr');
+				tr.innerHTML += '<td>Extra<br>gems</td>'
+				for (let j = 1; j < egems.length; j++) {
+					tr.innerHTML +=
+						'<td align="center" width="120"><img name="gempic" src="assets/common/gem.png" alt="Gems" />' + egems[
+							j] + ': <br>+' + formattime(gemtimes[j]) + '</td>';
+				}
+				tbdy.appendChild(tr);
+				table.appendChild(tbdy);
+				mainresults.appendChild(h2);
+				mainresults.appendChild(table);
+			}
+
+			var p = document.createElement('p');
+			p.innerHTML +=
+				'<br><b>Closest valuable upgrades<br>(reduced time to beat minion -> increased coins income):</b><br>';
+			for (let i = 0; i < timeUpgrades.length; i++) {
+				p.innerHTML += timeUpgrades[i][1] + '/' + timeUpgrades[i][2] + ' in ' + formattime(timeUpgrades[i][0]) +
+					'<br>'
+				if (i == 2) break;
+			}
+			results.appendChild(p);
+
+			p = document.createElement('p');
+			p.innerHTML += '<b>Extra gems conversion rate<br>(after the end of event):</b><br>';
+			for (let i = 1; i < egems.length; i++) {
+				p.innerHTML += '<img name="gempic" src="assets/common/gem.png" alt="Gems" />' + egems[i] + ' ≥ ' +
+					'<img name="coinpic" src="assets/common/coin.png" alt="Coins" width="20" />' + maindata["convrate"][i] +
+					'<br>'
+			}
+			results.appendChild(p);
 
 
-  
-  
-</script>
+			results.appendChild(mainresults);
+			//setimages('gempic')
+			h1 = document.createElement('h1');
+			h1.innerHTML += 'Total time: ' + formattime(totaltime);
+			results.appendChild(h1);
+			//checking if pouch image is loaded
+			//if not - adding 30px to iframe height
+			//if yes - adding 5px
+			let addedheight = 0;
+			if (imgLoaded(img) == false) {
+				addedheight = 30;
+			} else {
+				addedheight = 5;
+			}
+			let iframeSize = document.getElementById("wrapper").scrollHeight + addedheight;
+			parent.postMessage(iframeSize, "*");
+
+		}
+	</script>
 </head>
+
 <body onload="loadpage()">
-<div id="wrapper" class="container-lg markdown-body">
+	<div id="wrapper" class="container-lg markdown-body">
 
-<p style="margin-top: 1px;">Select event: <select id="eventList" onchange="resetPage()">
-  </select></p>
+		<p style="margin-top: 1px;">Select event: <select id="eventList" onchange="resetPage()">
+			</select></p>
 
-<img name="coinpic" src="assets/common/coin.png" alt="Current coins" /> <input id="curcoins" type="number" value="0" min="0" max="950000" style="width:80px"/>
-<br>
-<br>
-<table>
-<td style="width:200px">
-Current gear levels: <br>
-<input id="curarmor" type="number" value="9" min="1" max="88" style="width:60px" onchange="updatedmg('curarmor')"/><br>
-<input id="curhelmet" type="number" value="9" min="1" max="88" style="width:60px" onchange="updatedmg('curhelmet')"/>
-</td><td>
-Current gear power: <br>
-<input id="curarmordmg" type="text" value="9" style="width:60px" disabled="true" /><br>
-<input id="curhelmetdmg" type="text" value="9" style="width:60px" disabled="true" />
-</td>
-</table>
+		<img name="coinpic" src="assets/common/coin.png" alt="Current coins" /> <input id="curcoins" type="number"
+			value="0" min="0" max="950000" style="width:80px" />
+		<br>
+		<br>
+		<table>
+			<td style="width:200px">
+				Current gear levels: <br>
+				<input id="curarmor" type="number" value="9" min="1" max="88" style="width:60px"
+					onchange="updatedmg('curarmor')" /><br>
+				<input id="curhelmet" type="number" value="9" min="1" max="88" style="width:60px"
+					onchange="updatedmg('curhelmet')" />
+			</td>
+			<td>
+				Current gear power: <br>
+				<input id="curarmordmg" type="text" value="9" style="width:60px" disabled="true" /><br>
+				<input id="curhelmetdmg" type="text" value="9" style="width:60px" disabled="true" />
+			</td>
+		</table>
 
-   <p id="helpers">
-   </p>
+		<p id="helpers">
+		</p>
 
-  
- Current stage: <select id="curstage">
-  </select>
-  <br>
-  <br>
-  
-  <input id="chanceExtraHit" type="checkbox"> <span id="">Calc with chance of extra hit <span id="" style="color:red; font-size:18pt display:inline"><b>*   </b></span> </span>
-  <p><input style="width:450px" type="button" value="Calculate" onclick="calctime()"></p>     
-  <div id="results"></div>
 
-  <p id="bosstip1" style="display:none">
-  <br>
-  
-  <!---<select id="skiprechits" disabled="true">
+		Current stage: <select id="curstage">
+		</select>
+		<br>
+		<br>
+
+		<input id="chanceExtraHit" type="checkbox"> <span id="">Calc with chance of extra hit <span id=""
+				style="color:red; font-size:18pt display:inline"><b>* </b></span> </span>
+		<p><input style="width:450px" type="button" value="Calculate" onclick="calctime()"></p>
+		<div id="results"></div>
+
+		<p id="bosstip1" style="display:none">
+			<br>
+
+			<!---<select id="skiprechits" disabled="true">
     <option value="1">1 hit</option>
 	<option value="2">2 hits (very rare)</option>
   </select>-->
-  </p>
-  
-  <p id="bosstip2" style="display:none"><span style="color:red; font-size:18pt">*</span> It's possible to defeat the bosses with power less than<br>
-  recommended, if there will be more target icons than usual during<br>
-  the battle with them. It requires several retries for it to happen.
-  <br>
-  <br></p>
-  
-  <p id="" style="display:inline">Times for extra gems (by the end of event) are actual if you stop upgrading<br>
-  your gear after reaching the end of stage (if you decide to stop on particular<br>
-  stage or simply have not enough time to finish it by the event ending)
-  </p>
-  
-  <br>
-  <br>
-  <i><p>This calculator <b>does not</b> account for extra coins made by tapping<br>
-  character while it is glowing (happens every hour)</p>
-  <p>All calculations are approximate, actual times depend on<br>
-  how often you can check your pouch and upgrade gear.</p>
+		</p>
 
-</div>
+		<p id="bosstip2" style="display:none"><span style="color:red; font-size:18pt">*</span> It's possible to defeat
+			the bosses with power less than<br>
+			recommended, if there will be more target icons than usual during<br>
+			the battle with them. It requires several retries for it to happen.
+			<br>
+			<br>
+		</p>
+
+		<p id="" style="display:inline">Times for extra gems (by the end of event) are actual if you stop upgrading<br>
+			your gear after reaching the end of stage (if you decide to stop on particular<br>
+			stage or simply have not enough time to finish it by the event ending)
+		</p>
+
+		<br>
+		<br>
+		<i>
+			<p>This calculator <b>does not</b> account for extra coins made by tapping<br>
+				character while it is glowing (happens every hour)</p>
+			<p>All calculations are approximate, actual times depend on<br>
+				how often you can check your pouch and upgrade gear.</p>
+
+	</div>
 </body>
+
 </html>

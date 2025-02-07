@@ -1,128 +1,125 @@
 <html>
+
 <head>
-<script src="siege_data.js"></script> 
-<link rel="stylesheet" href="style.css">
+	<script src="siege_data.js"></script>
+	<link rel="stylesheet" href="style.css">
 
-<script>
+	<script>
+		var lunasfortune = [5, 10, 10, 15, 15, 20]
+		var curstage;
+		var totaltime;
 
-  var lunasfortune = [5,10,10,15,15,20]
-  var curstage;
-  var totaltime;
-  
-  function loadpage(){
-	let iframeSize = document.getElementById("wrapper").scrollHeight + 5;
-	parent.postMessage(iframeSize, "*");
-  }
-  
-  function calcstage(num){
-	var totalpower = 20;
-	var bosshp = document.getElementById("curstage")[num].value;
-	if (document.getElementById("lunasfortune").checked){
-	  totalpower = 20+lunasfortune[num];
-	}
-	if (num == document.getElementById("curstage").selectedIndex){
-	  bosshp = Number(document.getElementById("hpleft").value);
-	}
-	return Math.ceil(bosshp / totalpower);
-  }
-  
-  function getBossHP(){
-	document.getElementById("hpleft").value = document.getElementById("curstage").value;
-  }
-  
-  function formattime(time){
-    var out = "";
-	var count = [0,0];
-    if (Math.trunc(time / 86400) > 0){
-	  out += Math.trunc(time / 86400) + 'd ';
-	  time -= 86400 * Math.trunc(time / 86400);
-	  count[0] = 1;
-	}
-	if (Math.trunc(time / 3600) > 0){
-	  out += Math.trunc(time / 3600) + 'h ';
-	  time -= 3600 * Math.trunc(time / 3600);
-	  count[1] = 1;
-	}
-	if (Math.trunc(time / 60) > 0){
-	  if ((count[0] == 1) && (count[1] == 0)){
-	    out += '0h '+Math.trunc(time / 60) + 'm ';
-	  }
-	  else {
-	  out += Math.trunc(time / 60) + 'm ';
-	  }
-	  time -= 60 * Math.ceil(time / 60);
-	}
-	if (out == ""){
-	  out += time + 's ';
-	}
-	return out;
-  }
+		function loadpage() {
+			let iframeSize = document.getElementById("wrapper").scrollHeight + 5;
+			parent.postMessage(iframeSize, "*");
+		}
 
-  
-  function calctime(){
-    curstage = document.getElementById("curstage").selectedIndex;
-	var stages = document.getElementById("curstage").length;
-    let wrapper = document.getElementById("wrapper");
-    results = document.getElementById("results");
-	results.innerHTML = "";
-	totaltime = 0;
-	mainresults = document.createElement('div');
-	var tmptext = '(+ time until next hit)';
-	for (let i=curstage; i < stages; i++){
-	  curtime = calcstage(i)-1;
-	  totaltime += curtime;
-	  h2 = document.createElement('h2');
-	  h2.innerHTML += 'Stage ' + (i+1) + ' will require ' + formattime(curtime*10800) + tmptext + '<br>';
-	  tmptext = '';
-	  mainresults.appendChild(h2);
-	}
+		function calcstage(num) {
+			var totalpower = 20;
+			var bosshp = document.getElementById("curstage")[num].value;
+			if (document.getElementById("lunasfortune").checked) {
+				totalpower = 20 + lunasfortune[num];
+			}
+			if (num == document.getElementById("curstage").selectedIndex) {
+				bosshp = Number(document.getElementById("hpleft").value);
+			}
+			return Math.ceil(bosshp / totalpower);
+		}
 
-	results.appendChild(mainresults);
-	h1 = document.createElement('h1');
-	h1.style.display = "inline";
-	h1.innerHTML += 'Total time: ' + formattime(totaltime*10800);
-	h3 = document.createElement('h3');
-	h3.style.display = "inline";
-	h3.innerHTML += '(+ time until next hit)';
-	results.appendChild(h1);
-	results.appendChild(h3);
-	let addedheight = 5;
-	let iframeSize = document.getElementById("wrapper").scrollHeight + addedheight;
-	parent.postMessage(iframeSize, "*");
-  }
+		function getBossHP() {
+			document.getElementById("hpleft").value = document.getElementById("curstage").value;
+		}
+
+		function formattime(time) {
+			var out = "";
+			var count = [0, 0];
+			if (Math.trunc(time / 86400) > 0) {
+				out += Math.trunc(time / 86400) + 'd ';
+				time -= 86400 * Math.trunc(time / 86400);
+				count[0] = 1;
+			}
+			if (Math.trunc(time / 3600) > 0) {
+				out += Math.trunc(time / 3600) + 'h ';
+				time -= 3600 * Math.trunc(time / 3600);
+				count[1] = 1;
+			}
+			if (Math.trunc(time / 60) > 0) {
+				if ((count[0] == 1) && (count[1] == 0)) {
+					out += '0h ' + Math.trunc(time / 60) + 'm ';
+				} else {
+					out += Math.trunc(time / 60) + 'm ';
+				}
+				time -= 60 * Math.ceil(time / 60);
+			}
+			if (out == "") {
+				out += time + 's ';
+			}
+			return out;
+		}
 
 
-  
-  
-</script>
+		function calctime() {
+			curstage = document.getElementById("curstage").selectedIndex;
+			var stages = document.getElementById("curstage").length;
+			let wrapper = document.getElementById("wrapper");
+			results = document.getElementById("results");
+			results.innerHTML = "";
+			totaltime = 0;
+			mainresults = document.createElement('div');
+			var tmptext = '(+ time until next hit)';
+			for (let i = curstage; i < stages; i++) {
+				curtime = calcstage(i) - 1;
+				totaltime += curtime;
+				h2 = document.createElement('h2');
+				h2.innerHTML += 'Stage ' + (i + 1) + ' will require ' + formattime(curtime * 10800) + tmptext + '<br>';
+				tmptext = '';
+				mainresults.appendChild(h2);
+			}
+
+			results.appendChild(mainresults);
+			h1 = document.createElement('h1');
+			h1.style.display = "inline";
+			h1.innerHTML += 'Total time: ' + formattime(totaltime * 10800);
+			h3 = document.createElement('h3');
+			h3.style.display = "inline";
+			h3.innerHTML += '(+ time until next hit)';
+			results.appendChild(h1);
+			results.appendChild(h3);
+			let addedheight = 5;
+			let iframeSize = document.getElementById("wrapper").scrollHeight + addedheight;
+			parent.postMessage(iframeSize, "*");
+		}
+	</script>
 </head>
+
 <body onload="loadpage()">
-<div id="wrapper" class="container-lg markdown-body">
-<br>  
-<input id="lunasfortune" type="checkbox" > <span id="">Luna's Fortune</span>
-<br>  
-<br>  
- Current stage: <select id="curstage" onchange="getBossHP()">
-    <option value="45">1. Mane-iac (45HP)</option>
-	<option value="108" selected>2. Mane-iac (108HP)</option>
-	<option value="162">3. Mane-iac (162HP)</option>
-	<option value="189">4. Mane-iac (189HP)</option>
-	<option value="252">5. Mane-iac (252HP)</option>
-	<option value="360">6. Mane-iac (360HP)</option>
-  </select>  HP left: 
-  <input id="hpleft" type="number" value="108" min="0" style="width:70px"/>
-  <br>
-  <br>
-  
-     
-  <div id="results"></div>
+	<div id="wrapper" class="container-lg markdown-body">
+		<br>
+		<input id="lunasfortune" type="checkbox"> <span id="">Luna's Fortune</span>
+		<br>
+		<br>
+		Current stage: <select id="curstage" onchange="getBossHP()">
+			<option value="45">1. Mane-iac (45HP)</option>
+			<option value="108" selected>2. Mane-iac (108HP)</option>
+			<option value="162">3. Mane-iac (162HP)</option>
+			<option value="189">4. Mane-iac (189HP)</option>
+			<option value="252">5. Mane-iac (252HP)</option>
+			<option value="360">6. Mane-iac (360HP)</option>
+		</select> HP left:
+		<input id="hpleft" type="number" value="108" min="0" style="width:70px" />
+		<br>
+		<br>
 
-  <p><input style="width:450px" type="button" value="Calculate" onclick="calctime()"></p>
-  
-  
-  <p>All calculations are approximate, actual times depend on<br>
-  how often you can check your game.</p>
 
-</div>
+		<div id="results"></div>
+
+		<p><input style="width:450px" type="button" value="Calculate" onclick="calctime()"></p>
+
+
+		<p>All calculations are approximate, actual times depend on<br>
+			how often you can check your game.</p>
+
+	</div>
 </body>
+
 </html>

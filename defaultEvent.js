@@ -1,9 +1,9 @@
 const eventsSelector = {
-	"siege" : "A Mistmane New Year",
-	"blitz" : "The Perfect Pear",
-	"blitz2" : "The Bashful Barber",
+	"siege": "A Mistmane New Year",
+	"blitz": "The Perfect Pear",
+	"blitz2": "The Bashful Barber",
 	//Default event type (0=siege, 1=blitz, 2= new blitz)
-	"eventType" : 1
+	"eventType": 1
 }
 /*
 siege events:
