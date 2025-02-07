@@ -54,6 +54,8 @@
 
 <iframe id="eventframe" src="" height="1000px" width="600px" style="border-style:none"></iframe>
 
-  
-<p id="footer">Send me <a href="https://www.reddit.com/user/Nice_Coconut">PM on Reddit</a> for any questions and suggestions</p>
+
+<div id="footer">
+<p>mlpcalc was originally created by <a href="https://www.reddit.com/user/Nice_Coconut">Nice_Coconut</a>, however it is currently being maintained by <a href="https://github.com/ego-lay-atman-bay">ego-lay_atman-bay</a>, so if you have any question or suggestions, you can tell me on <a href="https://discord.gg/femskNZYda">my discord server</a> or the <a htef="https://discord.gg/xmVQnCSkKZ">MLPIOS Reddit Discord Server</a>.</p>
+</div>
 </div>
