@@ -59,6 +59,7 @@ function trunctime(time,value){
 	  tmp = [i,i];
 	  htmlEventList.push(tmp);
 	}
+	htmlEventList.sort()
 	addToDropDownList(eventList, htmlEventList);
   }
   
