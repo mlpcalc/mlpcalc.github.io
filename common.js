@@ -1,3 +1,10 @@
+async function getJson(file) {
+	const response = await fetch(file)
+	const json = await response.json()
+	return json
+}
+
+
 function formattime(time) {
 	if (Math.trunc(time) == 0) return '0s';
 	var out = "";

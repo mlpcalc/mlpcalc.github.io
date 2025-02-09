@@ -1,12 +1,12 @@
 <html>
 
 <head>
-	<script src="siege_data.js"></script>
 	<script src="common.js"></script>
 	<script src="defaultEvent.js"></script>
 	<link rel="stylesheet" href="style.css">
 
 	<script>
+		var gamedata = {}
 		var selectedEvent;
 		var maindata;
 		//const images = ["pouchpic","coinpic"];
@@ -25,7 +25,9 @@
 		var portraits = "helpers_portraits";
 		const defaultEvent = eventsSelector["siege"]
 
-		function loadpage() {
+		async function loadpage() {
+			gamedata = await getJson('./siege_data.json')
+
 			curstage = document.getElementById("curstage");
 			//setimages('coinpic');
 			eventList = document.getElementById("eventList");

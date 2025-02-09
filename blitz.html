@@ -1,11 +1,11 @@
 <html>
 
 <head>
-	<script src="blitz_data.js"></script>
 	<script src="common.js"></script>
 	<script src="defaultEvent.js"></script>
 	<link rel="stylesheet" href="style.css">
 	<script>
+		var gamedata = {}
 		const images = ["powerpic", "maxenergypic", "cooldownpic", "energypic", "sapphirepic", "gempic"];
 		var power, maxenergy, cooldown;
 		var basePower, helpersPower;
@@ -27,7 +27,9 @@
 		const TIME = 2
 
 		//tying variables to page elements
-		function loadpage() {
+		async function loadpage() {
+			gamedata = await getJson('./blitz_data.json')
+
 			power = document.getElementById("power");
 			maxenergy = document.getElementById("maxenergy");
 			cooldown = document.getElementById("time");
@@ -43,6 +45,7 @@
 					break;
 				}
 			}
+
 			resetPage();
 		}
 
@@ -538,7 +541,7 @@
 				<tr>
 					<th colspan="3"></th>
 					<td colspan="3" style="width:150px" align="center">Stop upgrading at: <span id="warning0"
-							style="color:red; font-size:18pt display:none"><b>*</b></span></td>
+							style="color:red; font-size:18pt; display:none"><b>*</b></span></td>
 				</tr>
 				<tr>
 					<th style="vertical-align:bottom width:20px">Extra<br>gems</th>

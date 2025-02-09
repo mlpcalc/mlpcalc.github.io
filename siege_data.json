@@ -1,4 +1,4 @@
-const gamedata = {
+{
 	"Viva La Pinkie Pie":
 	{
 		"upgrades": [
@@ -813,7 +813,7 @@ const gamedata = {
 				"BossHP": 570,
 				"BossHits": 15,
 				"TimeMinutes": 5,
-				"CurrencyCappings": [676, 776, 876, 876], //each stage here one helper shorter, so all cappings shifted by one
+				"CurrencyCappings": [676, 776, 876, 876],
 				"MinionHP": 800,
 				"MinionCurrencyReward": 2,
 				"MinionsBeforeBoss": 50
@@ -1037,7 +1037,7 @@ const gamedata = {
 				"BossHP": 570,
 				"BossHits": 15,
 				"TimeMinutes": 5,
-				"CurrencyCappings": [676, 776, 876, 876], //each stage here one helper shorter, so all cappings shifted by one
+				"CurrencyCappings": [676, 776, 876, 876],
 				"MinionHP": 800,
 				"MinionCurrencyReward": 2,
 				"MinionsBeforeBoss": 50
