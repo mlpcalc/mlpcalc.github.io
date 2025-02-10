@@ -68,7 +68,6 @@ Holiday Super Chef Competition
 Royal Dining: First Course
 Royal Dining: Entrée
 A New-Fashioned Wedding
-The Perfect Pear
 Bump, Set, Spike!
 I Am Ponyacci
 Zipline Blues
@@ -84,6 +83,7 @@ Abyssinian Adventure!
 new blitz:
 
 The Bashful Barber
-
+The Perfect Pear
+Snow Shy and the Three Li'l Fillies
 
 */
