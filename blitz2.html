@@ -20,7 +20,11 @@
 		var maindata;
 		var portraits = "helpers_portraits";
 		var helpnames, helpstage, helpdmg, helpchecked;
+		var bonusStart, bonusStep
 		var eventEnded, curBonusStage, curBonusStageHP, curBonusDamage;
+		var baseStageNumbers = [1, 5, 9];
+		var gemsVal = [5, 10, 15];
+		
 		const defaultEvent = eventsSelector["blitz2"]
 		const POWER = 0
 		const ENERGY = 1
@@ -66,6 +70,10 @@
 			helpnames = maindata["helpnames"];
 			helpstage = maindata["helpstage"];
 			helpdmg = maindata["helpdmg"];
+			bonusStart = maindata['bonusStart'] || 5000
+			bonusStep = maindata['bonusStep'] || 1000
+			baseStageNumbers = maindata['bonusGemStages'] || [1, 5, 9]
+			gemsVal = maindata['bonusGemValues'] || [5, 10, 15]
 			clearDropDownList(curStage);
 			addToDropDownList(curStage, generateStages());
 			curStage.selectedIndex = 0;
@@ -340,22 +348,20 @@
 		}
 
 		function setBonusStageHP() {
-			curBonusStageHP.value = (curBonusStage.value * 1000) + 4000;
+			curBonusStageHP.value = (curBonusStage.value * bonusStep) + (bonusStart - bonusStep);
 		}
 
 		function getBonusStagesDmg() {
 			bonusDmg = 0;
 			for (stage = 1; stage < curBonusStage.value; stage++) {
-				bonusDmg += (stage * 1000) + 4000;
+				bonusDmg += (stage * bonusStep) + (bonusStart - bonusStep);
 			}
 			bonusDmg += Number(curBonusDamage.value);
 			return bonusDmg;
 		}
 
 		function getBonusStagesGemValues() {
-			let baseStageNumbers = [1, 5, 9];
-			let gemsVal = [5, 10, 15];
-			let base = 4000;
+			let base = (bonusStart - bonusStep);
 			let baseArrayLen = baseStageNumbers.length;
 			let gemsHP = [];
 			let gemsReward = [];
@@ -363,12 +369,12 @@
 			let totalHP = 0;
 			for (i = 1; i <= curBonusStage.max; i++) {
 				stage += 1;
-				totalHP += (stage * 1000) + base;
+				totalHP += (stage * bonusStep) + base;
 				if (baseStageNumbers.includes(stage)) {
 					gemsHP.push(totalHP);
 				}
 				if (stage == baseStageNumbers[baseArrayLen - 1]) {
-					base += stage * 1000;
+					base += stage * bonusStep;
 					stage = 0;
 				}
 			}

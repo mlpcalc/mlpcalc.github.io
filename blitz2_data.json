@@ -842,7 +842,19 @@
       25,
       30
     ],
-    "margin": 0.013
+    "margin": 0.013,
+    "bonusStart": 5000,
+    "bonusStep": 1000,
+    "bonusGemStages": [
+      1,
+      5,
+      9
+    ],
+    "bonusGemValues": [
+      5,
+      10,
+      15
+    ]
   },
   "The Perfect Pear": {
     "vals": [
@@ -1679,7 +1691,19 @@
       25,
       30
     ],
-    "margin": 0.013
+    "margin": 0.013,
+    "bonusStart": 5000,
+    "bonusStep": 1000,
+    "bonusGemStages": [
+      1,
+      5,
+      9
+    ],
+    "bonusGemValues": [
+      5,
+      10,
+      15
+    ]
   },
   "Snow Shy and the Three Li'l Fillies": {
     "vals": [
@@ -2518,6 +2542,18 @@
       25,
       30
     ],
-    "margin": 0.013
+    "margin": 0.013,
+    "bonusStart": 5000,
+    "bonusStep": 1000,
+    "bonusGemStages": [
+      1,
+      5,
+      9
+    ],
+    "bonusGemValues": [
+      5,
+      10,
+      15
+    ]
   }
 }
