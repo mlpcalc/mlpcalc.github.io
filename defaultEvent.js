@@ -1,9 +1,9 @@
 const eventsSelector = {
 	"siege": "Dreams of Shire Lanka",
 	"blitz": "Rise of the Cyber Ponies",
-	"blitz2": "Snow Shy and the Three Li'l Fillies",
+	"blitz2": "A Mermare's Tale",
 	//Default event type (0=siege, 1=blitz, 2= new blitz)
-	"eventType": 0
+	"eventType": 2
 }
 /*
 siege events:
