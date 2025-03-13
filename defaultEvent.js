@@ -1,9 +1,9 @@
 const eventsSelector = {
-	"siege": "Dreams of Shire Lanka",
+	"siege": "The Cutie THREE-Mark",
 	"blitz": "Rise of the Cyber Ponies",
 	"blitz2": "A Mermare's Tale",
 	//Default event type (0=siege, 1=blitz, 2= new blitz)
-	"eventType": 2
+	"eventType": 0
 }
 /*
 siege events:
@@ -43,6 +43,8 @@ The Case of the Pilfered Pins!
 Boss Rush -- Nightmare Mode
 Seaquestria Couture
 Fashion Is Cyclical
+Dreams of Shire Lanka
+The Cutie THREE-Mark
 
 ===================
 blitz events:
@@ -76,7 +78,7 @@ A Mermare's Tale
 Generations - Dance Party!
 Tale of Tirek Part Three
 Abyssinian Adventure!
-Dreams of Shire Lanka
+
 
 
 
