@@ -1,9 +1,9 @@
 const eventsSelector = {
 	"siege": "The Cutie THREE-Mark",
 	"blitz": "Rise of the Cyber Ponies",
-	"blitz2": "A Mermare's Tale",
+	"blitz2": "Tale of Tirek Part Three",
 	//Default event type (0=siege, 1=blitz, 2= new blitz)
-	"eventType": 0
+	"eventType": 2
 }
 /*
 siege events:
@@ -87,5 +87,6 @@ new blitz:
 The Bashful Barber
 The Perfect Pear
 Snow Shy and the Three Li'l Fillies
+Tale of Tirek Part Three
 
 */
