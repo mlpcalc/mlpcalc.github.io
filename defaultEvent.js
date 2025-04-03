@@ -1,5 +1,5 @@
 const eventsSelector = {
-	"siege": "Return To Breezie Hallow",
+	"siege": "Return to Breezie Hollow",
 	"blitz": "Rise of the Cyber Ponies",
 	"blitz2": "Tale of Tirek Part Three",
 	//Default event type (0=siege, 1=blitz, 2= new blitz)
@@ -45,7 +45,7 @@ Seaquestria Couture
 Fashion Is Cyclical
 Dreams of Shire Lanka
 The Cutie THREE-Mark
-Return To Breezie Hallow
+Return to Breezie Hollow
 
 ===================
 blitz events:
