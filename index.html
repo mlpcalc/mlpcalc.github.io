@@ -1,61 +1,75 @@
 <html>
+  <head>
+    <link rel="stylesheet" href="style.css" />
+    <script src="defaultEvent.js"></script>
 
-<head>
-  <link rel="stylesheet" href="style.css">
-  <script src="defaultEvent.js"></script>
+    <script>
+      var curEventType = eventsSelector["eventType"];
+      var iframe;
 
-  <script>
-    var curEventType = eventsSelector["eventType"];
-    var iframe;
+      window.addEventListener("message", function (e) {
+        if (e.origin != "https://mlpcalc.github.io") return;
+        iframe.style.height = e.data + "px";
+      });
 
-    window.addEventListener("message", function (e) {
-      if (e.origin != "https://mlpcalc.github.io")
-        return;
-      iframe.style.height = e.data + "px";
-    })
-
-    function loadpage() {
-      iframe = document.getElementById('eventframe');
-      document.getElementById("eventtype").options[curEventType].selected = true;
-      updateEventType();
-    }
-
-    function updateEventType() {
-      curEventType = document.getElementById('eventtype').value;
-      if (curEventType == 0) {
-        iframe.src = "siege.html";
-      } else if (curEventType == 1) {
-        iframe.src = "blitz.html";
-      } else if (curEventType == 2) {
-        iframe.src = "blitz2.html";
-      } else {
-        iframe.src = "powerponies.html"
+      function loadpage() {
+        iframe = document.getElementById("eventframe");
+        document.getElementById("eventtype").options[
+          curEventType
+        ].selected = true;
+        updateEventType();
       }
-    }
-  </script>
-</head>
 
-<body onload="loadpage()">
-  <div class="container-lg markdown-body">
-    <h1>mlpcalc</h1>
-    <h2 style="margin-bottom: 1px;">Event calculator</h1>
-      <p style="margin-top: 1px;margin-bottom: 1px;">Select event type: <select id="eventtype"
-          onchange="updateEventType()">
+      function updateEventType() {
+        curEventType = document.getElementById("eventtype").value;
+        if (curEventType == 0) {
+          iframe.src = "siege.html";
+        } else if (curEventType == 1) {
+          iframe.src = "blitz.html";
+        } else if (curEventType == 2) {
+          iframe.src = "blitz2.html";
+        } else {
+          iframe.src = "powerponies.html";
+        }
+      }
+    </script>
+  </head>
+
+  <body onload="loadpage()">
+    <div class="container-lg markdown-body">
+      <h1>mlpcalc</h1>
+      <h2 style="margin-bottom: 1px">Event calculator</h2>
+      <p style="margin-top: 1px; margin-bottom: 1px">
+        Select event type:
+        <select id="eventtype" onchange="updateEventType()">
           <option value="0" selected>Siege</option>
           <option value="1">Blitz</option>
           <option value="2">Blitz2</option>
           <option value="3">Power Ponies</option>
-        </select></p>
+        </select>
+      </p>
 
-      <iframe id="eventframe" src="" height="1000px" width="600px" style="border-style:none"></iframe>
-
+      <iframe
+        id="eventframe"
+        src=""
+        height="1000px"
+        width="600px"
+        style="border-style: none"
+      ></iframe>
 
       <div id="footer">
-        <p>mlpcalc was originally created by <a href="https://www.reddit.com/user/Nice_Coconut">Nice_Coconut</a>,
-          however
-          it is currently being maintained by <a href="https://github.com/ego-lay-atman-bay">ego-lay_atman-bay</a>, so
-          if
-          you have any question or suggestions, you can tell me on <a href="https://discord.gg/femskNZYda">my discord
-            server</a> or the <a href="https://discord.gg/xmVQnCSkKZ">MLPIOS Reddit Discord Server</a>.</p>
+        <p>
+          mlpcalc was originally created by
+          <a href="https://www.reddit.com/user/Nice_Coconut">Nice_Coconut</a>,
+          however it is currently being maintained by
+          <a href="https://github.com/ego-lay-atman-bay">ego-lay_atman-bay</a>,
+          so if you have any question or suggestions, you can tell me on
+          <a href="https://discord.gg/femskNZYda">my discord server</a> or the
+          <a href="https://discord.gg/xmVQnCSkKZ"
+            >MLPIOS Reddit Discord Server</a
+          >.
+        </p>
       </div>
-  </div>
+    </div>
+  </body>
+</html>
