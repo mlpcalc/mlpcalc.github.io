@@ -506,6 +506,11 @@
 								stageHelpers = getStageHelpers(stageProcessing);
 							}
 						}
+						if (stagedmg >= bossstages[stageProcessing]) {
+							stagedmg = stagedmg - bossstages[stageProcessing];
+							stageProcessing++;
+							if (stageProcessing < bossstages.length) stageHelpers = getStageHelpers(stageProcessing);
+						}
 					}
 					//now stagedmg will act as total damage inflicted after the end of main part of event
 					else {
@@ -513,11 +518,6 @@
 							extraGemsIndex += 1;
 							extraGemsTimes.push(totalTime);
 						}
-					}
-					if (stagedmg >= bossstages[stageProcessing]) {
-						stagedmg = stagedmg - bossstages[stageProcessing];
-						stageProcessing++;
-						if (stageProcessing < bossstages.length) stageHelpers = getStageHelpers(stageProcessing);
 					}
 					if (sapphiresCollected >= convrate[conversionIndex]) {
 						gemtimes.push(totalTime);
