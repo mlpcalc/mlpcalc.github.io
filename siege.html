@@ -196,6 +196,7 @@
       }
 
       function calcstage(num) {
+        var nextLevel = document.getElementById('calculateWithWait').checked ? document.getElementById("waitlevel").value : 0
         var nextupgrade;
         var stagetime = 0;
         var totalpower = curarmor[0] + curhelmet[0] + stages[num]["helpersdmg"];
@@ -209,7 +210,7 @@
           bosshits = stages[num]["bosstime"] * 60;
         }
         var tmptime = Math.ceil(stages[num]["minionhp"] / totalpower);
-        while (totalpower * bosshits < stages[num]["bosshp"]) {
+        while (((nextLevel > 0 && totalpower < nextLevel)) || totalpower * bosshits < stages[num]["bosshp"]) {
           if (curarmor[1] > curhelmet[1]) {
             nextupgrade = [true, vals[curhelmet[1]][1]];
           } else {
@@ -241,6 +242,7 @@
             tmptime = Math.ceil(stages[num]["minionhp"] / totalpower);
           }
         }
+        console.log('totalpower', totalpower)
         if (bosshits == 0) {
           return stagetime + stages[num]["bosstime"] * 60;
         } else {
@@ -471,16 +473,27 @@
 
       Current stage:
       <select id="curstage"></select>
+      <br>
+      <input id="calculateWithWait" type="checkbox" onclick="document.getElementById('waitlevel').disabled = !this.checked" />
+      <label for="calculateWithWait">Calculate time it'll take if you stay on this stage until a specific level</label>
+      
+      <input
+        id="waitlevel"
+        type="number"
+        value="0"
+        min="0"
+        max="950000"
+        style="width: 80px"
+        disabled
+      />
       <br />
       <br />
 
       <input id="chanceExtraHit" type="checkbox" />
-      <span id=""
+      <label for="chanceExtraHit"
         >Calc with chance of extra hit
-        <span id="" style="color:red; font-size:18pt display:inline"
-          ><b>* </b></span
-        >
-      </span>
+        <span id="" style="color:red; font-size:18pt display:inline"><b>* </b></span>
+      </label>
       <p>
         <input
           style="width: 450px"
