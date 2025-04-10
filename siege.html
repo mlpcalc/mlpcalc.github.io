@@ -196,7 +196,14 @@
       }
 
       function calcstage(num) {
-        var nextLevel = document.getElementById('calculateWithWait').checked ? document.getElementById("waitlevel").value : 0
+        var nextArmorLevel = 0;
+        var nextHelmetLevel = 0;
+        var nextLevel = 0;
+        if (document.getElementById('calculateWithWait').checked) {
+          nextArmorLevel = Number(document.getElementById("waitArmorLevel").value)
+          nextHelmetLevel = Number(document.getElementById("waitHelmetLevel").value)
+          nextLevel = nextArmorLevel + nextHelmetLevel + stages[num]["helpersdmg"]
+        }
         var nextupgrade;
         var stagetime = 0;
         var totalpower = curarmor[0] + curhelmet[0] + stages[num]["helpersdmg"];
@@ -214,6 +221,7 @@
           if (curarmor[1] > curhelmet[1]) {
             nextupgrade = [true, vals[curhelmet[1]][1]];
           } else {
+            console.log('totalpower:', totalpower, nextLevel)
             nextupgrade = [false, vals2[curarmor[1]][1]];
           }
           while (coins < nextupgrade[1]) {
@@ -473,11 +481,21 @@
       Current stage:
       <select id="curstage"></select>
       <br>
-      <input id="calculateWithWait" type="checkbox" onclick="document.getElementById('waitlevel').disabled = !this.checked" />
-      <label for="calculateWithWait">Calculate time it'll take if you stay on this stage until a specific level</label>
-      
+      <input id="calculateWithWait" type="checkbox" onclick="document.getElementById('waitArmorLevel').disabled = !this.checked; document.getElementById('waitHelmetLevel').disabled = !this.checked" />
+      <label for="calculateWithWait">Calculate time it'll take if you stay on this stage until specific gear levels</label>
+      <br>
       <input
-        id="waitlevel"
+        id="waitArmorLevel"
+        type="number"
+        value="0"
+        min="0"
+        max="950000"
+        style="width: 80px"
+        disabled
+      />
+      <br>
+      <input
+        id="waitHelmetLevel"
         type="number"
         value="0"
         min="0"
