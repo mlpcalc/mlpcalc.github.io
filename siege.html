@@ -199,7 +199,8 @@
         var nextArmorLevel = 0;
         var nextHelmetLevel = 0;
         var nextLevel = 0;
-        if (document.getElementById('calculateWithWait').checked) {
+        var waitLevel = document.getElementById('calculateWithWait').checked;
+        if (waitLevel) {
           nextArmorLevel = Number(document.getElementById("waitArmorLevel").value)
           nextHelmetLevel = Number(document.getElementById("waitHelmetLevel").value)
           nextLevel = nextArmorLevel + nextHelmetLevel + stages[num]["helpersdmg"]
@@ -217,11 +218,10 @@
           bosshits = stages[num]["bosstime"] * 60;
         }
         var tmptime = Math.ceil(stages[num]["minionhp"] / totalpower);
-        while (((nextLevel > 0 && totalpower < nextLevel)) || totalpower * bosshits < stages[num]["bosshp"]) {
+        while (((waitLevel && (curhelmet[1] < nextHelmetLevel || curarmor[1] < nextArmorLevel))) || totalpower * bosshits < stages[num]["bosshp"]) {
           if (curarmor[1] > curhelmet[1]) {
             nextupgrade = [true, vals[curhelmet[1]][1]];
           } else {
-            console.log('totalpower:', totalpower, nextLevel)
             nextupgrade = [false, vals2[curarmor[1]][1]];
           }
           while (coins < nextupgrade[1]) {
