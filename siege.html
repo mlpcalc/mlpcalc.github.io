@@ -115,7 +115,7 @@
       function generateStages() {
         var stagesarr = [];
         var tmp;
-        for (i = 0; i < maindata["bosses"].length - 1; i++) {
+        for (i = 0; i < maindata["bosses"].length; i++) {
           tmp = i + 1 + ". ";
           tmp += maindata["bosses"][i]["ID"] + " (";
           tmp += maindata["bosses"][i]["MinionHP"] + ", ";
@@ -257,6 +257,25 @@
         }
       }
 
+      function createGemsTable(gemtimes) {
+        table = document.createElement("table");
+        tbdy = document.createElement("tbody");
+        tr = document.createElement("tr");
+        tr.innerHTML += "<td>Extra<br>gems</td>";
+        for (let j = 1; j < egems.length; j++) {
+          tr.innerHTML +=
+            '<td align="center" width="120"><img name="gempic" src="assets/common/gem.png" alt="Gems" />' +
+            egems[j] +
+            ": <br>+" +
+            formattime(gemtimes[j]) +
+            "</td>";
+        }
+        tbdy.appendChild(tr);
+        table.appendChild(tbdy);
+
+        return table;
+      }
+
       function calcgems(instage, inpower, incoins) {
         var maxgems = maindata["convrate"][maindata["convrate"].length - 1];
         var cointime = Math.ceil(stages[instage]["minionhp"] / inpower);
@@ -333,38 +352,37 @@
         results.appendChild(span);
         mainresults = document.createElement("div");
         //setimages('pouchpic');
-        for (let i = curstage; i < stages.length - 1; i++) {
-          curtime = calcstage(i);
-          curdmg = curarmor[0] + curhelmet[0] + stages[curstage]["helpersdmg"];
-          gemtimes = calcgems(i + 1, curdmg, coins);
-          totaltime += curtime;
+        console.log('current stage', curstage, stages.length - 1)
+        if (curstage >= stages.length - 1) {
+          gemtimes = calcgems(curstage, curdmg, coins);
+          totaltime += gemtimes[gemtimes.length - 1];
           h2 = document.createElement("h2");
           h2.innerHTML +=
             "Stage " +
-            (i + 1) +
-            " will require " +
-            formattime(curtime) +
-            " and gear levels " +
-            curarmor[1] +
-            "/" +
-            curhelmet[1] +
-            "<br>";
-          table = document.createElement("table");
-          tbdy = document.createElement("tbody");
-          tr = document.createElement("tr");
-          tr.innerHTML += "<td>Extra<br>gems</td>";
-          for (let j = 1; j < egems.length; j++) {
-            tr.innerHTML +=
-              '<td align="center" width="120"><img name="gempic" src="assets/common/gem.png" alt="Gems" />' +
-              egems[j] +
-              ": <br>+" +
-              formattime(gemtimes[j]) +
-              "</td>";
-          }
-          tbdy.appendChild(tr);
-          table.appendChild(tbdy);
+            (curstage + 1)
           mainresults.appendChild(h2);
-          mainresults.appendChild(table);
+          mainresults.appendChild(createGemsTable(gemtimes));
+        } else {
+          for (let i = curstage; i < stages.length - 1; i++) {
+            curtime = calcstage(i);
+            curdmg = curarmor[0] + curhelmet[0] + stages[curstage]["helpersdmg"];
+            gemtimes = calcgems(i + 1, curdmg, coins);
+            totaltime += curtime;
+            h2 = document.createElement("h2");
+            h2.innerHTML +=
+              "Stage " +
+              (i + 1) +
+              " will require " +
+              formattime(curtime) +
+              " and gear levels " +
+              curarmor[1] +
+              "/" +
+              curhelmet[1] +
+              "<br>";
+            mainresults.appendChild(h2);
+            
+            mainresults.appendChild(createGemsTable(gemtimes));
+          }
         }
 
         var p = document.createElement("p");
