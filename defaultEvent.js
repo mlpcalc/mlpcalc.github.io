@@ -1,5 +1,5 @@
 const eventsSelector = {
-	"siege": "Return to Breezie Hollow",
+	"siege": "Daunting Donkey-Day",
 	"blitz": "Rise of the Cyber Ponies",
 	"blitz2": "Tale of Tirek Part Three",
 	//Default event type (0=siege, 1=blitz, 2= new blitz)
@@ -46,6 +46,7 @@ Fashion Is Cyclical
 Dreams of Shire Lanka
 The Cutie THREE-Mark
 Return to Breezie Hollow
+Daunting Donkey-Day
 
 ===================
 blitz events:
