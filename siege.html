@@ -264,7 +264,7 @@
         tr.innerHTML += "<td>Extra<br>gems</td>";
         for (let j = 1; j < egems.length; j++) {
           tr.innerHTML +=
-            '<td align="center" width="120"><img name="gempic" src="assets/common/gem.png" alt="Gems" />' +
+            '<td align="center" width="120"><img name="gempic" src="assets/common/gem.png" alt="Gems" width="20" />' +
             egems[j] +
             ": <br>+" +
             formattime(gemtimes[j]) +
@@ -405,7 +405,7 @@
           "<b>Extra gems conversion rate<br>(after the end of event):</b><br>";
         for (let i = 1; i < egems.length; i++) {
           p.innerHTML +=
-            '<img name="gempic" src="assets/common/gem.png" alt="Gems" />' +
+            '<img name="gempic" src="assets/common/gem.png" alt="Gems" width="20" />' +
             egems[i] +
             " ≥ " +
             '<img name="coinpic" src="assets/common/coin.png" alt="Coins" width="20" />' +
