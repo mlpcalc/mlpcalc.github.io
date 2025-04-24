@@ -133,17 +133,8 @@
           dropnums.push(dropvalues[i][0]);
           dropnums.push(dropvalues[i][1]);
         }
-        dropAverage.nextSibling.remove();
-        dropRandom.nextSibling.remove();
-        dropAverage.insertAdjacentText(
-          "afterend",
-          "Average (" + sapphiresavg + ")"
-        );
-        //"..." (spread) to arrays used in functions when elements of array required as arguments (replaces .apply)
-        dropRandom.insertAdjacentText(
-          "afterend",
-          "Random (" + Math.min(...dropnums) + "-" + Math.max(...dropnums) + ")"
-        );
+        dropAverage.nextElementSibling.innerText = `Average (${sapphiresavg})`
+        dropRandom.nextElementSibling.innerText = `Random (${Math.min(...dropnums)}-${Math.max(...dropnums)})`
 
         document.getElementById("errorMargin").innerText = (
           margin * 100
@@ -541,7 +532,7 @@
   <body onload="loadpage()">
     <div id="wrapper" class="container-lg markdown-body">
       <p style="margin-top: 1px">
-        Select event:
+        <label for="eventList">Select event:</label>
         <select id="eventList" onchange="resetPage()">
           <option>Tale of Tirek</option>
         </select>
@@ -549,7 +540,7 @@
       <p></p>
       <div class="current-levels">
         <div class="current-level">
-          <img name="powerpic" src="assets/common/power.png" alt="Power" />
+          <label for="power"><img name="powerpic" src="assets/common/power.png" alt="Power" /></label>
           <input
             id="power"
             type="number"
@@ -560,11 +551,13 @@
           />
         </div>
         <div class="current-level">
-          <img
-            name="maxenergypic"
-            src="assets/common/en_max.png"
-            alt="Max energy"
-          />
+          <label for="maxenergy">
+            <img
+              name="maxenergypic"
+              src="assets/common/en_max.png"
+              alt="Max energy"
+            />
+          </label>
           <select
             id="maxenergy"
             onchange="processETOptions(ENERGY)"
@@ -574,11 +567,13 @@
           </select>
         </div>
         <div class="current-level">
-          <img
-            name="cooldownpic"
-            src="assets/common/time.png"
-            alt="Cooldown time"
-          />
+          <label for="time">
+            <img
+              name="cooldownpic"
+              src="assets/common/time.png"
+              alt="Cooldown time"
+            />
+          </label>
           <select
             id="time"
             onchange="processETOptions(TIME)"
@@ -588,11 +583,13 @@
           </select>
         </div>
         <div class="current-level">
-          <img
-            name="energypic"
-            src="assets/common/energy.png"
-            alt="Current energy"
-          />
+          <label for="curenergy">
+            <img
+              name="energypic"
+              src="assets/common/energy.png"
+              alt="Current energy"
+            />
+          </label>
           <input
             id="curenergy"
             type="number"
@@ -602,11 +599,13 @@
           />
         </div>
         <div class="current-level">
-          <img
-            name="sapphirepic"
-            src="assets/common/sapphire.png"
-            alt="Current sapphires"
-          />
+          <label for="curcurrency">
+            <img
+              name="sapphirepic"
+              src="assets/common/sapphire.png"
+              alt="Current sapphires"
+            />
+          </label>
           <input
             id="curcurrency"
             type="number"
@@ -619,13 +618,13 @@
 
       <p id="helpers"></p>
 
-      Current stage
+      <label for="curstage">Current stage</label>
       <select id="curstage" onchange="checkStage()">
         <option value="0" selected>I</option>
         <option value="1">II</option>
         <option value="2">III</option>
       </select>
-      damage dealt:
+      <label for="curdamage">damage dealt:</label>
       <input
         id="curdamage"
         type="number"
@@ -727,7 +726,8 @@
             type="radio"
             value="avg"
             checked
-          />Average (60)
+          />
+          <label for="dropAverage">Average (60)</label>
         </td>
         <td>
           <input
@@ -735,7 +735,8 @@
             name="sappdrop"
             type="radio"
             value="rand"
-          />Random (25-150)
+          />
+          <label for="dropRandom">Random (25-150)</label>
         </td>
       </table>
     </div>

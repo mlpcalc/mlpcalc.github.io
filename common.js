@@ -106,7 +106,7 @@ function checkUncheck(checkboxId) {
 function generateHelpers() {
   let p = document.getElementById("helpers");
   p.innerHTML =
-    '<b>Helpers:</b> <input style="width:100px" type="button" value="switch view" onclick="swapImages()"><br>';
+    '<label for="switchHelperView"><b>Helpers:</b></label> <input id="switchHelperView" style="width:100px" type="button" value="switch view" onclick="swapImages()"><br>';
   //let helpdmgs = maindata['helpdmg'];
   let i, j;
   var table, td, tr, input, span, img;
