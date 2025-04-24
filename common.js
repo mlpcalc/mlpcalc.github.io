@@ -1,3 +1,31 @@
+function isLocalhost() {
+  return window.location.hostname === 'localhost' ||
+    // [::1] is the IPv6 localhost address.
+    window.location.hostname === '[::1]' ||
+    // 127.0.0.1/8 is considered localhost for IPv4.
+    RegExp([
+      '^([a-z0-9\\.\\-_%]+:([a-z0-9\\.\\-_%])+?@)?',
+      '((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\\.){3}(25[0-5]|2[0-4',
+      '][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])?',
+      '(:[0-9]+)?(\/[^\\s]*)?$'
+    ].join(''), 'i').test(window.location.hostname)
+}
+
+
+function resizeIframe() {
+  console.log('images', document.images)
+  let iframeSize = document.body.scrollHeight
+  parent.postMessage(iframeSize, "*");
+  //debugger
+  Promise.all(document.images.length ? Array.from(document.images).filter(img => !img.complete).map(img => new Promise(resolve => { img.onload = img.onerror = resolve; })) : [true]).then(() => {
+    //debugger
+    console.log('all images loaded')
+    let iframeSize = document.body.parentElement.scrollHeight
+    parent.postMessage(iframeSize, "*");
+  });
+}
+
+
 async function getJson(file) {
   const response = await fetch(file);
   const json = await response.json();
@@ -102,13 +130,16 @@ function generateHelpers() {
     }
     j += 1;
     td = document.createElement("td");
+    td.classList.add('helper')
     input = document.createElement("input");
     input.id = "help" + i;
     input.type = "checkbox";
     td.append(input);
-    tr.append(td);
-    td = document.createElement("td");
-    span = document.createElement("span");
+    // tr.append(td);
+    // td = document.createElement("td");
+
+    span = document.createElement("label");
+    span.setAttribute('for', input.id)
     let hstages = "";
     if (stagenums[i].length == 1) {
       hstages = "stage " + stagenums[i].toString();
@@ -140,7 +171,7 @@ function generateHelpers() {
     };
     span.append(img);
     if (hstages != "") {
-      span.innerHTML += "<br>(" + hstages + ")";
+      span.innerHTML += `<br>(${hstages})`;
     }
     td.append(span);
     tr.append(td);
@@ -166,11 +197,11 @@ function generateHelpers() {
 
     //assigning onclick to every image (not just to checkboxes)
     //same as above
-    document.getElementById("helperimg" + i).onclick = (function (i) {
-      return function () {
-        checkUncheck("help" + i);
-        setHelpers(i);
-      };
-    })(i);
+    // document.getElementById("helperimg" + i).onclick = (function (i) {
+    //   return function () {
+    //     checkUncheck("help" + i);
+    //     setHelpers(i);
+    //   };
+    // })(i);
   }
 }

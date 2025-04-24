@@ -2,7 +2,9 @@
   <head>
     <script src="common.js"></script>
     <script src="defaultEvent.js"></script>
+    <link rel="stylesheet" href="normalize.css" />
     <link rel="stylesheet" href="style.css" />
+    
     <script>
       var gamedata = {};
       const images = [
@@ -148,8 +150,7 @@
         processETOptions();
         document.getElementById("warning0").style.display = "none";
         document.getElementById("warning1").style.display = "none";
-        let iframeSize = document.getElementById("wrapper").scrollHeight;
-        parent.postMessage(iframeSize, "*");
+        resizeIframe();
       }
 
       function generateStages() {
@@ -429,8 +430,7 @@
         results.appendChild(h1);
         results.appendChild(span);
         setgems();
-        let iframeSize = document.getElementById("wrapper").scrollHeight;
-        parent.postMessage(iframeSize, "*");
+        resizeIframe();
       }
 
       function checkforgems(

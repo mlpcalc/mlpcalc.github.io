@@ -1,0 +1,49 @@
+.gear-config {
+    --border-width: 1px;
+    --border-color: #dfe2e5;
+    border: calc(var(--border-width) / 2) solid var(--border-color);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100px, 100%), 1fr));
+}
+
+.gear-option {
+    padding: 0.5rem;
+    border: calc(var(--border-width) / 2) solid var(--border-color);
+}
+
+
+.siege-main-results {
+    --columns: 5;
+    display: grid;
+    grid-template-columns: 0.5fr repeat(calc(var(--columns) - 1), 1fr);
+    container-type: inline-size;
+    container-name: main-result;
+}
+
+.siege-main-results > :nth-child(odd) {
+    grid-column: 1 / -1;
+}
+
+.siege-extra-gems {
+    display: grid;
+    grid-template-columns: subgrid;
+    /* grid-column: span  6; */
+    grid-column: 1 / -1;
+
+    --border-width: 1px;
+    --border-color: #dfe2e5;
+    border: calc(var(--border-width) / 2) solid var(--border-color);
+}
+
+.siege-extra-gems > div {
+    padding: 1em 0.5em;
+    text-align: center;
+    border: calc(var(--border-width) / 2) solid var(--border-color);
+    /* grid-column: 1; */
+}
+
+@container main-result (width < 600px) {
+    .siege-extra-gems > div {
+        grid-column: 1 / -1;
+    }
+}

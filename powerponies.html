@@ -1,6 +1,7 @@
 <html>
   <head>
-    <script src="siege_data.js"></script>
+    <script src="common.js"></script>
+    <link rel="stylesheet" href="normalize.css" />
     <link rel="stylesheet" href="style.css" />
 
     <script>
@@ -9,8 +10,7 @@
       var totaltime;
 
       function loadpage() {
-        let iframeSize = document.getElementById("wrapper").scrollHeight + 5;
-        parent.postMessage(iframeSize, "*");
+        resizeIframe();
       }
 
       function calcstage(num) {
@@ -90,10 +90,7 @@
         h3.innerHTML += "(+ time until next hit)";
         results.appendChild(h1);
         results.appendChild(h3);
-        let addedheight = 5;
-        let iframeSize =
-          document.getElementById("wrapper").scrollHeight + addedheight;
-        parent.postMessage(iframeSize, "*");
+        resizeIframe();
       }
     </script>
   </head>

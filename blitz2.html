@@ -2,7 +2,10 @@
   <head>
     <script src="common.js"></script>
     <script src="defaultEvent.js"></script>
+    <link rel="stylesheet" href="normalize.css" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="blitz.css" />
+
     <script>
       var gamedata = {};
       const images = [
@@ -160,8 +163,7 @@
         ).toFixed(1);
         processETOptions();
         switchEventActivity();
-        let iframeSize = document.getElementById("wrapper").scrollHeight;
-        parent.postMessage(iframeSize, "*");
+        resizeIframe()
       }
 
       function generateStages() {
@@ -588,7 +590,7 @@
           print1;
 
         let resultTime = document.createElement("h1");
-        resultTime.style.width = "450px";
+        resultTime.style.width = "100%";
         if (stageIndexes.length > 1) {
           resultTime.style.borderBottomWidth = "0px";
         }
@@ -621,7 +623,7 @@
           }
           resultTime.innerHTML += "<br>";
           if (i == stageIndexes.length - 2) {
-            resultTime.style.width = "450px";
+            resultTime.style.width = "100%";
             resultTime.style.marginBottom = "16px";
             resultTime.style.paddingBottom = "16px";
             resultTime.style.borderBottomWidth = "1px";
@@ -635,8 +637,8 @@
         results.appendChild(sappsCollectedInfo);
         results.appendChild(extraGemsInfo);
         setgems();
-        let iframeSize = document.getElementById("wrapper").scrollHeight;
-        parent.postMessage(iframeSize, "*");
+        // let iframeSize = document.getElementById("wrapper").scrollHeight;
+        resizeIframe()
       }
 
       function setgems() {
@@ -667,98 +669,75 @@
         </select>
       </p>
       <p></p>
-      <table style="border-collapse: collapse">
-        <thead>
-          <tr>
-            <th align="center">
-              <img name="powerpic" src="assets/common/power.png" alt="Power" />
-            </th>
-            <th align="center">
-              <img
-                name="maxenergypic"
-                src="assets/common/en_max.png"
-                alt="Max energy"
-              />
-            </th>
-            <th align="center" style="width: 85px">
-              <img
-                name="cooldownpic"
-                src="assets/common/time.png"
-                alt="Cooldown time"
-              />
-            </th>
-            <th style="border-left: 3px double #000" align="right">
-              <img
-                name="energypic"
-                src="assets/common/energy.png"
-                alt="Current energy"
-              />
-            </th>
-            <th align="center">
-              <img
-                name="sapphirepic"
-                src="assets/common/sapphire.png"
-                alt="Current sapphires"
-              />
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td align="center">
-              <input
-                id="power"
-                type="number"
-                value="10"
-                min="10"
-                max="63"
-                style="width: 60px"
-                onchange="processETOptions(POWER)"
-              />
-            </td>
-            <td align="center">
-              <select
-                id="maxenergy"
-                style="width: 60px"
-                onchange="processETOptions(ENERGY)"
-                disabled
-              >
-                <option>10</option>
-              </select>
-            </td>
-            <td align="left">
-              <select
-                id="time"
-                style="width: 80px"
-                onchange="processETOptions(TIME)"
-                disabled
-              >
-                <option value="12">12m</option>
-              </select>
-            </td>
-            <td align="right" style="width: 65px; border-left: 3px double #000">
-              <input
-                id="curenergy"
-                type="number"
-                value="0"
-                min="0"
-                max="197"
-                style="width: 60px"
-              />
-            </td>
-            <td>
-              <input
-                id="curcurrency"
-                type="number"
-                value="0"
-                min="0"
-                max="250000"
-                style="width: 80px"
-              />
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="current-levels">
+        <div class="current-level">
+          <img name="powerpic" src="assets/common/power.png" alt="Power" />
+          <input
+            id="power"
+            type="number"
+            value="10"
+            min="10"
+            max="63"
+            onchange="processETOptions(POWER)"
+          />
+        </div>
+        <div class="current-level">
+          <img
+            name="maxenergypic"
+            src="assets/common/en_max.png"
+            alt="Max energy"
+          />
+          <select
+            id="maxenergy"
+            onchange="processETOptions(ENERGY)"
+            disabled
+          >
+            <option>10</option>
+          </select>
+        </div>
+        <div class="current-level">
+          <img
+            name="cooldownpic"
+            src="assets/common/time.png"
+            alt="Cooldown time"
+          />
+          <select
+            id="time"
+            onchange="processETOptions(TIME)"
+            disabled
+          >
+            <option value="12">12m</option>
+          </select>
+        </div>
+        <div class="current-level">
+          <img
+            name="energypic"
+            src="assets/common/energy.png"
+            alt="Current energy"
+          />
+          <input
+            id="curenergy"
+            type="number"
+            value="0"
+            min="0"
+            max="197"
+          />
+        </div>
+        <div class="current-level">
+          <img
+            name="sapphirepic"
+            src="assets/common/sapphire.png"
+            alt="Current sapphires"
+          />
+          <input
+            id="curcurrency"
+            type="number"
+            value="0"
+            min="0"
+            max="250000"
+          />
+        </div>
+      </div>
 
       <p id="helpers"></p>
 
@@ -820,7 +799,7 @@
 
       <p>
         <input
-          style="width: 450px"
+          class="calculate-button"
           type="button"
           value="Calculate"
           onclick="calctime()"
