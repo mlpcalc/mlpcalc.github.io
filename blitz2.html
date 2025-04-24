@@ -806,60 +806,62 @@
         />
       </p>
 
-      <table>
-        <thead align="center">
-          <tr>
-            <th style="vertical-align:bottom width:30px">Extra gems</th>
-            <th style="vertical-align:bottom width:100px">Time to reach</th>
-            <th style="vertical-align:bottom width:100px">Margin of error</th>
-          </tr>
-        </thead>
-        <tbody id="gemtable" align="center"></tbody>
-      </table>
-      <br />
-      <br />
-      <i>
-        <p>
-          This calculator <b>does not</b> account for rainbow piles scattered
-          across<br />
-          the area. Meanwhile they can make a huge difference if checked
-          regularly<br />
-          (up to 6-7 hours of total time from start of event if you are lucky)
-        </p>
-        <p>
-          All other calculations are approximate, actual times depend on<br />
-          your luck with number of sapphires dropping for every hit<br />
-        </p>
-        <p>
-          You can check the spread of values by switching the option<br />
-          below and calculating the result several times.
-        </p>
-        <p>
-          Margin of error calculated as <span id="errorMargin">2.5</span>% from
-          average value<br />
-          since more than 90% of spread included in these boundaries
-        </p>
-      </i>
-      <b>Sapphires per hit:</b>
-      <table>
-        <td>
-          <input
-            id="dropAverage"
-            name="sappdrop"
-            type="radio"
-            value="avg"
-            checked
-          />Average (60)
-        </td>
-        <td>
-          <input
-            id="dropRandom"
-            name="sappdrop"
-            type="radio"
-            value="rand"
-          />Random (25-150)
-        </td>
-      </table>
+      <div class="table-container">
+        <table>
+          <thead align="center">
+            <tr>
+              <th style="vertical-align:bottom width:30px">Extra gems</th>
+              <th style="vertical-align:bottom width:100px">Time to reach</th>
+              <th style="vertical-align:bottom width:100px">Margin of error</th>
+            </tr>
+          </thead>
+          <tbody id="gemtable" align="center"></tbody>
+        </table>
+        <br />
+        <br />
+        <i>
+          <p>
+            This calculator <b>does not</b> account for rainbow piles scattered
+            across<br />
+            the area. Meanwhile they can make a huge difference if checked
+            regularly<br />
+            (up to 6-7 hours of total time from start of event if you are lucky)
+          </p>
+          <p>
+            All other calculations are approximate, actual times depend on<br />
+            your luck with number of sapphires dropping for every hit<br />
+          </p>
+          <p>
+            You can check the spread of values by switching the option<br />
+            below and calculating the result several times.
+          </p>
+          <p>
+            Margin of error calculated as <span id="errorMargin">2.5</span>% from
+            average value<br />
+            since more than 90% of spread included in these boundaries
+          </p>
+        </i>
+        <b>Sapphires per hit:</b>
+        <table>
+          <td>
+            <input
+              id="dropAverage"
+              name="sappdrop"
+              type="radio"
+              value="avg"
+              checked
+            />Average (60)
+          </td>
+          <td>
+            <input
+              id="dropRandom"
+              name="sappdrop"
+              type="radio"
+              value="rand"
+            />Random (25-150)
+          </td>
+        </table>
+      </div>
     </div>
   </body>
 </html>
