@@ -13,13 +13,11 @@ function isLocalhost() {
 
 
 function resizeIframe() {
-  console.log('images', document.images)
   let iframeSize = document.body.scrollHeight
   parent.postMessage(iframeSize, "*");
   //debugger
   Promise.all(document.images.length ? Array.from(document.images).filter(img => !img.complete).map(img => new Promise(resolve => { img.onload = img.onerror = resolve; })) : [true]).then(() => {
     //debugger
-    console.log('all images loaded')
     let iframeSize = document.body.parentElement.scrollHeight
     parent.postMessage(iframeSize, "*");
   });

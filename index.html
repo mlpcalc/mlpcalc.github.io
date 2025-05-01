@@ -12,7 +12,6 @@
       var iframe;
 
       window.addEventListener("message", function (e) {
-        console.log('is localhost', isLocalhost())
         if (e.origin != "https://mlpcalc.github.io" && !isLocalhost()) return;
         iframe.style.height = e.data + "px";
         // iframe.style.width = Math.ceil(iframe.contentWindow.document.body.scrollWidth) + 'px';

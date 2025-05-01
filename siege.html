@@ -367,7 +367,6 @@
         mainresults.classList.add('siege-main-results')
         mainresults.style.setProperty('--columns', maindata["convrate"].length)
         //setimages('pouchpic');
-        console.log('current stage', curstage, stages.length - 1)
         if (curstage >= stages.length - 1) {
           gemtimes = calcgems(curstage, curdmg, coins);
           totaltime += gemtimes[gemtimes.length - 1];
