@@ -44,6 +44,7 @@
 
 @container main-result (width < 600px) {
     .siege-extra-gems > div {
+        padding: 0.2em 0.2em;
         grid-column: 1 / -1;
     }
 }
