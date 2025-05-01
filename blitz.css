@@ -1,0 +1,31 @@
+.current-levels {
+    --border-width: 1px;
+    --border-color: #dfe2e5;
+    border: calc(var(--border-width) / 2) solid var(--border-color);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100px, 100%), 1fr));
+    grid-auto-rows: 2fr 1fr;
+}
+
+.current-level {
+    border: calc(var(--border-width) / 2) solid var(--border-color);
+    display: grid;
+    grid-template-rows: subgrid;
+    align-content: space-between;
+    justify-items: center;
+    align-items: center;
+    grid-row: span 2;
+}
+
+.current-level > * {
+    /* border: calc(var(--border-width) / 4) solid var(--border-color); */
+    /* width: 100%; */
+    /* height: 100%; */
+    /* object-fit: contain; */
+    margin: 4px;
+}
+
+.current-level input, .current-level select {
+    max-width: 80px;
+    width: 100%;
+}

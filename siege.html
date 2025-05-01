@@ -2,7 +2,9 @@
   <head>
     <script src="common.js"></script>
     <script src="defaultEvent.js"></script>
+    <link rel="stylesheet" href="normalize.css" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="siege.css" />
 
     <script>
       var gamedata = {};
@@ -103,8 +105,7 @@
         updatedmg("curarmor");
         updatedmg("curhelmet");
         //chanceExtraHit();
-        let iframeSize = document.getElementById("wrapper").scrollHeight + 5;
-        parent.postMessage(iframeSize, "*");
+        resizeIframe()
       }
 
       function updatedmg(gear) {
@@ -258,20 +259,32 @@
       }
 
       function createGemsTable(gemtimes) {
-        table = document.createElement("table");
+        table = document.createElement("div");
+        table.classList.add('siege-extra-gems')
         tbdy = document.createElement("tbody");
         tr = document.createElement("tr");
-        tr.innerHTML += "<td>Extra<br>gems</td>";
+
+        let header = document.createElement('div')
+        header.innerText = 'Extra gems'
+        table.appendChild(header)
+
         for (let j = 1; j < egems.length; j++) {
-          tr.innerHTML +=
-            '<td align="center" width="120"><img name="gempic" src="assets/common/gem.png" alt="Gems" height="20" />' +
-            egems[j] +
-            ": <br>+" +
-            formattime(gemtimes[j]) +
-            "</td>";
+          let cell = document.createElement('div')
+          let img = document.createElement('img')
+
+          img.setAttribute('name', 'gempic')
+          img.src = 'assets/common/gem.png'
+          img.setAttribute('alt', 'Gems')
+          img.height = 12
+          
+          span = document.createElement('span')
+          span.innerHTML = egems[j] + ":<br/>+" + formattime(gemtimes[j])
+          
+          cell.appendChild(img)
+          cell.appendChild(span)
+
+          table.appendChild(cell)
         }
-        tbdy.appendChild(tr);
-        table.appendChild(tbdy);
 
         return table;
       }
@@ -351,6 +364,8 @@
           "</b>";
         results.appendChild(span);
         mainresults = document.createElement("div");
+        mainresults.classList.add('siege-main-results')
+        mainresults.style.setProperty('--columns', maindata["convrate"].length)
         //setimages('pouchpic');
         console.log('current stage', curstage, stages.length - 1)
         if (curstage >= stages.length - 1) {
@@ -422,15 +437,13 @@
         //checking if pouch image is loaded
         //if not - adding 30px to iframe height
         //if yes - adding 5px
-        let addedheight = 0;
-        if (imgLoaded(img) == false) {
-          addedheight = 30;
-        } else {
-          addedheight = 5;
-        }
-        let iframeSize =
-          document.getElementById("wrapper").scrollHeight + addedheight;
-        parent.postMessage(iframeSize, "*");
+        // let addedheight = 0;
+        // if (imgLoaded(img) == false) {
+        //   addedheight = 30;
+        // } else {
+        //   addedheight = 5;
+        // }
+        resizeIframe()
       }
     </script>
   </head>
@@ -438,7 +451,7 @@
   <body onload="loadpage()">
     <div id="wrapper" class="container-lg markdown-body">
       <p style="margin-top: 1px">
-        Select event:
+        <label for="eventList">Select event:</label>
         <select id="eventList" onchange="resetPage()"></select>
       </p>
 
@@ -453,8 +466,8 @@
       />
       <br />
       <br />
-      <table>
-        <td style="width: 200px">
+      <div class="gear-config">
+        <div class="gear-option">
           Current gear levels: <br />
           <input
             id="curarmor"
@@ -474,8 +487,8 @@
             style="width: 60px"
             onchange="updatedmg('curhelmet')"
           />
-        </td>
-        <td>
+        </div>
+        <div class="gear-option">
           Current gear power: <br />
           <input
             id="curarmordmg"
@@ -491,8 +504,8 @@
             style="width: 60px"
             disabled="true"
           />
-        </td>
-      </table>
+        </div>
+      </div>
 
       <p id="helpers"></p>
 
@@ -531,7 +544,7 @@
       </label>
       <p>
         <input
-          style="width: 450px"
+          class="calculate-button"
           type="button"
           value="Calculate"
           onclick="calctime()"

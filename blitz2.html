@@ -2,7 +2,10 @@
   <head>
     <script src="common.js"></script>
     <script src="defaultEvent.js"></script>
+    <link rel="stylesheet" href="normalize.css" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="blitz.css" />
+
     <script>
       var gamedata = {};
       const images = [
@@ -143,25 +146,15 @@
           dropnums.push(dropvalues[i][0]);
           dropnums.push(dropvalues[i][1]);
         }
-        dropAverage.nextSibling.remove();
-        dropRandom.nextSibling.remove();
-        dropAverage.insertAdjacentText(
-          "afterend",
-          "Average (" + sapphiresavg + ")"
-        );
-        //"..." (spread) to arrays used in functions when elements of array required as arguments (replaces .apply)
-        dropRandom.insertAdjacentText(
-          "afterend",
-          "Random (" + Math.min(...dropnums) + "-" + Math.max(...dropnums) + ")"
-        );
-
+        dropAverage.nextElementSibling.innerText = `Average (${sapphiresavg})`
+        dropRandom.nextElementSibling.innerText = `Random (${Math.min(...dropnums)}-${Math.max(...dropnums)})`
+        
         document.getElementById("errorMargin").innerText = (
           margin * 100
         ).toFixed(1);
         processETOptions();
         switchEventActivity();
-        let iframeSize = document.getElementById("wrapper").scrollHeight;
-        parent.postMessage(iframeSize, "*");
+        resizeIframe()
       }
 
       function generateStages() {
@@ -588,7 +581,7 @@
           print1;
 
         let resultTime = document.createElement("h1");
-        resultTime.style.width = "450px";
+        resultTime.style.width = "100%";
         if (stageIndexes.length > 1) {
           resultTime.style.borderBottomWidth = "0px";
         }
@@ -621,7 +614,7 @@
           }
           resultTime.innerHTML += "<br>";
           if (i == stageIndexes.length - 2) {
-            resultTime.style.width = "450px";
+            resultTime.style.width = "100%";
             resultTime.style.marginBottom = "16px";
             resultTime.style.paddingBottom = "16px";
             resultTime.style.borderBottomWidth = "1px";
@@ -635,8 +628,8 @@
         results.appendChild(sappsCollectedInfo);
         results.appendChild(extraGemsInfo);
         setgems();
-        let iframeSize = document.getElementById("wrapper").scrollHeight;
-        parent.postMessage(iframeSize, "*");
+        // let iframeSize = document.getElementById("wrapper").scrollHeight;
+        resizeIframe()
       }
 
       function setgems() {
@@ -661,114 +654,99 @@
   <body onload="loadpage()">
     <div id="wrapper" class="container-lg markdown-body">
       <p style="margin-top: 1px">
-        Select event:
+        <label for="eventList">Select event:</label>
         <select id="eventList" onchange="resetPage()">
           <option>Tale of Tirek</option>
         </select>
       </p>
       <p></p>
-      <table style="border-collapse: collapse">
-        <thead>
-          <tr>
-            <th align="center">
-              <img name="powerpic" src="assets/common/power.png" alt="Power" />
-            </th>
-            <th align="center">
-              <img
-                name="maxenergypic"
-                src="assets/common/en_max.png"
-                alt="Max energy"
-              />
-            </th>
-            <th align="center" style="width: 85px">
-              <img
-                name="cooldownpic"
-                src="assets/common/time.png"
-                alt="Cooldown time"
-              />
-            </th>
-            <th style="border-left: 3px double #000" align="right">
-              <img
-                name="energypic"
-                src="assets/common/energy.png"
-                alt="Current energy"
-              />
-            </th>
-            <th align="center">
-              <img
-                name="sapphirepic"
-                src="assets/common/sapphire.png"
-                alt="Current sapphires"
-              />
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td align="center">
-              <input
-                id="power"
-                type="number"
-                value="10"
-                min="10"
-                max="63"
-                style="width: 60px"
-                onchange="processETOptions(POWER)"
-              />
-            </td>
-            <td align="center">
-              <select
-                id="maxenergy"
-                style="width: 60px"
-                onchange="processETOptions(ENERGY)"
-                disabled
-              >
-                <option>10</option>
-              </select>
-            </td>
-            <td align="left">
-              <select
-                id="time"
-                style="width: 80px"
-                onchange="processETOptions(TIME)"
-                disabled
-              >
-                <option value="12">12m</option>
-              </select>
-            </td>
-            <td align="right" style="width: 65px; border-left: 3px double #000">
-              <input
-                id="curenergy"
-                type="number"
-                value="0"
-                min="0"
-                max="197"
-                style="width: 60px"
-              />
-            </td>
-            <td>
-              <input
-                id="curcurrency"
-                type="number"
-                value="0"
-                min="0"
-                max="250000"
-                style="width: 80px"
-              />
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="current-levels">
+        <div class="current-level">
+          <label for="power"><img name="powerpic" src="assets/common/power.png" alt="Power" /></label>
+          <input
+            id="power"
+            type="number"
+            value="10"
+            min="10"
+            max="63"
+            onchange="processETOptions(POWER)"
+          />
+        </div>
+        <div class="current-level">
+          <label for="maxenergy">
+            <img
+              name="maxenergypic"
+              src="assets/common/en_max.png"
+              alt="Max energy"
+            />
+          </label>
+          <select
+            id="maxenergy"
+            onchange="processETOptions(ENERGY)"
+            disabled
+          >
+            <option>10</option>
+          </select>
+        </div>
+        <div class="current-level">
+          <label for="time">
+            <img
+              name="cooldownpic"
+              src="assets/common/time.png"
+              alt="Cooldown time"
+            />
+          </label>
+          <select
+            id="time"
+            onchange="processETOptions(TIME)"
+            disabled
+          >
+            <option value="12">12m</option>
+          </select>
+        </div>
+        <div class="current-level">
+          <label for="curenergy">
+            <img
+              name="energypic"
+              src="assets/common/energy.png"
+              alt="Current energy"
+            />
+          </label>
+          <input
+            id="curenergy"
+            type="number"
+            value="0"
+            min="0"
+            max="197"
+          />
+        </div>
+        <div class="current-level">
+          <label for="curcurrency">
+            <img
+              name="sapphirepic"
+              src="assets/common/sapphire.png"
+              alt="Current sapphires"
+            />
+          </label>
+          <input
+            id="curcurrency"
+            type="number"
+            value="0"
+            min="0"
+            max="250000"
+          />
+        </div>
+      </div>
 
       <p id="helpers"></p>
 
-      Current stage
+      <label for="curstage">Current stage</label>
       <select id="curstage" onchange="checkStage()">
         <option value="0" selected>I</option>
         <option value="1">II</option>
         <option value="2">III</option>
       </select>
-      damage dealt:
+      <label for="curdamage">damage dealt:</label>
       <input
         id="curdamage"
         type="number"
@@ -783,10 +761,10 @@
         type="checkbox"
         onchange="switchEventActivity()"
       />
-      <span id="">Event ended </span>
+      <label for="eventEndedCheckbox">Event ended </label>
       <p id="bonusParameters">
         <br />
-        Current bonus stage
+        <label for="bonusStageNum">Current bonus stage</label>
         <input
           id="bonusStageNum"
           type="number"
@@ -797,7 +775,7 @@
           onchange="setBonusStageHP()"
           disabled="true"
         />
-        Bonus stage HP
+        <label for="bonusStageHP">Bonus stage HP</label>
         <input
           id="bonusStageHP"
           type="text"
@@ -806,7 +784,7 @@
           disabled="true"
         />
         <br />
-        Damage dealt:
+        <label for="BonusDamage">Damage dealt:</label>
         <input
           id="BonusDamage"
           type="number"
@@ -820,67 +798,71 @@
 
       <p>
         <input
-          style="width: 450px"
+          class="calculate-button"
           type="button"
           value="Calculate"
           onclick="calctime()"
         />
       </p>
 
-      <table>
-        <thead align="center">
-          <tr>
-            <th style="vertical-align:bottom width:30px">Extra gems</th>
-            <th style="vertical-align:bottom width:100px">Time to reach</th>
-            <th style="vertical-align:bottom width:100px">Margin of error</th>
-          </tr>
-        </thead>
-        <tbody id="gemtable" align="center"></tbody>
-      </table>
-      <br />
-      <br />
-      <i>
-        <p>
-          This calculator <b>does not</b> account for rainbow piles scattered
-          across<br />
-          the area. Meanwhile they can make a huge difference if checked
-          regularly<br />
-          (up to 6-7 hours of total time from start of event if you are lucky)
-        </p>
-        <p>
-          All other calculations are approximate, actual times depend on<br />
-          your luck with number of sapphires dropping for every hit<br />
-        </p>
-        <p>
-          You can check the spread of values by switching the option<br />
-          below and calculating the result several times.
-        </p>
-        <p>
-          Margin of error calculated as <span id="errorMargin">2.5</span>% from
-          average value<br />
-          since more than 90% of spread included in these boundaries
-        </p>
-      </i>
-      <b>Sapphires per hit:</b>
-      <table>
-        <td>
-          <input
-            id="dropAverage"
-            name="sappdrop"
-            type="radio"
-            value="avg"
-            checked
-          />Average (60)
-        </td>
-        <td>
-          <input
-            id="dropRandom"
-            name="sappdrop"
-            type="radio"
-            value="rand"
-          />Random (25-150)
-        </td>
-      </table>
+      <div class="table-container">
+        <table>
+          <thead align="center">
+            <tr>
+              <th style="vertical-align:bottom width:30px">Extra gems</th>
+              <th style="vertical-align:bottom width:100px">Time to reach</th>
+              <th style="vertical-align:bottom width:100px">Margin of error</th>
+            </tr>
+          </thead>
+          <tbody id="gemtable" align="center"></tbody>
+        </table>
+        <br />
+        <br />
+        <i>
+          <p>
+            This calculator <b>does not</b> account for rainbow piles scattered
+            across<br />
+            the area. Meanwhile they can make a huge difference if checked
+            regularly<br />
+            (up to 6-7 hours of total time from start of event if you are lucky)
+          </p>
+          <p>
+            All other calculations are approximate, actual times depend on<br />
+            your luck with number of sapphires dropping for every hit<br />
+          </p>
+          <p>
+            You can check the spread of values by switching the option<br />
+            below and calculating the result several times.
+          </p>
+          <p>
+            Margin of error calculated as <span id="errorMargin">2.5</span>% from
+            average value<br />
+            since more than 90% of spread included in these boundaries
+          </p>
+        </i>
+        <b>Sapphires per hit:</b>
+        <table>
+          <td>
+            <input
+              id="dropAverage"
+              name="sappdrop"
+              type="radio"
+              value="avg"
+              checked
+            />
+            <label for="dropAverage">Average (60)</label>
+          </td>
+          <td>
+            <input
+              id="dropRandom"
+              name="sappdrop"
+              type="radio"
+              value="rand"
+            />
+            <label for="dropRandom">Random (25-150)</label>
+          </td>
+        </table>
+      </div>
     </div>
   </body>
 </html>

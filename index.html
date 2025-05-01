@@ -1,15 +1,23 @@
 <html>
   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="normalize.css" />
     <link rel="stylesheet" href="style.css" />
     <script src="defaultEvent.js"></script>
+    <script src="common.js"></script>
 
     <script>
       var curEventType = eventsSelector["eventType"];
       var iframe;
 
       window.addEventListener("message", function (e) {
-        if (e.origin != "https://mlpcalc.github.io") return;
+        console.log('is localhost', isLocalhost())
+        if (e.origin != "https://mlpcalc.github.io" && !isLocalhost()) return;
         iframe.style.height = e.data + "px";
+        // iframe.style.width = Math.ceil(iframe.contentWindow.document.body.scrollWidth) + 'px';
+        // iframe.style.height = Math.ceil(iframe.contentWindow.document.body.scrollHeight) + 'px';
+        //debugger
       });
 
       function loadpage() {
@@ -22,6 +30,7 @@
 
       function updateEventType() {
         curEventType = document.getElementById("eventtype").value;
+        iframe.style.height = '500px'
         if (curEventType == 0) {
           iframe.src = "siege.html";
         } else if (curEventType == 1) {
@@ -31,16 +40,19 @@
         } else {
           iframe.src = "powerponies.html";
         }
+        iframe.onload = function() {
+          this.style.height = this.contentWindow.document.body.scrollHeight + 'px';
+        }
       }
     </script>
   </head>
 
   <body onload="loadpage()">
-    <div class="container-lg markdown-body">
+    <div class="main markdown-body">
       <h1>mlpcalc</h1>
       <h2 style="margin-bottom: 1px">Event calculator</h2>
       <p style="margin-top: 1px; margin-bottom: 1px">
-        Select event type:
+        <label for="eventtype">Select event type:</label>
         <select id="eventtype" onchange="updateEventType()">
           <option value="0" selected>Siege</option>
           <option value="1">Blitz</option>
@@ -52,9 +64,6 @@
       <iframe
         id="eventframe"
         src=""
-        height="1000px"
-        width="600px"
-        style="border-style: none"
       ></iframe>
 
       <div id="footer">
