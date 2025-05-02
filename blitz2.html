@@ -419,6 +419,7 @@
         let stageProcessing = Number(curStage.value);
         let totalTime = 0; //overall time spent on all event actuvity (inc. extra gems farming)
         let finalTime = 0; //time for completing main part of event
+        let stageTime = 0;
         let sapphiresLeft = 0;
         let sapphiresSpent = 0;
         let sapphiresCollected = 0;
@@ -514,13 +515,16 @@
             if (storedEnergy > 0) {
               storedEnergy -= 1;
             } else {
+              stageTime += vals[curUpgrade][2] * 60;
               totalTime += vals[curUpgrade][2] * 60;
             }
             if (!eventEnded_) {
               if (stagedmg >= bossstages[stageProcessing]) {
                 stagedmg = stagedmg - bossstages[stageProcessing];
+                console.log('stagedmg:', stagedmg)
                 stageIndexes.push(stageProcessing);
-                stageTimes.push(totalTime);
+                stageTimes.push(stageTime);
+                stageTime = 0;
                 //if it's the last stage
                 if (stageProcessing >= bossstages.length - 1) {
                   eventEnded_ = true;
@@ -598,7 +602,7 @@
         results.appendChild(resultTime);
 
         //adding times for each stage
-        for (i = 0; i < stageIndexes.length - 1; i++) {
+        for (i = 0; i < stageIndexes.length; i++) {
           resultTime = document.createElement("p");
           resultTime.style.fontWeight = "600";
           resultTime.style.marginTop = "0px";
@@ -613,16 +617,15 @@
             resultTime.innerText += print1;
           }
           resultTime.innerHTML += "<br>";
-          if (i == stageIndexes.length - 2) {
-            resultTime.style.width = "100%";
-            resultTime.style.marginBottom = "16px";
-            resultTime.style.paddingBottom = "16px";
-            resultTime.style.borderBottomWidth = "1px";
-            resultTime.style.borderBottomStyle = "solid";
-            resultTime.style.borderBottomColor = "#eaecef";
-          }
           results.appendChild(resultTime);
         }
+
+        resultTime.style.width = "100%";
+        resultTime.style.marginBottom = "16px";
+        resultTime.style.paddingBottom = "16px";
+        resultTime.style.borderBottomWidth = "1px";
+        resultTime.style.borderBottomStyle = "solid";
+        resultTime.style.borderBottomColor = "#eaecef";
 
         results.appendChild(pouchInfo);
         results.appendChild(sappsCollectedInfo);
