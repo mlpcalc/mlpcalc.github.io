@@ -1,9 +1,9 @@
 const eventsSelector = {
-	"siege": "Daunting Donkey-Day",
+	"siege": "Back to Mount Aris",
 	"blitz": "Rise of the Cyber Ponies",
 	"blitz2": "A Maritime Mystery",
 	//Default event type (0=siege, 1=blitz, 2= new blitz)
-	"eventType": 2
+	"eventType": 0
 }
 /*
 siege events:
@@ -47,6 +47,7 @@ Dreams of Shire Lanka
 The Cutie THREE-Mark
 Return to Breezie Hollow
 Daunting Donkey-Day
+Back to Mount Aris
 
 ===================
 blitz events:
