@@ -18,7 +18,7 @@ function resizeIframe() {
   //debugger
   Promise.all(document.images.length ? Array.from(document.images).filter(img => !img.complete).map(img => new Promise(resolve => { img.onload = img.onerror = resolve; })) : [true]).then(() => {
     //debugger
-    let iframeSize = document.body.parentElement.scrollHeight
+    let iframeSize = document.body.parentElement.scrollHeight + 1
     parent.postMessage(iframeSize, "*");
   });
 }
