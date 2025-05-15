@@ -15354,7 +15354,28 @@
       "Princess Skystar",
       "Princess Celestia Seapony"
     ],
-    "helpSwappable": [],
+    "helpSwappable": [
+      [
+        9,
+        11
+      ],
+      [
+        12,
+        14
+      ],
+      [
+        15,
+        17
+      ],
+      [
+        18,
+        20
+      ],
+      [
+        18,
+        20
+      ]
+    ],
     "convrate": [
       1,
       2501,
