@@ -47,8 +47,8 @@
         document.getElementById("results").innerHTML = "";
         selectedEvent = eventList[eventList.selectedIndex].value;
         maindata = gamedata[selectedEvent];
-        let i;
-        for (i = 0; i < maindata["bosses"].length; i++) {
+
+        for (let i = 0; i < maindata["bosses"].length; i++) {
           stages[i] = {};
           stages[i]["bosshp"] = maindata["bosses"][i]["BossHP"];
           stages[i]["bosshits"] = maindata["bosses"][i]["BossHits"];
@@ -56,9 +56,24 @@
           stages[i]["minionhp"] = maindata["bosses"][i]["MinionHP"];
           stages[i]["minioncoins"] =
             maindata["bosses"][i]["MinionCurrencyReward"];
-          stages[i]["maxcoins"] = maindata["bosses"][i]["CurrencyCappings"][0];
+          stages[i]["maxcoins"] = 0;
           stages[i]["helpersdmg"] = 0;
         }
+
+        for (let swappable of maindata['helpSwappable']) {
+          let stageIndexes = []
+          for (let i = 0; i < maindata['helpstage'].length; i++) {
+            let stage = maindata['helpstage'][i]
+            if (stage.includes(swappable[0])) {
+              stageIndexes.push(i)
+            }
+          }
+
+          for (let stageIndex of stageIndexes) {
+            stages[stageIndex]["maxcoins"] += 1;
+          }
+        }
+
         vals = maindata["upgrades"];
         vals2 = vals;
         helpnames = maindata["helpnames"];
@@ -69,7 +84,7 @@
         }
         curhelmet = [vals[0][0], 0]; //[current value, index in vals]
         curarmor = [vals2[0][0], 0];
-        for (i = 0; i < vals.length; i++) {
+        for (let i = 0; i < vals.length; i++) {
           upgradelevels.push(vals[i][0] + upgradelevels[i]);
         }
         egems = maindata["convgems"];
@@ -163,13 +178,29 @@
 
       function setHelpers(helpId) {
         let stageList = [];
+        let isSwappable = false
         maindata["helpstage"].forEach(function (stageHelpers, index, array) {
           if (stageHelpers.includes(helpId)) {
             stageList.push([index, array[index].indexOf(helpId)]);
           }
         });
 
-        change = document.getElementById("help" + helpId).checked ? 1 : -1;
+        let change = document.getElementById("help" + helpId).checked ? 1 : -1;
+
+        //swap for helpers that are same character in different forms
+        maindata["helpSwappable"].forEach(function (sameHelpers, index) {
+          if (sameHelpers.includes(helpId)) {
+            isSwappable = false
+            let swapId = sameHelpers.filter((id) => id != helpId)[0];
+            let swapHelper = document.getElementById("help" + swapId);
+            if (change == 1 && swapHelper != null) {
+              if (swapHelper.checked) {
+                swapHelper.checked = false;
+                setHelpers(swapId);
+              }
+            }
+          }
+        });
 
         stageList.forEach(function (stage, index) {
           let curStage = stage[0];
@@ -177,23 +208,8 @@
           stages[curStage]["helpersdmg"] +=
             maindata["helpdmg"][curStage][helperPos] * change;
           let maxCoinsArr = maindata["bosses"][curStage]["CurrencyCappings"];
-          let curCoinPos = maxCoinsArr.indexOf(stages[curStage]["maxcoins"]);
-          stages[curStage]["maxcoins"] = maxCoinsArr[curCoinPos + change];
+          stages[curStage]["maxcoins"] += change;
         });
-
-        //swap for helpers that are same character in different forms
-        if (change == 1) {
-          maindata["helpSwappable"].forEach(function (sameHelpers, index) {
-            if (sameHelpers.includes(helpId)) {
-              let swapId = sameHelpers.filter((id) => id != helpId)[0];
-              let swapHelper = document.getElementById("help" + swapId);
-              if (swapHelper.checked) {
-                swapHelper.checked = false;
-                setHelpers(swapId);
-              }
-            }
-          });
-        }
       }
 
       function calcstage(num) {
@@ -347,9 +363,11 @@
         curdmg = curarmor[0] + curhelmet[0] + stages[curstage]["helpersdmg"];
         curminion = stages[curstage]["minionhp"];
         ttb = Math.ceil(curminion / curdmg);
+        let maxCoinsArr = maindata["bosses"][curstage]["CurrencyCappings"]
+        let maxcoins = maxCoinsArr[Math.min(stages[curstage]["maxcoins"], maxCoinsArr.length - 1)]
         pouchtime =
           Math.ceil(
-            stages[curstage]["maxcoins"] / stages[curstage]["minioncoins"]
+            maxcoins / stages[curstage]["minioncoins"]
           ) * ttb;
         span = document.createElement("span");
         img = document.createElement("img");
@@ -358,7 +376,7 @@
         //span.innerHTML = '<img name="pouchpic" src="assets/common/pouch.png" alt="maxpouch" /><b> (current max '+ stages[curstage]['maxcoins'] +') will fill in: '+formattime(pouchtime)+'</b>';
         span.innerHTML +=
           "<b> (current max " +
-          stages[curstage]["maxcoins"] +
+          maxcoins +
           ") will fill in: " +
           formattime(pouchtime) +
           "</b>";
