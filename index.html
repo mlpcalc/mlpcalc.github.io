@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="style.css" />
     <script src="defaultEvent.js"></script>
     <script src="common.js"></script>
+    <script src="theme-selector.js"></script>
 
     <script>
       var curEventType = eventsSelector["eventType"];
@@ -49,6 +50,12 @@
   <body onload="loadpage()">
     <div class="main markdown-body">
       <h1>mlpcalc</h1>
+      
+      <div class="theme-selector">
+        <input type="button" name="Theme" id="theme-selector" onclick="toggle_theme()" />
+        <label for="theme-selector"></label>
+      </div>
+      
       <h2 style="margin-bottom: 1px">Event calculator</h2>
       <p style="margin-top: 1px; margin-bottom: 1px">
         <label for="eventtype">Select event type:</label>

@@ -1,6 +1,5 @@
 .current-levels {
     --border-width: 1px;
-    --border-color: #dfe2e5;
     border: calc(var(--border-width) / 2) solid var(--border-color);
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100px, 100%), 1fr));

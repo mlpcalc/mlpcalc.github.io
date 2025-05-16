@@ -2,6 +2,8 @@
   <head>
     <script src="common.js"></script>
     <script src="defaultEvent.js"></script>
+    <script src="theme-selector.js"></script>
+
     <link rel="stylesheet" href="normalize.css" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="blitz.css" />
@@ -741,7 +743,9 @@
         </div>
       </div>
 
-      <p id="helpers"></p>
+      <div class="table-container">
+        <p id="helpers"></p>
+      </div>
 
       <label for="curstage">Current stage</label>
       <select id="curstage" onchange="checkStage()">

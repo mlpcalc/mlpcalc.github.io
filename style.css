@@ -1,3 +1,25 @@
+:root {
+    --text-color: black;
+    --background-color: white;
+
+    --border-color: #dfe2e5;
+    --accent: #f5f7fa;
+    --tertiary: #dde4ee;
+    --hover-tertiary: #aabcd4;
+    --secondary-border-color: #7793bb;
+}
+
+:root.dark {
+    --text-color: white;
+    --background-color: black;
+
+    --border-color: #858585;
+    --accent: #3b3b3b;
+    --tertiary: #3b3b3b;
+    --hover-tertiary: hsl(0, 0%, 30%);
+    --secondary-border-color: #858585;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -6,13 +28,18 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-size: 16px;
     line-height: 1.5;
-    word-wrap: break-word
+    word-wrap: break-word;
+
+    color: var(--text-color);
+    /* background-color: var(--background-color); */
+    /* background-color: light-dark(white, black); */
 }
 
 .main {
     max-width: 50rem;
     margin: auto;
     padding: 0 1rem;
+    position: relative;
 }
 
 .container-lg {
@@ -22,11 +49,38 @@ body {
 h1 {
     padding-bottom: 0.3em;
     font-size: 2em;
-    border-bottom: 1px solid #eaecef;
+}
+
+button, input[type="button"] {
+    background-color: var(--tertiary);
+    border: 1px solid var(--secondary-border-color);
+    border-radius: 0.3em;
+    padding: 0.2em 0.5em;
+    margin-block: 0.2em;
+    cursor: pointer;
+}
+
+select {
+    background-color: var(--tertiary);
+    border: 1px solid var(--secondary-border-color);
+    border-radius: 0.3em;
+    cursor: pointer;
+}
+
+button:hover,
+button:active,
+input[type="button"]:hover,
+input[type="button"]:active,
+select:hover,
+select:active {
+    background-color: var(--hover-tertiary);
+}
+
+button, input, select {
+    color: var(--text-color);
 }
 
 h2 {
-    border-bottom: 1px solid #eaecef;
     font-size: 1.5em;
     padding-bottom: 0.3em;
 }
@@ -54,11 +108,11 @@ table {
 }
 
 table td, table th {
-    border: 1px solid #dfe2e5;
+    border: 1px solid var(--border-color);
 }
 
 table tr:nth-child(2n) {
-    background-color: #f6f8fa;
+    background-color: var(--accent);
 }
 
 table td:not(.helper), table th:not(.helper) {
@@ -78,7 +132,11 @@ table td:not(.helper), table th:not(.helper) {
 }
 
 .helper:has(input[type="checkbox"]:checked) label {
-    background-color: lightblue;
+    background-color: rgba(173, 216, 230, 0.8);
+}
+
+:root.dark .helper:has(input[type="checkbox"]:checked) label {
+    background-color:rgba(173, 216, 230, 0.3);
 }
 
 .helper input[type="checkbox"] {
@@ -91,4 +149,39 @@ table td:not(.helper), table th:not(.helper) {
 .calculate-button {
     max-width: 450px;
     width: 100%;
+}
+
+
+.theme-selector {
+    width: 4rem;
+    height: 4rem;
+    aspect-ratio: 1 / 1;
+    position: absolute;
+    right: 2rem;
+    top: 2rem;
+}
+
+.theme-selector input {
+    display: none;
+}
+
+.theme-selector label {
+    display:  block;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+
+    background-color: var(--accent);
+    border-radius: 50rem;
+    border: 0.5rem solid var(--accent);
+}
+
+:root.light .theme-selector label {
+    background-image: url('./assets/common/cutiemark_celestia.png');
+}
+
+:root.dark .theme-selector label {
+    background-image: url('./assets/common/cutiemark_luna.png');
 }
