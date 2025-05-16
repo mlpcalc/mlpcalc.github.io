@@ -1,14 +1,18 @@
+:root.light h1, :root.light h2 {
+    border-bottom: 1px solid #eaecef;
+}
+
 .gear-config {
     --border-width: 1px;
-    --border-color: #dfe2e5;
-    border: calc(var(--border-width) / 2) solid var(--border-color);
+    --gem-border-color: var(--border-color);
+    border: calc(var(--border-width) / 2) solid var(--gem-border-color);
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100px, 100%), 1fr));
 }
 
 .gear-option {
     padding: 0.5rem;
-    border: calc(var(--border-width) / 2) solid var(--border-color);
+    border: calc(var(--border-width) / 2) solid var(--gem-border-color);
 }
 
 
@@ -31,14 +35,14 @@
     grid-column: 1 / -1;
 
     --border-width: 1px;
-    --border-color: #dfe2e5;
-    border: calc(var(--border-width) / 2) solid var(--border-color);
+    --gem-border-color: var(--border-color);
+    border: calc(var(--border-width) / 2) solid var(--gem-border-color);
 }
 
 .siege-extra-gems > div {
     padding: 1em 0.5em;
     text-align: center;
-    border: calc(var(--border-width) / 2) solid var(--border-color);
+    border: calc(var(--border-width) / 2) solid var(--gem-border-color);
     /* grid-column: 1; */
 }
 
