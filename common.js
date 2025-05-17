@@ -54,22 +54,6 @@ function trunctime(time, value) {
   return [time, num];
 }
 
-function swapImages() {
-  let tmp = "";
-  let helpers = document.getElementsByClassName("helperimage");
-  if (portraits == "helpers_portraits") {
-    tmp = "helpers";
-  } else {
-    tmp = "helpers_portraits";
-  }
-  for (let i = 0; i < helpers.length; i++) {
-    let name = helpers[i].src.split("/");
-    name = name[name.length - 1];
-    helpers[i].src = "assets/" + tmp + "/" + name;
-  }
-  portraits = tmp;
-}
-
 function addToDropDownList(selBox, arr) {
   let newOption;
   for (let i = 0; i < arr.length; i++) {
@@ -99,6 +83,79 @@ function generateEventList() {
 function checkUncheck(checkboxId) {
   chbox = document.getElementById(checkboxId);
   chbox.checked = !chbox.checked;
+}
+
+function swapImages() {
+  let tmp = "";
+  let helpers = document.getElementsByClassName("helperimage");
+  if (portraits == "helpers_portraits") {
+    tmp = "helpers";
+  } else {
+    tmp = "helpers_portraits";
+  }
+  for (let i = 0; i < helpers.length; i++) {
+    let name = helpers[i].src.split("/");
+    name = name[name.length - 1];
+    helpers[i].src = "assets/" + tmp + "/" + name;
+  }
+  portraits = tmp;
+}
+
+function getSavedHelpers() {
+    if (localStorage.hasOwnProperty('helpers')) {
+      helpers = ['Twilight Sparkle']
+        try {
+          helpers = JSON.parse(localStorage.getItem('helpers'))
+        } catch {
+          saveHelper('Twilight Sparkle')
+        }
+        return helpers
+    }
+    return ['Twilight Sparkle']
+}
+
+function saveHelper(helper) {
+  helper = helper.trim()
+  
+  if (!localStorage.hasOwnProperty('helpers')) {
+    localStorage.setItem('helpers', '["Twilight Sparkle"]')
+  }
+  let helpers = []
+  try {
+    helpers = JSON.parse(localStorage.getItem('helpers'))
+  } catch {
+    helpers = ['Twilight Sparkle']
+  }
+
+  if (helpers.includes(helper)) {
+    return
+  }
+
+  helpers.push(helper)
+  helpers = [...new Set(helpers)]
+  localStorage.setItem('helpers', JSON.stringify(helpers))
+}
+
+function removeSavedHelper(helper) {
+  helper = helper.trim()
+
+  if (!localStorage.hasOwnProperty('helpers')) {
+    localStorage.setItem('helpers', '["Twilight Sparkle"]')
+  }
+  let helpers = []
+  try {
+    helpers = JSON.parse(localStorage.getItem('helpers'))
+  } catch {
+    helpers = ['Twilight Sparkle']
+  }
+
+  if (!helpers.includes(helper)) {
+    return
+  }
+
+  helpers.splice(helpers.indexOf(helper), 1)
+  helpers = [...new Set(helpers)]
+  localStorage.setItem('helpers', JSON.stringify(helpers))
 }
 
 function generateHelpers() {
@@ -183,6 +240,7 @@ function generateHelpers() {
   }
   document.getElementById("helpers").append(table);
 
+  let savedHelpers = getSavedHelpers()
   for (i = 0; i < maindata["helpnames"].length; i++) {
     //https://developer.mozilla.org/en-US/docs/Glossary/IIFE
     //to prevent setting setHelpers always with LAST item
@@ -192,6 +250,11 @@ function generateHelpers() {
         setHelpers(i);
       };
     })(i);
+
+    if (savedHelpers.includes(maindata["helpnames"][i].trim())) {
+      document.getElementById("help" + i).checked = true
+      setHelpers(i)
+    }
 
     //assigning onclick to every image (not just to checkboxes)
     //same as above

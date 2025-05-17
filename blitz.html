@@ -172,12 +172,17 @@
           helperID < maindata["helpnames"].length;
           helperID++
         ) {
+          let name = maindata["helpnames"][helperID]
           if (document.getElementById("help" + helperID).checked) {
             helpchecked[helperID] = true;
             if (helpstage[stageIndex].indexOf(helperID) != -1) {
               helpersPower += helpdmg[helperID];
             }
-          } else helpchecked[helperID] = false;
+            saveHelper(name)
+          } else {
+            helpchecked[helperID] = false
+            removeSavedHelper(name)
+          };
         }
         power.value = basePower[0] + helpersPower;
         power.min = basePower[1] + helpersPower;

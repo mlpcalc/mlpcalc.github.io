@@ -188,6 +188,12 @@
         });
 
         let change = document.getElementById("help" + helpId).checked ? 1 : -1;
+        let name = maindata["helpnames"][helpId]
+        if (change > 0) {
+          saveHelper(name)
+        } else {
+          removeSavedHelper(name)
+        }
 
         //swap for helpers that are same character in different forms
         maindata["helpSwappable"].forEach(function (sameHelpers, index) {
