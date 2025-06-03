@@ -1,9 +1,9 @@
 const eventsSelector = {
 	"siege": "Rin Rage",
 	"blitz": "Rise of the Cyber Ponies",
-	"blitz2": "A Maritime Mystery",
+	"blitz2": "Mirrors, Mirrors...",
 	//Default event type (0=siege, 1=blitz, 2= new blitz)
-	"eventType": 0
+	"eventType": 2
 }
 /*
 siege events:
@@ -92,6 +92,7 @@ The Bashful Barber
 The Perfect Pear
 Snow Shy and the Three Li'l Fillies
 Tale of Tirek Part Three
+Mirrors, Mirrors...
 
 
 */
