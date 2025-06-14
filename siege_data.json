@@ -2810,7 +2810,7 @@
         "ID": "Big Shot",
         "BossHP": 100,
         "BossHits": 10,
-        "TimeMinutes": 1,
+        "TimeMinutes": 0,
         "CurrencyCappings": [
           3,
           3,
@@ -2825,7 +2825,7 @@
         "ID": "Chaos Twilight",
         "BossHP": 570,
         "BossHits": 15,
-        "TimeMinutes": 5,
+        "TimeMinutes": 0,
         "CurrencyCappings": [
           576,
           676,
@@ -2840,7 +2840,7 @@
         "ID": "Chaos Novo",
         "BossHP": 1200,
         "BossHits": 15,
-        "TimeMinutes": 10,
+        "TimeMinutes": 0,
         "CurrencyCappings": [
           1065,
           1215,
@@ -2855,7 +2855,7 @@
         "ID": "Grogar-tized Discord",
         "BossHP": 4680,
         "BossHits": 20,
-        "TimeMinutes": 15,
+        "TimeMinutes": 0,
         "CurrencyCappings": [
           2619,
           3069,
@@ -2870,7 +2870,7 @@
         "ID": "Chaos Cadance",
         "BossHP": 9880,
         "BossHits": 20,
-        "TimeMinutes": 15,
+        "TimeMinutes": 0,
         "CurrencyCappings": [
           8328,
           9528,
@@ -2885,7 +2885,7 @@
         "ID": "Chaos Chrysalis",
         "BossHP": 21300,
         "BossHits": 25,
-        "TimeMinutes": 20,
+        "TimeMinutes": 0,
         "CurrencyCappings": [
           15980,
           18330,
@@ -2897,10 +2897,10 @@
         "MinionsBeforeBoss": 30
       },
       {
-        "ID": "Chaos Cozy Glow",
+        "ID": "Chaos Cozy Glow ",
         "BossHP": 32100,
         "BossHits": 25,
-        "TimeMinutes": 25,
+        "TimeMinutes": 0,
         "CurrencyCappings": [
           24640,
           28490,
@@ -3015,7 +3015,7 @@
       "Twilight Sparkle",
       "Rarity",
       "Fluttershy",
-      "Princess Cadence",
+      "Princess Cadance",
       "Flurry Heart",
       "Shining Armor",
       "Kibitz",
