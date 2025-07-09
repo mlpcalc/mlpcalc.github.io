@@ -1,5 +1,5 @@
 const eventsSelector = {
-	"siege": "Crowns and Chaos Part 2",
+	"siege": "The Crowning Achievement Part 2",
 	"blitz": "Rise of the Cyber Ponies",
 	"blitz2": "Mirrors, Mirrors...",
 	//Default event type (0=siege, 1=blitz, 2= new blitz)
@@ -49,6 +49,7 @@ Return to Breezie Hollow
 Daunting Donkey-Day
 Back to Mount Aris
 Crowns and Chaos Part 2
+The Crowning Achievement Part 2
 
 ===================
 blitz events:
