@@ -1,5 +1,5 @@
 const eventsSelector = {
-	"siege": "The Crowning Achievement Part 2",
+	"siege": "Fashion Is Cyclical",
 	"blitz": "Rise of the Cyber Ponies",
 	"blitz2": "Mirrors, Mirrors...",
 	//Default event type (0=siege, 1=blitz, 2= new blitz)
