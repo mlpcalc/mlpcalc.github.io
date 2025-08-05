@@ -1,5 +1,5 @@
 const eventsSelector = {
-	"siege": "Fashion Is Cyclical",
+	"siege": "Ponyville Talent Pageant",
 	"blitz": "Rise of the Cyber Ponies",
 	"blitz2": "Mirrors, Mirrors...",
 	//Default event type (0=siege, 1=blitz, 2= new blitz)
@@ -50,6 +50,7 @@ Daunting Donkey-Day
 Back to Mount Aris
 Crowns and Chaos Part 2
 The Crowning Achievement Part 2
+Ponyville Talent Pageant
 
 ===================
 blitz events:
