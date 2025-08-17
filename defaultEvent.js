@@ -1,9 +1,9 @@
 const eventsSelector = {
 	"siege": "Ponyville Talent Pageant",
 	"blitz": "Rise of the Cyber Ponies",
-	"blitz2": "Mirrors, Mirrors...",
+	"blitz2": "Love and Silence",
 	//Default event type (0=siege, 1=blitz, 2= new blitz)
-	"eventType": 0
+	"eventType": 2
 }
 /*
 siege events:
@@ -96,6 +96,6 @@ The Perfect Pear
 Snow Shy and the Three Li'l Fillies
 Tale of Tirek Part Three
 Mirrors, Mirrors...
-
+Love and Silence
 
 */
