@@ -1,9 +1,9 @@
 const eventsSelector = {
-	"siege": "Ponyville Talent Pageant",
+	"siege": "You Have (Royal) Mail",
 	"blitz": "Rise of the Cyber Ponies",
 	"blitz2": "Love and Silence",
 	//Default event type (0=siege, 1=blitz, 2= new blitz)
-	"eventType": 2
+	"eventType": 0
 }
 /*
 siege events:
@@ -51,6 +51,7 @@ Back to Mount Aris
 Crowns and Chaos Part 2
 The Crowning Achievement Part 2
 Ponyville Talent Pageant
+You Have (Royal) Mail
 
 ===================
 blitz events:
