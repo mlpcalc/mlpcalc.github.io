@@ -1,9 +1,9 @@
 const eventsSelector = {
 	"siege": "You Have (Royal) Mail",
 	"blitz": "Rise of the Cyber Ponies",
-	"blitz2": "Love and Silence",
+	"blitz2": "Prince Blue Blood To The Rescue",
 	//Default event type (0=siege, 1=blitz, 2= new blitz)
-	"eventType": 0
+	"eventType": 2
 }
 /*
 siege events:
@@ -98,5 +98,6 @@ Snow Shy and the Three Li'l Fillies
 Tale of Tirek Part Three
 Mirrors, Mirrors...
 Love and Silence
+Prince Blue Blood To The Rescue
 
 */
