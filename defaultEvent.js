@@ -1,9 +1,9 @@
 const eventsSelector = {
-	"siege": "You Have (Royal) Mail",
+	"siege": "Nightmare Night at the Museum -- Part 3",
 	"blitz": "Rise of the Cyber Ponies",
 	"blitz2": "Prince Blue Blood To The Rescue",
 	//Default event type (0=siege, 1=blitz, 2= new blitz)
-	"eventType": 2
+	"eventType": 0
 }
 /*
 siege events:
@@ -52,6 +52,7 @@ Crowns and Chaos Part 2
 The Crowning Achievement Part 2
 Ponyville Talent Pageant
 You Have (Royal) Mail
+Nightmare Night at the Museum -- Part 3
 
 ===================
 blitz events:
