@@ -1,9 +1,9 @@
 const eventsSelector = {
 	"siege": "Nightmare Night at the Museum -- Part 3",
 	"blitz": "Rise of the Cyber Ponies",
-	"blitz2": "Prince Blue Blood To The Rescue",
+	"blitz2": "Sombra's Secrets",
 	//Default event type (0=siege, 1=blitz, 2= new blitz)
-	"eventType": 0
+	"eventType": 2
 }
 /*
 siege events:
@@ -100,5 +100,6 @@ Tale of Tirek Part Three
 Mirrors, Mirrors...
 Love and Silence
 Prince Blue Blood To The Rescue
+Sombra's Secrets
 
 */
