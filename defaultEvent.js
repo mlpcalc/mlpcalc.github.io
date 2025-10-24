@@ -1,9 +1,9 @@
 const eventsSelector = {
-	"siege": "Nightmare Night at the Museum -- Part 3",
+	"siege": "Vampire Tails",
 	"blitz": "Rise of the Cyber Ponies",
 	"blitz2": "Sombra's Secrets",
 	//Default event type (0=siege, 1=blitz, 2= new blitz)
-	"eventType": 2
+	"eventType": 0
 }
 /*
 siege events:
@@ -53,6 +53,7 @@ The Crowning Achievement Part 2
 Ponyville Talent Pageant
 You Have (Royal) Mail
 Nightmare Night at the Museum -- Part 3
+Vampire Tails
 
 ===================
 blitz events:
