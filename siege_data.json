@@ -19462,6 +19462,21 @@
         "MinionsBeforeBoss": 50
       },
       {
+        "ID": "Flurry Heart 1",
+        "BossHP": 1200,
+        "BossHits": 15,
+        "TimeMinutes": 0,
+        "CurrencyCappings": [
+          1065,
+          1215,
+          1365,
+          1515
+        ],
+        "MinionHP": 1500,
+        "MinionCurrencyReward": 3,
+        "MinionsBeforeBoss": 45
+      },
+      {
         "ID": "Mustache Crystal Pony",
         "BossHP": 4680,
         "BossHits": 20,
@@ -19507,21 +19522,6 @@
         "MinionsBeforeBoss": 30
       },
       {
-        "ID": "Flurry Heart 1",
-        "BossHP": 1200,
-        "BossHits": 15,
-        "TimeMinutes": 0,
-        "CurrencyCappings": [
-          1065,
-          1215,
-          1365,
-          1515
-        ],
-        "MinionHP": 1500,
-        "MinionCurrencyReward": 3,
-        "MinionsBeforeBoss": 45
-      },
-      {
         "ID": "Flurry Heart 2",
         "BossHP": 32100,
         "BossHits": 25,
@@ -19564,6 +19564,11 @@
         20
       ],
       [
+        20,
+        20,
+        25
+      ],
+      [
         25,
         30,
         35
@@ -19577,11 +19582,6 @@
         45,
         50,
         55
-      ],
-      [
-        20,
-        20,
-        25
       ],
       [
         45,
@@ -19643,6 +19643,9 @@
       "Glamour Gleam",
       "Lilac Luster",
       "Bright Smile",
+      "Crystal Empire Onlooker",
+      "Crystal Empire Spectator",
+      "Mustache Crystal Pony",
       "Crystal Golden Glitter",
       "Crystal Spike Fan",
       "Crystal Empire Stylist",
@@ -19652,9 +19655,6 @@
       "Crystal Sweetie Belle",
       "Crystal Apple Bloom",
       "Crystal Scootaloo",
-      "Crystal Empire Onlooker",
-      "Crystal Empire Spectator",
-      "Mustache Crystal Pony",
       "Crystal Starlight Glimmer",
       "Crystal Maud Pie",
       "Crystal Trixie"
