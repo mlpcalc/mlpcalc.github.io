@@ -1,5 +1,5 @@
 const eventsSelector = {
-	"siege": "The Crystalling",
+	"siege": "Detective Twilight",
 	"blitz": "Rise of the Cyber Ponies",
 	"blitz2": "Sombra's Secrets",
 	//Default event type (0=siege, 1=blitz, 2= new blitz)
@@ -55,6 +55,7 @@ You Have (Royal) Mail
 Nightmare Night at the Museum -- Part 3
 Vampire Tails
 The Crystalling
+Detective Twilight
 
 ===================
 blitz events:
