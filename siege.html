@@ -226,8 +226,8 @@
         var nextLevel = 0;
         var waitLevel = document.getElementById('calculateWithWait').checked;
         if (waitLevel) {
-          nextArmorLevel = Number(document.getElementById("waitArmorLevel").value)
-          nextHelmetLevel = Number(document.getElementById("waitHelmetLevel").value)
+          nextArmorLevel = document.getElementById("waitArmorLevel").valueAsNumber
+          nextHelmetLevel = document.getElementById("waitHelmetLevel").valueAsNumber
           nextLevel = nextArmorLevel + nextHelmetLevel + stages[num]["helpersdmg"]
         }
         var nextupgrade;
@@ -358,11 +358,11 @@
         results = document.getElementById("results");
         results.innerHTML = "";
         timeUpgrades = [];
-        curstage = Number(document.getElementById("curstage").value);
+        curstage = Number(document.getElementById("curstage").value)
         //setHelpers();
-        tmp1 = Number(document.getElementById("curarmor").value);
-        tmp2 = Number(document.getElementById("curhelmet").value);
-        coins = Number(document.getElementById("curcoins").value);
+        tmp1 = document.getElementById("curarmor").valueAsNumber
+        tmp2 = document.getElementById("curhelmet").valueAsNumber
+        coins = document.getElementById("curcoins").valueAsNumber
         curarmor = [upgradelevels[tmp1], tmp1];
         curhelmet = [upgradelevels[tmp2], tmp2];
         totaltime = 0;
