@@ -1,5 +1,5 @@
 const eventsSelector = {
-	"siege": "Detective Twilight",
+	"siege": "Happy Hearth's Warming",
 	"blitz": "Rise of the Cyber Ponies",
 	"blitz2": "Sombra's Secrets",
 	//Default event type (0=siege, 1=blitz, 2= new blitz)
@@ -56,6 +56,8 @@ Nightmare Night at the Museum -- Part 3
 Vampire Tails
 The Crystalling
 Detective Twilight
+Happy Hearth's Warming
+
 
 ===================
 blitz events:
