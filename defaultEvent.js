@@ -1,5 +1,5 @@
 const eventsSelector = {
-	"siege": "Happy Hearth's Warming",
+	"siege": "The Nightmare Before Hearth's Warming, Part 2",
 	"blitz": "Rise of the Cyber Ponies",
 	"blitz2": "Sombra's Secrets",
 	//Default event type (0=siege, 1=blitz, 2= new blitz)
@@ -57,6 +57,7 @@ Vampire Tails
 The Crystalling
 Detective Twilight
 Happy Hearth's Warming
+The Nightmare Before Hearth's Warming, Part 2
 
 
 ===================
