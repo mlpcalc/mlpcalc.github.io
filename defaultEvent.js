@@ -1,5 +1,5 @@
 const eventsSelector = {
-	"siege": "The Nightmare Before Hearth's Warming, Part 2",
+	"siege": "Dreams of Shire Lanka",
 	"blitz": "Rise of the Cyber Ponies",
 	"blitz2": "Sombra's Secrets",
 	//Default event type (0=siege, 1=blitz, 2= new blitz)
