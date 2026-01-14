@@ -1,5 +1,5 @@
 const eventsSelector = {
-	"siege": "Dreams of Shire Lanka",
+	"siege": "Changeling History",
 	"blitz": "Rise of the Cyber Ponies",
 	"blitz2": "Sombra's Secrets",
 	//Default event type (0=siege, 1=blitz, 2= new blitz)
@@ -58,6 +58,7 @@ The Crystalling
 Detective Twilight
 Happy Hearth's Warming
 The Nightmare Before Hearth's Warming, Part 2
+Changeling History
 
 
 ===================
