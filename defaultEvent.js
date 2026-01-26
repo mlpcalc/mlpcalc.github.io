@@ -1,5 +1,5 @@
 const eventsSelector = {
-	"siege": "Changeling History",
+	"siege": "A Tale of Tirek, Part Four",
 	"blitz": "Rise of the Cyber Ponies",
 	"blitz2": "Sombra's Secrets",
 	//Default event type (0=siege, 1=blitz, 2= new blitz)
@@ -59,6 +59,7 @@ Detective Twilight
 Happy Hearth's Warming
 The Nightmare Before Hearth's Warming, Part 2
 Changeling History
+A Tale of Tirek, Part Four
 
 
 ===================
