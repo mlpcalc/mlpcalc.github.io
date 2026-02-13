@@ -1,9 +1,9 @@
 const eventsSelector = {
-	"siege": "A Tale of Tirek, Part Four",
+	"siege": "Lunar New Year",
 	"blitz": "Rise of the Cyber Ponies",
-	"blitz2": "Sombra's Secrets",
+	"blitz2": "Romeo and Juliet Reimagined!",
 	//Default event type (0=siege, 1=blitz, 2= new blitz)
-	"eventType": 0
+	"eventType": 2
 }
 /*
 siege events:
@@ -60,6 +60,7 @@ Happy Hearth's Warming
 The Nightmare Before Hearth's Warming, Part 2
 Changeling History
 A Tale of Tirek, Part Four
+Lunar New Year
 
 
 ===================
@@ -109,5 +110,6 @@ Mirrors, Mirrors...
 Love and Silence
 Prince Blue Blood To The Rescue
 Sombra's Secrets
+Romeo and Juliet Reimagined!
 
 */
