@@ -3,7 +3,7 @@ const eventsSelector = {
 	"blitz": "Rise of the Cyber Ponies",
 	"blitz2": "Romeo and Juliet Reimagined!",
 	//Default event type (0=siege, 1=blitz, 2= new blitz)
-	"eventType": 2
+	"eventType": 0
 }
 /*
 siege events:
