@@ -1,7 +1,7 @@
 const eventsSelector = {
 	"siege": "Lunar New Year",
 	"blitz": "Rise of the Cyber Ponies",
-	"blitz2": "Snow Shy and the Three Li'l Fillies!",
+	"blitz2": "Snow Shy and the Three Li'l Fillies",
 	//Default event type (0=siege, 1=blitz, 2= new blitz)
 	"eventType": 2
 }
