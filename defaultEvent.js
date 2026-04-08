@@ -1,9 +1,9 @@
 const eventsSelector = {
-	"siege": "Applejack Dreams of Robot Ponies",
+	"siege": "The Unicorn of Odd",
 	"blitz": "Rise of the Cyber Ponies",
 	"blitz2": "Crystal Empire Fall Formal",
 	//Default event type (0=siege, 1=blitz, 2= new blitz)
-	"eventType": 2
+	"eventType": 0
 }
 /*
 siege events:
