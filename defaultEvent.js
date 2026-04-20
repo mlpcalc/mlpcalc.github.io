@@ -1,5 +1,5 @@
 const eventsSelector = {
-	"siege": "The Unicorn of Odd",
+	"siege": "The Legend of Rockhoof",
 	"blitz": "Rise of the Cyber Ponies",
 	"blitz2": "Crystal Empire Fall Formal",
 	//Default event type (0=siege, 1=blitz, 2= new blitz)
