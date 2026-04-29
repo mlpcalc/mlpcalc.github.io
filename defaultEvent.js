@@ -1,7 +1,7 @@
 const eventsSelector = {
-	"siege": "The Legend of Rockhoof",
+	"siege": "Around Equestria in 80 Days",
 	"blitz": "Rise of the Cyber Ponies",
-	"blitz2": "Crystal Empire Fall Formal",
+	"blitz2": "Call of the Cutie",
 	//Default event type (0=siege, 1=blitz, 2= new blitz)
 	"eventType": 0
 }
