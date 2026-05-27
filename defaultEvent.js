@@ -1,9 +1,9 @@
 const eventsSelector = {
-	"siege": "Back to Mount Aris",
+	"siege": "A Royal Problem",
 	"blitz": "Rise of the Cyber Ponies",
 	"blitz2": "Call of the Cutie",
 	//Default event type (0=siege, 1=blitz, 2= new blitz)
-	"eventType": 0
+	"eventType": 2
 }
 /*
 siege events:
