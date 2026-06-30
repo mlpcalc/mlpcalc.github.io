@@ -1,7 +1,7 @@
 const eventsSelector = {
-	"siege": "A Royal Problem",
+	"siege": "Make a Wish Upon a Toy",
 	"blitz": "Rise of the Cyber Ponies",
-	"blitz2": "Call of the Cutie",
+	"blitz2": "Call Me \"CHOREOGRAPHY\"!",
 	//Default event type (0=siege, 1=blitz, 2= new blitz)
 	"eventType": 0
 }
