@@ -1,5 +1,5 @@
 const eventsSelector = {
-	"siege": "You Have (Royal) Mail",
+	"siege": "Roll for Initiate",
 	"blitz": "Rise of the Cyber Ponies",
 	"blitz2": "Call Me \"CHOREOGRAPHY\"!",
 	//Default event type (0=siege, 1=blitz, 2= new blitz)
